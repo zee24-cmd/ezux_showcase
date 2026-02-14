@@ -1,7 +1,7 @@
 {
     "name": "showcase",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.0.1",
     "author": "Zeeshan Sayed",
     "repository": {
         "type": "git",
@@ -9,8 +9,10 @@
     },
     "type": "module",
     "scripts": {
+        "predev": "node ../../scripts/kill-port.js 5173",
         "dev": "vite --host",
         "build": "tsc && vite build",
+        "prepreview": "node ../../scripts/kill-port.js 4173 4174",
         "preview": "vite preview",
         "test:e2e": "playwright test",
         "test:e2e:ui": "playwright test --ui",
@@ -28,7 +30,7 @@
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
-        "ezux": "^1.0.0",
+        "ezux": "^1.0.1",
         "file-saver": "^2.0.5",
         "lucide-react": "^0.563.0",
         "pdf-lib": "^1.17.1",
