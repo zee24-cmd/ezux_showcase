@@ -421,7 +421,7 @@ function AuthenticatedLayout() {
             footerClassName="bg-transparent"
             contentClassName="overflow-y-auto"
         >
-            <>
+            <div>
                 <MetaTags
                     description="Professional React UI components for enterprise applications. High-performance grids, schedulers, boards and more."
                     keywords="React, UI Suite, Enterprise, Grid, Table, Scheduler, Kanban, Treeview, Signature, TanStack"
@@ -435,7 +435,7 @@ function AuthenticatedLayout() {
                         <Outlet />
                     </React.Suspense>
                 </div>
-            </>
+            </div>
         </EzLayout>
     );
 }
