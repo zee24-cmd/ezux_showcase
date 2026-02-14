@@ -1,0 +1,54 @@
+{
+    "name": "showcase",
+    "private": true,
+    "version": "0.0.0",
+    "author": "Zeeshan Sayed",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zee24-cmd/ezux_showcase"
+    },
+    "type": "module",
+    "scripts": {
+        "dev": "vite --host",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "test:e2e": "playwright test",
+        "test:e2e:ui": "playwright test --ui",
+        "test:e2e:headed": "playwright test --headed",
+        "test:e2e:debug": "playwright test --debug"
+    },
+    "dependencies": {
+        "@faker-js/faker": "^10.3.0",
+        "@tanstack/react-query": "^5.90.20",
+        "@tanstack/react-query-devtools": "^5.91.3",
+        "@tanstack/react-router": "^1.159.5",
+        "@tanstack/react-router-devtools": "^1.159.5",
+        "@tanstack/router-devtools-core": "^1.159.4",
+        "@tanstack/router-vite-plugin": "^1.159.5",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "date-fns": "^4.1.0",
+        "ezux": "^1.0.0",
+        "file-saver": "^2.0.5",
+        "lucide-react": "^0.563.0",
+        "pdf-lib": "^1.17.1",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "tailwind-merge": "^3.4.0"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.58.2",
+        "@tailwindcss/vite": "^4.1.18",
+        "@types/file-saver": "^2.0.7",
+        "@types/node": "^20.0.0",
+        "@types/react": "^19.2.13",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^5.1.4",
+        "autoprefixer": "^10.4.24",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^4.1.18",
+        "tailwindcss-animate": "^1.0.7",
+        "typescript": "^5.9.3",
+        "vite": "^7.3.1"
+    }
+}

@@ -1,0 +1,4301 @@
+{
+  "EzTable": {
+    "name": "EzTable",
+    "description": "EzTable is a high-performance, enterprise-grade data grid engine.\nBuilt on TanStack Table v8, it combines lightweight core logic with powerful\nfeatures like virtualization, advanced filtering, and modular editing.\n\n\n### Core Capabilities\n- **Superior Performance**: Row and column virtualization for smooth handling of 100k+ records.\n- **Smart Data Fetching**: Support for infinite scroll, server-side pagination, and caching via React Query.\n- **Flexible Editing**: Choose between `Normal` (inline), `Dialog` (form-based), or `Batch` editing modes.\n- **Advanced Interactivity**: Range selection, drag-and-drop column reordering, and context menus.\n- **Data Intelligence**: Built-in export (Excel/CSV/PDF), column pinning, and grouping.\n\n### Minimal Example\n```tsx\n<EzTable\n  data={employees}\n  columns={[\n    { accessorKey: 'name', header: 'Name' },\n    { accessorKey: 'role', header: 'Role' }\n  ]}\n  pagination\n  enableFiltering\n/>\n```\n\n### Advanced Config: Editing & Persistence\n```tsx\n<EzTable\n  data={data}\n  columns={columns}\n  editSettings={{\n    allowEditing: true,\n    mode: 'Batch',\n    primaryKey: 'id'\n  }}\n  enablePersistence\n  persistenceKey=\"user-table-grid\"\n  onBatchSave={(changes) => saveToDatabase(changes)}\n/>\n```",
+    "properties": [
+      {
+        "name": "adaptiveSizing",
+        "type": "boolean",
+        "description": "Enable adaptive sizing for dynamic item heights."
+      },
+      {
+        "name": "aggregates",
+        "type": "complex",
+        "description": "Configuration for column aggregates (e.g. Sum, Average).\nDisplayed in the table footer."
+      },
+      {
+        "name": "allowKeyboard",
+        "type": "boolean",
+        "description": "Enable keyboard navigation features."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "classNames",
+        "type": "EzTableClassNames",
+        "description": "Custom class names for internal table elements.\nUse strict mode class names or functions for dynamic styling."
+      },
+      {
+        "name": "clipboardSettings",
+        "type": "complex",
+        "description": "Configuration for clipboard operations (copy/paste)."
+      },
+      {
+        "name": "clipMode",
+        "type": "clip | ellipsis | ellipsis-tooltip",
+        "description": "Text clipping mode for all columns.\n- `clip`: Text is clipped.\n- `ellipsis`: Text is truncated with an ellipsis.\n- `ellipsis-tooltip`: Text is truncated and a tooltip is shown on hover."
+      },
+      {
+        "name": "columns",
+        "type": "complex",
+        "description": "Configuration for the table columns.\nDefines headers, accessors, cell rendering, and other per-column options."
+      },
+      {
+        "name": "columnVirtualizationThreshold",
+        "type": "number",
+        "description": "Number of columns after which virtualization kicks in."
+      },
+      {
+        "name": "data",
+        "type": "complex",
+        "description": "The data to display in the table. \nCan be an array of objects or an empty array."
+      },
+      {
+        "name": "dataSource",
+        "type": "complex",
+        "description": "Alias for data."
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "debugVirtualization",
+        "type": "boolean",
+        "description": "Enable debug logging for virtualization."
+      },
+      {
+        "name": "defaultGrouping",
+        "type": "GroupingState",
+        "description": "Initial grouping state."
+      },
+      {
+        "name": "density",
+        "type": "compact | standard | comfortable",
+        "description": "Display density of the table."
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Direction of the text (ltr, rtl, auto)"
+      },
+      {
+        "name": "editSettings",
+        "type": "EditSettings",
+        "description": "Configuration for editing behavior (mode, new row position)."
+      },
+      {
+        "name": "emptyRecordTemplate",
+        "type": "complex",
+        "description": "Custom template for when there are no records."
+      },
+      {
+        "name": "enableAdvancedFiltering",
+        "type": "boolean",
+        "description": "Enable advanced filtering (Excel-like)."
+      },
+      {
+        "name": "enableAltRow",
+        "type": "boolean",
+        "description": "Enable alternating row background colors (zebra striping)."
+      },
+      {
+        "name": "enableChangeTracking",
+        "type": "boolean",
+        "description": "Enable change tracking for batch editing."
+      },
+      {
+        "name": "enableColumnFiltering",
+        "type": "boolean",
+        "description": "Enable column filtering."
+      },
+      {
+        "name": "enableColumnPinning",
+        "type": "boolean",
+        "description": "Enable column pinning (sticky columns)."
+      },
+      {
+        "name": "enableColumnVirtualization",
+        "type": "boolean",
+        "description": "Enable horizontal column virtualization.\nRecommended for tables with many columns (e.g. 50+)."
+      },
+      {
+        "name": "enableContextMenu",
+        "type": "boolean",
+        "description": "Enable context menu on right-click."
+      },
+      {
+        "name": "enableEditing",
+        "type": "boolean",
+        "description": "Enable inline or batch editing."
+      },
+      {
+        "name": "enableExport",
+        "type": "boolean",
+        "description": "Enable data export (Excel, CSV, PDF)."
+      },
+      {
+        "name": "enableGroupFooters",
+        "type": "boolean",
+        "description": "Enable group footers (aggregates)."
+      },
+      {
+        "name": "enableGrouping",
+        "type": "boolean",
+        "description": "Enable row grouping."
+      },
+      {
+        "name": "enableHover",
+        "type": "boolean",
+        "description": "Enable row hover effect."
+      },
+      {
+        "name": "enableHtmlSanitizer",
+        "type": "boolean",
+        "description": "Enable HTML sanitizer for cell content."
+      },
+      {
+        "name": "enableInfiniteScroll",
+        "type": "boolean",
+        "description": "Enable Infinite Scrolling.\nIf true, `onEndReached` will be called when the user scrolls to the bottom."
+      },
+      {
+        "name": "enablePersistence",
+        "type": "boolean",
+        "description": "Enable state persistence (save settings to local storage)."
+      },
+      {
+        "name": "enablePivoting",
+        "type": "boolean",
+        "description": "Enable pivoting mode."
+      },
+      {
+        "name": "enableRangeSelection",
+        "type": "boolean",
+        "description": "Enable range selection (Excel-like selection)."
+      },
+      {
+        "name": "enableRowPinning",
+        "type": "boolean",
+        "description": "Enable row pinning (sticky rows)."
+      },
+      {
+        "name": "enableRowReordering",
+        "type": "boolean",
+        "description": "Enable drag-and-drop row reordering."
+      },
+      {
+        "name": "enableRowSelection",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "enableSearchHighlighting",
+        "type": "boolean",
+        "description": "Enable highlighting of search terms in cells."
+      },
+      {
+        "name": "enableStickyHeader",
+        "type": "boolean",
+        "description": "Enable sticky header."
+      },
+      {
+        "name": "enableStickyPagination",
+        "type": "boolean",
+        "description": "Enable sticky pagination at the bottom."
+      },
+      {
+        "name": "enableTreeData",
+        "type": "boolean",
+        "description": "Enable tree data (hierarchical rows)."
+      },
+      {
+        "name": "estimatedRowHeight",
+        "type": "number",
+        "description": "Estimated row height for virtualization.\nIncrease this if your rows are taller than 48px to improve scroll performance.\nDefault: 48"
+      },
+      {
+        "name": "filterSettings",
+        "type": "FilterSettings",
+        "description": "Configuration for filtering behavior (UI type, mode, etc)."
+      },
+      {
+        "name": "getRowId",
+        "type": "complex",
+        "description": "Function to derive a unique ID for a row.\nDefaults to looking for `id` property."
+      },
+      {
+        "name": "getSubRows",
+        "type": "complex",
+        "description": "Function to get sub-rows for tree data."
+      },
+      {
+        "name": "gridLines",
+        "type": "Both | Horizontal | Vertical | None",
+        "description": "Grid line configuration."
+      },
+      {
+        "name": "groupSettings",
+        "type": "complex",
+        "description": "Configuration for grouping UI."
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "description": "Height of the table. \nAccepts pixel number or CSS string (e.g. '500px')."
+      },
+      {
+        "name": "icons",
+        "type": "EzTableIcons",
+        "description": "Custom icons for table elements (sort, filter, pagination, etc.)."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "initialState",
+        "type": "Partial",
+        "description": "Initial state object for the table.\nUse this to set the initial pagination, sorting, filtering, etc."
+      },
+      {
+        "name": "isCellEditable",
+        "type": "complex",
+        "description": "Function to check if a cell is editable."
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "description": "Whether the table is in a loading state."
+      },
+      {
+        "name": "isRowEditable",
+        "type": "complex",
+        "description": "Function to check if a row is editable."
+      },
+      {
+        "name": "loadingTemplate",
+        "type": "complex",
+        "description": "Custom template for the loading state."
+      },
+      {
+        "name": "localization",
+        "type": "EzTableLocalization",
+        "description": "Localization strings for the table (e.g. pagination labels, no rows message)."
+      },
+      {
+        "name": "manualFiltering",
+        "type": "boolean",
+        "description": "Whether filtering is handled manually (server-side)."
+      },
+      {
+        "name": "manualPagination",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "manualSorting",
+        "type": "boolean",
+        "description": "Whether sorting is handled manually (server-side)."
+      },
+      {
+        "name": "overscanCount",
+        "type": "number",
+        "description": "Number of items to render outside the visible area.\nHigher values reduce blank space during fast scrolling but increase memory usage."
+      },
+      {
+        "name": "pageCount",
+        "type": "number",
+        "description": "Total number of pages (0-indexed)."
+      },
+      {
+        "name": "pageSettings",
+        "type": "complex",
+        "description": "Configuration for pagination.\nDefines page size, available page sizes, and initial page."
+      },
+      {
+        "name": "pageSize",
+        "type": "number",
+        "description": "Number of rows per page."
+      },
+      {
+        "name": "pagination",
+        "type": "boolean",
+        "description": "Enable pagination."
+      },
+      {
+        "name": "persistenceKey",
+        "type": "string",
+        "description": "Key to use for state persistence."
+      },
+      {
+        "name": "prefetchDistance",
+        "type": "number",
+        "description": "Distance in items to prefetch during scrolling."
+      },
+      {
+        "name": "printMode",
+        "type": "CurrentPage | AllPages",
+        "description": "Print mode (Current Page or All Pages)."
+      },
+      {
+        "name": "progressiveRendering",
+        "type": "boolean",
+        "description": "Progressive rendering for large datasets.\nRenders rows in chunks to keep the UI responsive."
+      },
+      {
+        "name": "query",
+        "type": "any",
+        "description": "Generic query parameters for server-side operations.\nPassed to `onDataRequest`."
+      },
+      {
+        "name": "renderDetailPanel",
+        "type": "complex",
+        "description": "Function to render a detail panel for expanding rows."
+      },
+      {
+        "name": "renderNoRowsOverlay",
+        "type": "complex",
+        "description": "Custom overlay to render when there are no rows."
+      },
+      {
+        "name": "rowClass",
+        "type": "string | ",
+        "description": ""
+      },
+      {
+        "name": "rowCount",
+        "type": "number",
+        "description": "Total expected rows if knowing beforehand.\nCrucial for server-side pagination to calculate total pages."
+      },
+      {
+        "name": "rowHeight",
+        "type": "number",
+        "description": "Fixed row height for all rows.\nRequired for efficient virtualization."
+      },
+      {
+        "name": "rowTemplate",
+        "type": "complex",
+        "description": "Custom template for rendering rows."
+      },
+      {
+        "name": "scrollBehavior",
+        "type": "auto | smooth",
+        "description": "Scroll behavior for the table (auto or smooth)."
+      },
+      {
+        "name": "scrollMargin",
+        "type": "number",
+        "description": "Scroll margin (pixels) to apply to scroll container."
+      },
+      {
+        "name": "scrollPaddingEnd",
+        "type": "number",
+        "description": "Scroll padding end (pixels) to offset sticky elements."
+      },
+      {
+        "name": "scrollPaddingStart",
+        "type": "number",
+        "description": "Scroll padding start (pixels) to offset sticky elements or top padding."
+      },
+      {
+        "name": "searchSettings",
+        "type": "SearchSettings",
+        "description": "Configuration for global search behavior."
+      },
+      {
+        "name": "selectionSettings",
+        "type": "SelectionSettings",
+        "description": "Configuration for row/cell selection behavior."
+      },
+      {
+        "name": "service",
+        "type": "ITableService",
+        "description": "Data service instance for remote operations."
+      },
+      {
+        "name": "serviceName",
+        "type": "string",
+        "description": "Name of the registered service."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "setPagerMessage",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "slotProps",
+        "type": "Record",
+        "description": "Props to pass to the custom slots."
+      },
+      {
+        "name": "slots",
+        "type": "EzTableSlots",
+        "description": "Custom slots to override default internal components."
+      },
+      {
+        "name": "sortSettings",
+        "type": "SortSettings",
+        "description": "Configuration for sorting behavior."
+      },
+      {
+        "name": "state",
+        "type": "Partial",
+        "description": "Controlled state object for the table.\nUse this to control pagination, sorting, filtering, etc. from outside."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      },
+      {
+        "name": "textWrapSettings",
+        "type": "TextWrapSettings",
+        "description": "Configuration for text wrapping in cells and headers."
+      },
+      {
+        "name": "toolbar",
+        "type": "complex",
+        "description": "Toolbar items configuration.\nAccepts an array of item names (strings) or detailed item objects."
+      },
+      {
+        "name": "validateField",
+        "type": "complex",
+        "description": "Function to validate a field during editing.\nReturn true if valid, or an error message string if invalid."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "description": "Width of the table. \nAccepts pixel number or CSS string (e.g. '100%')."
+      }
+    ],
+    "events": [
+      {
+        "name": "onBatchDiscard",
+        "type": "complex",
+        "description": "Callback when batch changes are discarded."
+      },
+      {
+        "name": "onBatchSave",
+        "type": "complex",
+        "description": "Callback when batch changes are saved."
+      },
+      {
+        "name": "onCellClick",
+        "type": "complex",
+        "description": "Callback when a cell is clicked."
+      },
+      {
+        "name": "onCellDoubleClick",
+        "type": "complex",
+        "description": "Callback when a cell is double-clicked."
+      },
+      {
+        "name": "onCellFocus",
+        "type": "complex",
+        "description": "Callback when a cell is focused."
+      },
+      {
+        "name": "onCellSave",
+        "type": "complex",
+        "description": "Callback when a cell is saved (async)."
+      },
+      {
+        "name": "onColumnFiltersChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onContextMenuItemClick",
+        "type": "complex",
+        "description": "Callback when a context menu item is clicked."
+      },
+      {
+        "name": "onContextMenuOpen",
+        "type": "complex",
+        "description": "Callback when context menu is opened."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when a data change operation is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when a data change operation completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when a data change (add/edit/delete) is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when a data change operation starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data is loaded into the table."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback to request data from the server.\nTriggered by paging, sorting, filtering, etc."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "onEndReached",
+        "type": "complex",
+        "description": "Callback when the table is scrolled to the bottom.\nUsed for Infinite Scroll to load more data."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback when an internal error occurs."
+      },
+      {
+        "name": "onExportComplete",
+        "type": "complex",
+        "description": "Callback when export completes."
+      },
+      {
+        "name": "onExportCSV",
+        "type": "complex",
+        "description": "Callback when CSV export is triggered."
+      },
+      {
+        "name": "onExportExcel",
+        "type": "complex",
+        "description": "Callback when Excel export is triggered."
+      },
+      {
+        "name": "onExportPDF",
+        "type": "complex",
+        "description": "Callback when PDF export is triggered."
+      },
+      {
+        "name": "onFetchData",
+        "type": "complex",
+        "description": "Alias for onDataRequest. Triggered when data needs to be fetched (e.g. pagination/sorting in server-side mode)."
+      },
+      {
+        "name": "onFilter",
+        "type": "complex",
+        "description": "Callback when filters change."
+      },
+      {
+        "name": "onFormRender",
+        "type": "complex",
+        "description": "Callback when the edit form is rendered."
+      },
+      {
+        "name": "onGlobalFilterChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid renders completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid renders starts."
+      },
+      {
+        "name": "onGroupingChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onPageChange",
+        "type": "complex",
+        "description": "Callback when page changes."
+      },
+      {
+        "name": "onPaginationChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onPaste",
+        "type": "complex",
+        "description": "Callback when data is pasted from clipboard."
+      },
+      {
+        "name": "onProcessRowUpdate",
+        "type": "complex",
+        "description": "Callback to process a row update before it is committed.\nUseful for validation or transformation."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback when the table is refreshed."
+      },
+      {
+        "name": "onRowAddStart",
+        "type": "complex",
+        "description": "Callback before a new row is added. Return false to cancel."
+      },
+      {
+        "name": "onRowClick",
+        "type": "complex",
+        "description": "Callback when a row is clicked."
+      },
+      {
+        "name": "onRowDeselect",
+        "type": "complex",
+        "description": "Callback when a row is deselected."
+      },
+      {
+        "name": "onRowDoubleClick",
+        "type": "complex",
+        "description": "Callback when a row is double-clicked."
+      },
+      {
+        "name": "onRowEditStart",
+        "type": "complex",
+        "description": "Callback before a row is edited. Return false to cancel."
+      },
+      {
+        "name": "onRowReorder",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onRowSelect",
+        "type": "complex",
+        "description": "Callback when a row is selected."
+      },
+      {
+        "name": "onRowSelectionChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onSearch",
+        "type": "complex",
+        "description": "Callback when global search is performed."
+      },
+      {
+        "name": "onSort",
+        "type": "complex",
+        "description": "Callback when sorting changes."
+      },
+      {
+        "name": "onSortingChange",
+        "type": "complex",
+        "description": ""
+      },
+      {
+        "name": "onStateChange",
+        "type": "complex",
+        "description": "Callback fired when the table state changes."
+      },
+      {
+        "name": "onToolbarItemClick",
+        "type": "complex",
+        "description": "Callback when a toolbar item is clicked."
+      }
+    ],
+    "methods": [
+      {
+        "name": "addRecord",
+        "description": "Adds a new record to the table.",
+        "parameters": [
+          {
+            "name": "data",
+            "type": "Partial<TData>",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void | Promise<void>",
+        "type": "(data?: Partial<TData>) => void | Promise<void>"
+      },
+      {
+        "name": "autoFitColumns",
+        "description": "Automatically fits columns to content.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "cancelDataChanges",
+        "description": "Cancels any pending data changes.",
+        "parameters": [],
+        "returnType": "void | Promise<void>",
+        "type": "() => void | Promise<void>"
+      },
+      {
+        "name": "clearFilter",
+        "description": "Clears the filter for a specific column or all columns.",
+        "parameters": [
+          {
+            "name": "fieldName",
+            "type": "string",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(fieldName?: string) => void"
+      },
+      {
+        "name": "clearRowSelection",
+        "description": "Clears row selection (Alias for clearSelection).",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "clearSelection",
+        "description": "Clears the current selection.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "clearSort",
+        "description": "Clears the current sort.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "collapseAllGroups",
+        "description": "Collapses all groups.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "copyToClipboard",
+        "description": "Copies table data to clipboard.",
+        "parameters": [
+          {
+            "name": "withHeaders",
+            "type": "boolean",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(withHeaders?: boolean) => void"
+      },
+      {
+        "name": "deleteRecord",
+        "description": "Deletes a record from the table.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string | number",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void | Promise<void>",
+        "type": "(key?: string | number) => void | Promise<void>"
+      },
+      {
+        "name": "deleteRecords",
+        "description": "Deletes multiple records.",
+        "parameters": [
+          {
+            "name": "indices",
+            "type": "number[]",
+            "description": ""
+          }
+        ],
+        "returnType": "void | Promise<void>",
+        "type": "(indices: number[]) => void | Promise<void>"
+      },
+      {
+        "name": "editRecord",
+        "description": "Puts a record into edit mode.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "void | Promise<void>",
+        "type": "(key: string | number) => void | Promise<void>"
+      },
+      {
+        "name": "expandAllGroups",
+        "description": "Expands all groups.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "exportDataAsCsv",
+        "description": "Exports data as CSV.",
+        "parameters": [
+          {
+            "name": "options",
+            "type": "any",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(options?: any) => void"
+      },
+      {
+        "name": "filterByColumn",
+        "description": "Filters the table by a specific column.",
+        "parameters": [
+          {
+            "name": "fieldName",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "operator",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "value",
+            "type": "any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(fieldName: string, operator: string, value: any) => void"
+      },
+      {
+        "name": "forceUpdate",
+        "description": "Forces a re-render of the table.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "getBatchChanges",
+        "description": "Returns batch changes (added, changed, deleted).",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      },
+      {
+        "name": "getChanges",
+        "description": "Returns changes (Alias for getBatchChanges).",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      },
+      {
+        "name": "getColumnByField",
+        "description": "Returns a column definition by its field name.",
+        "parameters": [
+          {
+            "name": "field",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "any",
+        "type": "(field: string) => any"
+      },
+      {
+        "name": "getColumns",
+        "description": "Returns all column definitions.",
+        "parameters": [],
+        "returnType": "ColumnDef<TData, unknown>[]",
+        "type": "() => ColumnDef<TData, unknown>[]"
+      },
+      {
+        "name": "getData",
+        "description": "Returns the current data displayed in the table.",
+        "parameters": [],
+        "returnType": "TData[]",
+        "type": "() => TData[]"
+      },
+      {
+        "name": "getDataModule",
+        "description": "Returns the underlying data module (internal use).",
+        "parameters": [],
+        "returnType": "any",
+        "type": "() => any"
+      },
+      {
+        "name": "getHiddenColumns",
+        "description": "Returns the list of hidden columns.",
+        "parameters": [],
+        "returnType": "any[]",
+        "type": "() => any[]"
+      },
+      {
+        "name": "getPrimaryKeyFieldNames",
+        "description": "Returns the field names used as primary keys.",
+        "parameters": [],
+        "returnType": "string[]",
+        "type": "() => string[]"
+      },
+      {
+        "name": "getRowInfo",
+        "description": "Returns row information for a specific key.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "Row<TData> | undefined",
+        "type": "(key: string | number) => Row<TData> | undefined"
+      },
+      {
+        "name": "getSelectedRecords",
+        "description": "Returns the currently selected records.",
+        "parameters": [],
+        "returnType": "TData[]",
+        "type": "() => TData[]"
+      },
+      {
+        "name": "getSelectedRowIndexes",
+        "description": "Returns the indexes of currently selected rows.",
+        "parameters": [],
+        "returnType": "number[]",
+        "type": "() => number[]"
+      },
+      {
+        "name": "getVisibleColumns",
+        "description": "Returns the list of visible columns.",
+        "parameters": [],
+        "returnType": "any[]",
+        "type": "() => any[]"
+      },
+      {
+        "name": "goToPage",
+        "description": "Navigates to a specific page.",
+        "parameters": [
+          {
+            "name": "page",
+            "type": "number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(page: number) => void"
+      },
+      {
+        "name": "hideSpinner",
+        "description": "Hides the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "isRemote",
+        "description": "Checks if the table is in remote data mode.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "refresh",
+        "description": "Refreshes the table data.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "removeSortColumn",
+        "description": "Removes a sort column.",
+        "parameters": [
+          {
+            "name": "field",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(field: string) => void"
+      },
+      {
+        "name": "saveDataChanges",
+        "description": "Saves any pending data changes (batch mode).",
+        "parameters": [],
+        "returnType": "void | Promise<void>",
+        "type": "() => void | Promise<void>"
+      },
+      {
+        "name": "scrollToIndex",
+        "description": "Scrolls to a specific row index.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(index: number) => void"
+      },
+      {
+        "name": "search",
+        "description": "Performs a global search.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(key: string) => void"
+      },
+      {
+        "name": "selectAll",
+        "description": "Selects all rows in the table.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "selectRow",
+        "description": "Selects a row by its index or ID.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(index: string | number) => void"
+      },
+      {
+        "name": "selectRowByRange",
+        "description": "Selects a range of rows.",
+        "parameters": [
+          {
+            "name": "startIndex",
+            "type": "string | number",
+            "description": ""
+          },
+          {
+            "name": "endIndex",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(startIndex: string | number, endIndex: string | number) => void"
+      },
+      {
+        "name": "selectRows",
+        "description": "Selects multiple rows by their indices or IDs.",
+        "parameters": [
+          {
+            "name": "indices",
+            "type": "string | number[]",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(indices: string | number[]) => void"
+      },
+      {
+        "name": "setCellValue",
+        "description": "Sets a value for a specific cell.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "field",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "value",
+            "type": "any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(key: string, field: string, value: any) => void"
+      },
+      {
+        "name": "setColumnVisibility",
+        "description": "Sets column visibility programmatically.",
+        "parameters": [
+          {
+            "name": "model",
+            "type": "Record<string, boolean>",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(model: Record<string, boolean>) => void"
+      },
+      {
+        "name": "setFilterModel",
+        "description": "Sets the filter model programmatically.",
+        "parameters": [
+          {
+            "name": "model",
+            "type": "ColumnFiltersState",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(model: ColumnFiltersState) => void"
+      },
+      {
+        "name": "setPagerMessage",
+        "description": "Sets a message in the pager.",
+        "parameters": [
+          {
+            "name": "message",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(message: string) => void"
+      },
+      {
+        "name": "setRowData",
+        "description": "Updates the data for a specific row.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "data",
+            "type": "Partial<TData>",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(key: string, data: Partial<TData>) => void"
+      },
+      {
+        "name": "showSpinner",
+        "description": "Shows the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "sortByColumn",
+        "description": "Sorts the table by a specific column.",
+        "parameters": [
+          {
+            "name": "fieldName",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "direction",
+            "type": "any | any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(fieldName: string, direction: any | any) => void"
+      },
+      {
+        "name": "updateRecord",
+        "description": "Updates an existing record.",
+        "parameters": [
+          {
+            "name": "key",
+            "type": "string | number",
+            "description": ""
+          },
+          {
+            "name": "data",
+            "type": "Partial<TData>",
+            "description": ""
+          }
+        ],
+        "returnType": "void | Promise<void>",
+        "type": "(key: string | number, data: Partial<TData>) => void | Promise<void>"
+      },
+      {
+        "name": "validateEditForm",
+        "description": "Validates the current edit form.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "validateField",
+        "description": "Validates a specific field.",
+        "parameters": [
+          {
+            "name": "field",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "boolean",
+        "type": "(field: string) => boolean"
+      }
+    ],
+    "subcomponents": []
+  },
+  "EzScheduler": {
+    "name": "EzScheduler",
+    "description": "EzScheduler is a comprehensive event management and resource scheduling engine.\nIt provides a fluid user experience for managing complex schedules across \nvarious view modes with full drag-and-drop and resizing support.\n\n\n### Key Features\n- **Multi-View System**: Switch between Day, Week, Work Week, Month, and various Timeline views.\n- **Resource Management**: Group events by resources (people, rooms, equipment) with dedicated lanes.\n- **Interactive Editing**: Intuitive drag-and-drop event movement, resizing, and double-click creation.\n- **Intelligent Overlap**: Customizable overlap detection and blocking for intervals like lunch breaks.\n- **Quick Info & Editor**: Built-in popovers for quick summaries and a full modal for detailed editing.\n- **Virtualization**: Efficient rendering of large resource lists and event densities.\n\n### Minimal Example\n```tsx\n<EzScheduler\n  events={myEvents}\n  view=\"Week\"\n  onEventChange={(event) => updateEvent(event)}\n/>\n```\n\n### Resource Grouping Example\n```tsx\n<EzScheduler\n  resources={[\n    { id: '1', name: 'Meeting Room A', color: '#e11d48' },\n    { id: '2', name: 'Meeting Room B', color: '#2563eb' }\n  ]}\n  events={events}\n  view=\"TimelineDay\"\n  onEventCreate={(event) => createNewMeeting(event)}\n/>\n```",
+    "properties": [
+      {
+        "name": "agendaDaysCount",
+        "type": "number",
+        "description": "Number of days to show in Agenda view."
+      },
+      {
+        "name": "allowClipboard",
+        "type": "boolean",
+        "description": "Allow copying/pasting events via clipboard."
+      },
+      {
+        "name": "allowInline",
+        "type": "boolean",
+        "description": "Allow inline editing of events."
+      },
+      {
+        "name": "allowMultiCellSelection",
+        "type": "boolean",
+        "description": "Allow selecting multiple cells."
+      },
+      {
+        "name": "allowMultiDrag",
+        "type": "boolean",
+        "description": "Allow dragging multiple events."
+      },
+      {
+        "name": "allowMultiRowSelection",
+        "type": "boolean",
+        "description": "Allow selecting multiple rows."
+      },
+      {
+        "name": "allowPastEvents",
+        "type": "boolean",
+        "description": "Allow past events modification."
+      },
+      {
+        "name": "allowSwiping",
+        "type": "boolean",
+        "description": "Allow touch swiping to navigate views."
+      },
+      {
+        "name": "calendarMode",
+        "type": "Gregorian | Islamic",
+        "description": "Calendar system to use."
+      },
+      {
+        "name": "cell",
+        "type": "string | ",
+        "description": "Template for cell content."
+      },
+      {
+        "name": "cellHeaderTemplate",
+        "type": "string | ",
+        "description": "Template for cell headers."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "components",
+        "type": "EzSchedulerComponents",
+        "description": "Custom component injections (IoC)."
+      },
+      {
+        "name": "cssClass",
+        "type": "string",
+        "description": "Custom CSS class for the scheduler container."
+      },
+      {
+        "name": "currentTimeIndicator",
+        "type": "boolean",
+        "description": "Show current time indicator."
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "dateFormat",
+        "type": "string",
+        "description": "Date format for headers and tooltips."
+      },
+      {
+        "name": "dateHeader",
+        "type": "string | ",
+        "description": "Template for date headers."
+      },
+      {
+        "name": "dateRangeTemplate",
+        "type": "string | ",
+        "description": "Template for date range display."
+      },
+      {
+        "name": "dayHeaderTemplate",
+        "type": "string | ",
+        "description": "Template for day headers."
+      },
+      {
+        "name": "debugVirtualization",
+        "type": "boolean",
+        "description": "Debugging for virtualization."
+      },
+      {
+        "name": "defaultSelectedDate",
+        "type": "Date",
+        "description": "Default initial selected date."
+      },
+      {
+        "name": "defaultView",
+        "type": "ViewType",
+        "description": "Default initial view."
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Direction of the text (ltr, rtl, auto)"
+      },
+      {
+        "name": "editorFooterTemplate",
+        "type": "string | ",
+        "description": "Template for editor footer."
+      },
+      {
+        "name": "editorHeaderTemplate",
+        "type": "string | ",
+        "description": "Template for editor header."
+      },
+      {
+        "name": "editorTemplate",
+        "type": "string | ",
+        "description": "Template for editor content."
+      },
+      {
+        "name": "enableAdaptiveUI",
+        "type": "boolean",
+        "description": "Enable adaptive UI for mobile devices."
+      },
+      {
+        "name": "enableAllDayScroll",
+        "type": "boolean",
+        "description": "Enable scrolling for the All Day row."
+      },
+      {
+        "name": "enableHtmlSanitizer",
+        "type": "boolean",
+        "description": "Enable HTML sanitizer for templates."
+      },
+      {
+        "name": "enablePersistence",
+        "type": "boolean",
+        "description": "Enable state persistence (save settings to local storage)."
+      },
+      {
+        "name": "enableRecurrenceValidation",
+        "type": "boolean",
+        "description": "Validation for recurrence rules."
+      },
+      {
+        "name": "enableRtl",
+        "type": "boolean",
+        "description": "Enable RTL (Right-to-Left) text direction."
+      },
+      {
+        "name": "endHour",
+        "type": "string",
+        "description": "End hour of the scheduler (e.g., '18:00')."
+      },
+      {
+        "name": "eventDrag",
+        "type": "boolean",
+        "description": "Allow event dragging."
+      },
+      {
+        "name": "eventDragArea",
+        "type": "string",
+        "description": "CSS class for event drag area."
+      },
+      {
+        "name": "eventOverlap",
+        "type": "boolean",
+        "description": "Allow overlapping events to be displayed."
+      },
+      {
+        "name": "eventResize",
+        "type": "boolean",
+        "description": "Allow event resizing."
+      },
+      {
+        "name": "events",
+        "type": "complex",
+        "description": "Array of event data."
+      },
+      {
+        "name": "eventSettings",
+        "type": "EventSettingsModel",
+        "description": "Configuration for event fields and settings."
+      },
+      {
+        "name": "firstDayOfWeek",
+        "type": "number",
+        "description": "First day of the week (0=Sunday, 1=Monday, etc.)."
+      },
+      {
+        "name": "firstMonthOfYear",
+        "type": "number",
+        "description": "First month of the year (0=January, etc.)."
+      },
+      {
+        "name": "group",
+        "type": "GroupModel",
+        "description": "Configuration for grouping resources."
+      },
+      {
+        "name": "headerIndentTemplate",
+        "type": "string | ",
+        "description": "Template for header indentation."
+      },
+      {
+        "name": "headerRows",
+        "type": "complex",
+        "description": "Custom header rows configuration."
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "description": "Height of the scheduler."
+      },
+      {
+        "name": "hideEmptyAgendaDays",
+        "type": "boolean",
+        "description": "Hide days with no events in Agenda view."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "is24Hour",
+        "type": "boolean",
+        "description": "Use 24-hour format."
+      },
+      {
+        "name": "isAllDay",
+        "type": "boolean",
+        "description": "Whether the current view is All Day."
+      },
+      {
+        "name": "isLoading",
+        "type": "boolean",
+        "description": "Whether the scheduler is loading data."
+      },
+      {
+        "name": "keyboardNavigation",
+        "type": "boolean",
+        "description": "Allow keyboard navigation."
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "description": "Locale for the scheduler."
+      },
+      {
+        "name": "maxDate",
+        "type": "Date",
+        "description": "Maximum date navigable."
+      },
+      {
+        "name": "minDate",
+        "type": "Date",
+        "description": "Minimum date navigable."
+      },
+      {
+        "name": "monthHeaderTemplate",
+        "type": "string | ",
+        "description": "Template for month view headers."
+      },
+      {
+        "name": "monthsCount",
+        "type": "number",
+        "description": "Number of months to display in year/month views."
+      },
+      {
+        "name": "overscanCount",
+        "type": "number",
+        "description": "Number of items to render outside visible area."
+      },
+      {
+        "name": "prefetchDistance",
+        "type": "number",
+        "description": "Distance in items to prefetch."
+      },
+      {
+        "name": "progressiveRendering",
+        "type": "boolean",
+        "description": "Progressive rendering for large datasets."
+      },
+      {
+        "name": "quickInfoOnSelectionEnd",
+        "type": "boolean",
+        "description": "Show quick info popup on selection end."
+      },
+      {
+        "name": "quickInfoTemplates",
+        "type": "QuickInfoTemplatesModel",
+        "description": "Templates for quick info popup."
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "description": "Enable read-only mode."
+      },
+      {
+        "name": "recurrenceEngine",
+        "type": "any",
+        "description": "Recurrence engine instance."
+      },
+      {
+        "name": "resourceHeaderTemplate",
+        "type": "string | ",
+        "description": "Template for resource headers."
+      },
+      {
+        "name": "resources",
+        "type": " | ",
+        "description": "Resources data."
+      },
+      {
+        "name": "rowAutoHeight",
+        "type": "boolean",
+        "description": "Auto-adjust row height based on content."
+      },
+      {
+        "name": "selectedDate",
+        "type": "Date",
+        "description": "The currently selected date."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "showHeaderBar",
+        "type": "boolean",
+        "description": "Show the header bar."
+      },
+      {
+        "name": "showQuickInfoPopup",
+        "type": "boolean",
+        "description": "Show quick info popup on click."
+      },
+      {
+        "name": "showResourceHeaders",
+        "type": "boolean",
+        "description": "Show resource headers."
+      },
+      {
+        "name": "showResourcesInDayView",
+        "type": "boolean",
+        "description": "Show resources in Day view."
+      },
+      {
+        "name": "showTimeIndicator",
+        "type": "boolean",
+        "description": "Show current time indicator."
+      },
+      {
+        "name": "showUnassignedLane",
+        "type": "boolean",
+        "description": "Show unassigned lane in swimlane views."
+      },
+      {
+        "name": "showWeekend",
+        "type": "boolean",
+        "description": "Show weekends."
+      },
+      {
+        "name": "showWeekNumber",
+        "type": "boolean",
+        "description": "Show week numbers."
+      },
+      {
+        "name": "slotDuration",
+        "type": "number",
+        "description": "Duration of a time slot in minutes."
+      },
+      {
+        "name": "slotHeight",
+        "type": "number",
+        "description": "Height of a time slot in pixels."
+      },
+      {
+        "name": "startHour",
+        "type": "string",
+        "description": "Start hour of the scheduler (e.g., '08:00')."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      },
+      {
+        "name": "timeFormat",
+        "type": "string",
+        "description": "Time format (e.g., 'HH:mm')."
+      },
+      {
+        "name": "timeScale",
+        "type": "TimeScaleModel",
+        "description": "Time scale configuration."
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "description": "Timezone of the scheduler."
+      },
+      {
+        "name": "timezoneDataSource",
+        "type": "complex",
+        "description": "Timezone data source."
+      },
+      {
+        "name": "toolbarItems",
+        "type": "complex",
+        "description": "Toolbar items configuration."
+      },
+      {
+        "name": "view",
+        "type": "View",
+        "description": "The initial view to display."
+      },
+      {
+        "name": "views",
+        "type": "complex",
+        "description": "Available views configuration."
+      },
+      {
+        "name": "weekRule",
+        "type": "WeekRule",
+        "description": "Week start rule."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "description": "Width of the scheduler."
+      },
+      {
+        "name": "workDays",
+        "type": "complex",
+        "description": "Working days (0=Sun, 1=Mon, etc.)."
+      },
+      {
+        "name": "workHours",
+        "type": "WorkHoursModel",
+        "description": "Working hours configuration."
+      }
+    ],
+    "events": [
+      {
+        "name": "actionBegin",
+        "type": "complex",
+        "description": "Callback when an action begins."
+      },
+      {
+        "name": "actionComplete",
+        "type": "complex",
+        "description": "Callback when an action completes."
+      },
+      {
+        "name": "actionFailure",
+        "type": "complex",
+        "description": "Callback when an action fails."
+      },
+      {
+        "name": "beforePaste",
+        "type": "complex",
+        "description": "Callback before pasting."
+      },
+      {
+        "name": "beforePrint",
+        "type": "complex",
+        "description": "Callback before printing."
+      },
+      {
+        "name": "cellClick",
+        "type": "complex",
+        "description": "Callback when a cell is clicked."
+      },
+      {
+        "name": "cellDoubleClick",
+        "type": "complex",
+        "description": "Callback when a cell is double-clicked."
+      },
+      {
+        "name": "created",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "dataBinding",
+        "type": "complex",
+        "description": "Callback during data binding."
+      },
+      {
+        "name": "dataBound",
+        "type": "complex",
+        "description": "Callback when data is bound."
+      },
+      {
+        "name": "destroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "drag",
+        "type": "complex",
+        "description": "Callback during dragging."
+      },
+      {
+        "name": "dragStart",
+        "type": "complex",
+        "description": "Callback when dragging starts."
+      },
+      {
+        "name": "dragStop",
+        "type": "complex",
+        "description": "Callback when dragging stops."
+      },
+      {
+        "name": "eventClick",
+        "type": "complex",
+        "description": "Callback when an event is clicked."
+      },
+      {
+        "name": "eventDoubleClick",
+        "type": "complex",
+        "description": "Callback when an event is double-clicked."
+      },
+      {
+        "name": "eventRendered",
+        "type": "complex",
+        "description": "Callback when event is rendered."
+      },
+      {
+        "name": "excelExport",
+        "type": "complex",
+        "description": "Callback during excel export."
+      },
+      {
+        "name": "hover",
+        "type": "complex",
+        "description": "Callback on hover."
+      },
+      {
+        "name": "moreEventsClick",
+        "type": "complex",
+        "description": "Callback when \"more events\" is clicked."
+      },
+      {
+        "name": "navigating",
+        "type": "complex",
+        "description": "Callback during navigation."
+      },
+      {
+        "name": "onCellClick",
+        "type": "complex",
+        "description": "Callback when a cell is clicked."
+      },
+      {
+        "name": "onCellContextMenu",
+        "type": "complex",
+        "description": "Callback when a cell is right-clicked."
+      },
+      {
+        "name": "onCellDoubleClick",
+        "type": "complex",
+        "description": "Callback when a cell is double-clicked."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": "Callback when data changes."
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when data change is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when data change completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when data change is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when data change starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data loads."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback when data is requested."
+      },
+      {
+        "name": "onDateChange",
+        "type": "complex",
+        "description": "Callback when the date changes."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback on error."
+      },
+      {
+        "name": "onEventChange",
+        "type": "complex",
+        "description": "Callback when an event is changed."
+      },
+      {
+        "name": "onEventClick",
+        "type": "complex",
+        "description": "Callback when an event is clicked."
+      },
+      {
+        "name": "onEventCreate",
+        "type": "complex",
+        "description": "Callback when an event is created."
+      },
+      {
+        "name": "onEventDelete",
+        "type": "complex",
+        "description": "Callback when an event is deleted."
+      },
+      {
+        "name": "onEventDoubleClick",
+        "type": "complex",
+        "description": "Callback when an event is double-clicked."
+      },
+      {
+        "name": "onEventOverlap",
+        "type": "complex",
+        "description": "Callback when events overlap."
+      },
+      {
+        "name": "onExportCSV",
+        "type": "complex",
+        "description": "Export to CSV callback."
+      },
+      {
+        "name": "onExportExcel",
+        "type": "complex",
+        "description": "Export to Excel callback."
+      },
+      {
+        "name": "onExportICS",
+        "type": "complex",
+        "description": "Export to ICS callback."
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid/component render completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid/component render starts."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback on refresh."
+      },
+      {
+        "name": "onSlotDurationChange",
+        "type": "complex",
+        "description": "Callback when the slot duration changes."
+      },
+      {
+        "name": "onViewChange",
+        "type": "complex",
+        "description": "Callback when the view changes."
+      },
+      {
+        "name": "popupClose",
+        "type": "complex",
+        "description": "Callback when a popup closes."
+      },
+      {
+        "name": "popupOpen",
+        "type": "complex",
+        "description": "Callback when a popup opens."
+      },
+      {
+        "name": "renderCell",
+        "type": "complex",
+        "description": "Callback when a cell is rendered."
+      },
+      {
+        "name": "resizeStart",
+        "type": "complex",
+        "description": "Callback when resizing starts."
+      },
+      {
+        "name": "resizeStop",
+        "type": "complex",
+        "description": "Callback when resizing stops."
+      },
+      {
+        "name": "resizing",
+        "type": "complex",
+        "description": "Callback during resizing."
+      },
+      {
+        "name": "select",
+        "type": "complex",
+        "description": "Callback when selection changes."
+      },
+      {
+        "name": "tooltipOpen",
+        "type": "complex",
+        "description": "Callback when tooltip opens."
+      },
+      {
+        "name": "virtualScrollStart",
+        "type": "complex",
+        "description": "Callback when virtual scroll starts."
+      },
+      {
+        "name": "virtualScrollStop",
+        "type": "complex",
+        "description": "Callback when virtual scroll stops."
+      }
+    ],
+    "methods": [
+      {
+        "name": "addEvent",
+        "description": "Add a new event.",
+        "parameters": [
+          {
+            "name": "event",
+            "type": "Record<string, any> | SchedulerEvent",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<void>",
+        "type": "(event: Record<string, any> | SchedulerEvent) => Promise<void>"
+      },
+      {
+        "name": "addResource",
+        "description": "Add a new resource.",
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "Record<string, any> | Resource",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<void>",
+        "type": "(resource: Record<string, any> | Resource) => Promise<void>"
+      },
+      {
+        "name": "changeView",
+        "description": "Change the current view.",
+        "parameters": [
+          {
+            "name": "view",
+            "type": "View",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(view: View) => void"
+      },
+      {
+        "name": "closeEditor",
+        "description": "Close the event editor.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "closeQuickInfoPopup",
+        "description": "Close the quick info popup.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "currentView",
+        "type": "View",
+        "description": "The current view mode."
+      },
+      {
+        "name": "deleteEvent",
+        "description": "Delete an event by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<void>",
+        "type": "(id: string | number) => Promise<void>"
+      },
+      {
+        "name": "destroy",
+        "description": "Destroy the component instance.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "exportToCsv",
+        "description": "Export to CSV.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "exportToExcel",
+        "description": "Export to Excel.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "getData",
+        "description": "Get all events.",
+        "parameters": [],
+        "returnType": "Promise<SchedulerEvent[]>",
+        "type": "() => Promise<SchedulerEvent[]>"
+      },
+      {
+        "name": "getEvents",
+        "description": "Get all events.",
+        "parameters": [],
+        "returnType": "Promise<SchedulerEvent[]>",
+        "type": "() => Promise<SchedulerEvent[]>"
+      },
+      {
+        "name": "getEventsInDateRange",
+        "description": "Get events in a specific date range.",
+        "parameters": [
+          {
+            "name": "start",
+            "type": "Date",
+            "description": ""
+          },
+          {
+            "name": "end",
+            "type": "Date",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<SchedulerEvent[]>",
+        "type": "(start: Date, end: Date) => Promise<SchedulerEvent[]>"
+      },
+      {
+        "name": "hideSpinner",
+        "description": "Hide the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "next",
+        "description": "Navigate to the next date range.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "openEditor",
+        "description": "Open the event editor.",
+        "parameters": [
+          {
+            "name": "event",
+            "type": "SchedulerEvent",
+            "description": ""
+          },
+          {
+            "name": "action",
+            "type": "CurrentAction",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(event: SchedulerEvent, action: CurrentAction) => void"
+      },
+      {
+        "name": "prev",
+        "description": "Navigate to the previous date range.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "print",
+        "description": "Print the scheduler.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "refresh",
+        "description": "Refresh the scheduler layout.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "removeResource",
+        "description": "Remove a resource by ID.",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "type": "string | number",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<void>",
+        "type": "(resourceId: string | number) => Promise<void>"
+      },
+      {
+        "name": "saveEvent",
+        "description": "Save an existing or new event.",
+        "parameters": [
+          {
+            "name": "event",
+            "type": "Record<string, any> | SchedulerEvent",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<void>",
+        "type": "(event: Record<string, any> | SchedulerEvent) => Promise<void>"
+      },
+      {
+        "name": "scrollTo",
+        "description": "Scroll to a specific time.",
+        "parameters": [
+          {
+            "name": "hour",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "minute",
+            "type": "number",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(hour: string, minute?: number) => void"
+      },
+      {
+        "name": "scrollToIndex",
+        "description": "Scroll to a specific row index.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(index: number) => void"
+      },
+      {
+        "name": "scrollToTime",
+        "description": "Scroll to a specific time (legacy).",
+        "parameters": [
+          {
+            "name": "hour",
+            "type": "number",
+            "description": ""
+          },
+          {
+            "name": "minute",
+            "type": "number",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(hour: number, minute: number) => void"
+      },
+      {
+        "name": "showSpinner",
+        "description": "Show the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "today",
+        "description": "Navigate to today.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      }
+    ],
+    "subcomponents": [
+      {
+        "name": "event",
+        "description": "Custom event component."
+      },
+      {
+        "name": "resourceHeader",
+        "description": "Custom resource header component."
+      },
+      {
+        "name": "timeSlot",
+        "description": "Custom time slot component."
+      },
+      {
+        "name": "toolbar",
+        "description": "Custom toolbar component."
+      }
+    ]
+  },
+  "EzKanban": {
+    "name": "EzKanban",
+    "description": "EzKanban is a powerful, flexible board management system designed for \nagile workflows and task visualization. It features a robust drag-and-drop \nengine and supports multiple viewing modes.\n\n\n### Key Features\n- **Modular Architecture**: Built on `@dnd-kit` for performant and accessible drag-and-drop.\n- **Multi-View Engine**: Switch between `standard` (basic columns), `swimlane` (grouped by team/priority), and `timeline` views.\n- **Dynamic Columns**: Support for collapsible columns, WIP limits, and custom header rendering.\n- **Enterprise Editing**: Integrated card editor modal with support for custom field extensions.\n- **Change Tracking**: Built-in undo/redo stack for all board operations.\n- **Extensibility**: Inversion of Control (IoC) via custom renderers for cards, headers, and editors.\n\n### Minimal Example\n```tsx\nimport { EzKanban } from 'ezux';\n\nfunction TaskBoard() {\n  return (\n    <EzKanban\n      board={initialBoardData}\n      onBoardChange={(newBoard) => saveBoard(newBoard)}\n    />\n  );\n}\n```\n\n### Advanced Config: Swimlanes & Timeline\n```tsx\n<EzKanban\n  board={engineeringBoard}\n  view=\"swimlane\"\n  swimlaneSettings={{ collapsible: true }}\n  onCardDoubleClick={(card) => openDetails(card)}\n/>\n```",
+    "properties": [
+      {
+        "name": "allowDragAndDrop",
+        "type": "boolean",
+        "description": "Allow drag and drop."
+      },
+      {
+        "name": "allowMultiSelect",
+        "type": "boolean",
+        "description": "Allow selecting multiple cards."
+      },
+      {
+        "name": "ariaConfig",
+        "type": "Record",
+        "description": "Accessibility configuration."
+      },
+      {
+        "name": "board",
+        "type": "KanbanBoard",
+        "description": "The board data object."
+      },
+      {
+        "name": "cardClassName",
+        "type": "complex",
+        "description": "Function to determine card class names."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "columnSettings",
+        "type": "complex",
+        "description": "Configuration for columns."
+      },
+      {
+        "name": "confirmOnDelete",
+        "type": "boolean",
+        "description": "Confirm before deleting items."
+      },
+      {
+        "name": "customRenderers",
+        "type": "complex",
+        "description": "Custom renderers for various board elements."
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "dialogSettings",
+        "type": "complex",
+        "description": "Configuration for dialogs (editor, confirmation)."
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Text direction."
+      },
+      {
+        "name": "dragSettings",
+        "type": "complex",
+        "description": "Configuration for drag and drop behavior."
+      },
+      {
+        "name": "enableTooltip",
+        "type": "boolean",
+        "description": "Enable tooltips for cards."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "keyboardNavigation",
+        "type": "boolean",
+        "description": "Enable keyboard navigation."
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "description": "Locale for the board."
+      },
+      {
+        "name": "permissions",
+        "type": "KanbanPermissions",
+        "description": "User permissions config."
+      },
+      {
+        "name": "plugins",
+        "type": "complex",
+        "description": "List of plugins to enhance functionality."
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "description": "Enable read-only mode."
+      },
+      {
+        "name": "rtl",
+        "type": "boolean",
+        "description": "Enable RTL layout."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      },
+      {
+        "name": "swimlaneSettings",
+        "type": "complex",
+        "description": "Configuration for swimlanes."
+      },
+      {
+        "name": "theme",
+        "type": "light | dark | system",
+        "description": "Color theme."
+      },
+      {
+        "name": "tooltipTemplate",
+        "type": "complex",
+        "description": "Template for card tooltips."
+      },
+      {
+        "name": "view",
+        "type": "standard | timeline | swimlane",
+        "description": "The current view mode."
+      },
+      {
+        "name": "virtualizationThreshold",
+        "type": "number",
+        "description": "Threshold for virtualization."
+      },
+      {
+        "name": "wipStrict",
+        "type": "boolean",
+        "description": "Enforce strict WIP limits."
+      }
+    ],
+    "events": [
+      {
+        "name": "onBeforeCardRender",
+        "type": "complex",
+        "description": "Callback before card render."
+      },
+      {
+        "name": "onBoardChange",
+        "type": "complex",
+        "description": "Callback when the board state changes."
+      },
+      {
+        "name": "onCardClick",
+        "type": "complex",
+        "description": "Callback when a card is clicked."
+      },
+      {
+        "name": "onCardCreate",
+        "type": "complex",
+        "description": "Callback when a new card is being created."
+      },
+      {
+        "name": "onCardDelete",
+        "type": "complex",
+        "description": "Callback when a card is deleted."
+      },
+      {
+        "name": "onCardDoubleClick",
+        "type": "complex",
+        "description": "Callback when a card is double-clicked."
+      },
+      {
+        "name": "onCardDragEnter",
+        "type": "complex",
+        "description": "Callback when card enters a column."
+      },
+      {
+        "name": "onCardDragLeave",
+        "type": "complex",
+        "description": "Callback when card leaves a column."
+      },
+      {
+        "name": "onCardDragStart",
+        "type": "complex",
+        "description": "Callback when card drag starts."
+      },
+      {
+        "name": "onCardDragStop",
+        "type": "complex",
+        "description": "Callback when card drag stops."
+      },
+      {
+        "name": "onCardSelect",
+        "type": "complex",
+        "description": "Callback when cards are selected."
+      },
+      {
+        "name": "onCardUpdate",
+        "type": "complex",
+        "description": "Callback when a card is updated."
+      },
+      {
+        "name": "onColumnCreate",
+        "type": "complex",
+        "description": "Callback when a column is created."
+      },
+      {
+        "name": "onColumnDelete",
+        "type": "complex",
+        "description": "Callback when a column is deleted."
+      },
+      {
+        "name": "onColumnUpdate",
+        "type": "complex",
+        "description": "Callback when a column is updated."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": "Callback when data changes."
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when data change is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when data change completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when data change is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when data change starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data loads."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback when data is requested."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback on error."
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid/component render completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid/component render starts."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback on refresh."
+      },
+      {
+        "name": "onSwimlaneCreate",
+        "type": "complex",
+        "description": "Callback when a swimlane is created."
+      },
+      {
+        "name": "onSwimlaneDelete",
+        "type": "complex",
+        "description": "Callback when a swimlane is deleted."
+      },
+      {
+        "name": "onSwimlaneToggle",
+        "type": "complex",
+        "description": "Callback when swimlane toggle."
+      },
+      {
+        "name": "onSwimlaneUpdate",
+        "type": "complex",
+        "description": "Callback when a swimlane is updated."
+      }
+    ],
+    "methods": [
+      {
+        "name": "addCard",
+        "description": "Add a new card.",
+        "parameters": [
+          {
+            "name": "draft",
+            "type": "Partial<TCard>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<TCard>",
+        "type": "(draft: Partial<TCard>) => Promise<TCard>"
+      },
+      {
+        "name": "addColumn",
+        "description": "Add a new column.",
+        "parameters": [
+          {
+            "name": "column",
+            "type": "Partial<KanbanColumn>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<KanbanColumn>",
+        "type": "(column: Partial<KanbanColumn>) => Promise<KanbanColumn>"
+      },
+      {
+        "name": "addSwimlane",
+        "description": "Add a new swimlane.",
+        "parameters": [
+          {
+            "name": "swimlane",
+            "type": "Partial<KanbanSwimlane>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<KanbanSwimlane>",
+        "type": "(swimlane: Partial<KanbanSwimlane>) => Promise<KanbanSwimlane>"
+      },
+      {
+        "name": "archiveCard",
+        "description": "Archive a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(cardId: string) => Promise<any>"
+      },
+      {
+        "name": "clearFilters",
+        "description": "Clear all filters.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "collapseColumn",
+        "description": "Collapse a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(columnId: string) => void"
+      },
+      {
+        "name": "collapseSwimlane",
+        "description": "Collapse a swimlane.",
+        "parameters": [
+          {
+            "name": "swimlaneId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(swimlaneId: string) => void"
+      },
+      {
+        "name": "deleteCard",
+        "description": "Delete a card by ID.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(cardId: string) => Promise<any>"
+      },
+      {
+        "name": "deleteColumn",
+        "description": "Delete a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(columnId: string) => Promise<any>"
+      },
+      {
+        "name": "deleteSwimlane",
+        "description": "Delete a swimlane.",
+        "parameters": [
+          {
+            "name": "swimlaneId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(swimlaneId: string) => Promise<any>"
+      },
+      {
+        "name": "deselectAllCards",
+        "description": "Deselect all cards.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "deselectCard",
+        "description": "Deselect a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardId: string) => void"
+      },
+      {
+        "name": "duplicateCard",
+        "description": "Duplicate a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<TCard>",
+        "type": "(cardId: string) => Promise<TCard>"
+      },
+      {
+        "name": "expandColumn",
+        "description": "Expand a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(columnId: string) => void"
+      },
+      {
+        "name": "expandSwimlane",
+        "description": "Expand a swimlane.",
+        "parameters": [
+          {
+            "name": "swimlaneId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(swimlaneId: string) => void"
+      },
+      {
+        "name": "focusCard",
+        "description": "Focus a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardId: string) => void"
+      },
+      {
+        "name": "forceUpdate",
+        "description": "Force a re-render.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "getActiveFilters",
+        "description": "Get active filters.",
+        "parameters": [],
+        "returnType": "FilterConfig",
+        "type": "() => FilterConfig"
+      },
+      {
+        "name": "getBoard",
+        "description": "Get the full board object.",
+        "parameters": [],
+        "returnType": "KanbanBoard",
+        "type": "() => KanbanBoard"
+      },
+      {
+        "name": "getCard",
+        "description": "Get a card by ID.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "TCard | undefined",
+        "type": "(cardId: string) => TCard | undefined"
+      },
+      {
+        "name": "getCards",
+        "description": "Get all cards.",
+        "parameters": [],
+        "returnType": "TCard[]",
+        "type": "() => TCard[]"
+      },
+      {
+        "name": "getCardsInColumn",
+        "description": "Get cards in a specific column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "TCard[]",
+        "type": "(columnId: string) => TCard[]"
+      },
+      {
+        "name": "getColumn",
+        "description": "Get a column by ID.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "KanbanColumn | undefined",
+        "type": "(columnId: string) => KanbanColumn | undefined"
+      },
+      {
+        "name": "getColumns",
+        "description": "Get all columns.",
+        "parameters": [],
+        "returnType": "KanbanColumn[]",
+        "type": "() => KanbanColumn[]"
+      },
+      {
+        "name": "getFilteredCards",
+        "description": "Get filtered cards.",
+        "parameters": [],
+        "returnType": "TCard[]",
+        "type": "() => TCard[]"
+      },
+      {
+        "name": "getOrderedCards",
+        "description": "Get ordered cards in a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "TCard[]",
+        "type": "(columnId: string) => TCard[]"
+      },
+      {
+        "name": "getSearchQuery",
+        "description": "Get the search query.",
+        "parameters": [],
+        "returnType": "string",
+        "type": "() => string"
+      },
+      {
+        "name": "getSelectedCards",
+        "description": "Get currently selected cards.",
+        "parameters": [],
+        "returnType": "TCard[]",
+        "type": "() => TCard[]"
+      },
+      {
+        "name": "getStatistics",
+        "description": "Get board statistics.",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      },
+      {
+        "name": "getSwimlane",
+        "description": "Get a swimlane by ID.",
+        "parameters": [
+          {
+            "name": "swimlaneId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "KanbanSwimlane | undefined",
+        "type": "(swimlaneId: string) => KanbanSwimlane | undefined"
+      },
+      {
+        "name": "getSwimlanes",
+        "description": "Get all swimlanes.",
+        "parameters": [],
+        "returnType": "KanbanSwimlane[]",
+        "type": "() => KanbanSwimlane[]"
+      },
+      {
+        "name": "getView",
+        "description": "Get the current view.",
+        "parameters": [],
+        "returnType": "any | any | any",
+        "type": "() => any | any | any"
+      },
+      {
+        "name": "hideSpinner",
+        "description": "Hide the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "highlightCard",
+        "description": "Highlight a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "duration",
+            "type": "number",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardId: string, duration?: number) => void"
+      },
+      {
+        "name": "moveCard",
+        "description": "Move a card to a new column/swimlane.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "targetColumnId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "targetSwimlaneId",
+            "type": "string",
+            "description": "",
+            "isOptional": true
+          },
+          {
+            "name": "targetPosition",
+            "type": "number",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(cardId: string, targetColumnId: string, targetSwimlaneId?: string, targetPosition?: number) => Promise<any>"
+      },
+      {
+        "name": "refresh",
+        "description": "Refresh the board layout.",
+        "parameters": [],
+        "returnType": "Promise<void>",
+        "type": "() => Promise<void>"
+      },
+      {
+        "name": "reorderColumns",
+        "description": "Reorder columns.",
+        "parameters": [
+          {
+            "name": "columnIds",
+            "type": "string[]",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(columnIds: string[]) => Promise<any>"
+      },
+      {
+        "name": "reorderSwimlanes",
+        "description": "Reorder swimlanes.",
+        "parameters": [
+          {
+            "name": "swimlaneIds",
+            "type": "string[]",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(swimlaneIds: string[]) => Promise<any>"
+      },
+      {
+        "name": "reset",
+        "description": "Reset the board state.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "restoreCard",
+        "description": "Restore an archived card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(cardId: string) => Promise<any>"
+      },
+      {
+        "name": "scrollToCard",
+        "description": "Scroll to a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "options",
+            "type": "ScrollIntoViewOptions",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardId: string, options?: ScrollIntoViewOptions) => void"
+      },
+      {
+        "name": "scrollToColumn",
+        "description": "Scroll to a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "options",
+            "type": "ScrollIntoViewOptions",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(columnId: string, options?: ScrollIntoViewOptions) => void"
+      },
+      {
+        "name": "selectCard",
+        "description": "Select a card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardId: string) => void"
+      },
+      {
+        "name": "selectCards",
+        "description": "Select multiple cards.",
+        "parameters": [
+          {
+            "name": "cardIds",
+            "type": "string[]",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(cardIds: string[]) => void"
+      },
+      {
+        "name": "setActiveFilters",
+        "description": "Set active filters.",
+        "parameters": [
+          {
+            "name": "filters",
+            "type": "FilterConfig",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(filters: FilterConfig) => void"
+      },
+      {
+        "name": "setBoard",
+        "description": "Replace the board object.",
+        "parameters": [
+          {
+            "name": "board",
+            "type": "KanbanBoard",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(board: KanbanBoard) => void"
+      },
+      {
+        "name": "setSearchQuery",
+        "description": "Set the search query.",
+        "parameters": [
+          {
+            "name": "query",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(query: string) => void"
+      },
+      {
+        "name": "setView",
+        "description": "Set the current view.",
+        "parameters": [
+          {
+            "name": "view",
+            "type": "any | any | any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(view: any | any | any) => void"
+      },
+      {
+        "name": "showSpinner",
+        "description": "Show the loading spinner.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "updateCard",
+        "description": "Update an existing card.",
+        "parameters": [
+          {
+            "name": "cardId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "updates",
+            "type": "Partial<TCard>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(cardId: string, updates: Partial<TCard>) => Promise<any>"
+      },
+      {
+        "name": "updateColumn",
+        "description": "Update a column.",
+        "parameters": [
+          {
+            "name": "columnId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "updates",
+            "type": "Partial<KanbanColumn>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(columnId: string, updates: Partial<KanbanColumn>) => Promise<any>"
+      },
+      {
+        "name": "updateSwimlane",
+        "description": "Update a swimlane.",
+        "parameters": [
+          {
+            "name": "swimlaneId",
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "updates",
+            "type": "Partial<KanbanSwimlane>",
+            "description": ""
+          }
+        ],
+        "returnType": "Promise<any>",
+        "type": "(swimlaneId: string, updates: Partial<KanbanSwimlane>) => Promise<any>"
+      },
+      {
+        "name": "validate",
+        "description": "Validate the board state.",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      }
+    ],
+    "subcomponents": []
+  },
+  "EzTreeView": {
+    "name": "EzTreeView",
+    "description": "EzTreeView is a high-performance hierarchical data explorer.\nIt uses a virtualized engine to efficiently render trees with thousands of \nnodes while providing rich interactive features like drag-and-drop and \nmulti-level selection.\n\n\n### Key Features\n- **Superior Virtualization**: Flat-list virtualization for smooth scrolling even with deep, expanded trees.\n- **Flexible Selection**: Supports `single`, `multiple`, and `checkbox` selection modes with indeterminate state support.\n- **Drag & Drop**: Native `@dnd-kit` integration for reordering nodes and changing parent-child relationships.\n- **Inline Editing**: Double-click to rename nodes with built-in validation.\n- **Search & Filter**: Real-time filtering with automatic expansion of matching parent nodes.\n- **Custom Rendering**: Fully customizable node templates and icons via the `components` prop.\n\n### Minimal Example\n```tsx\n<EzTreeView\n  data={myTreeData}\n  showCheckboxes\n  onNodeClicked={(node) => console.log('Clicked:', node.text)}\n/>\n```\n\n### Advanced Config: Virtualization & DND\n```tsx\n<EzTreeView\n  data={largeTreeData}\n  allowDragAndDrop\n  allowEditing\n  onNodeDrop={(dragged, target, position) => handleMove(dragged, target, position)}\n  className=\"h-[400px] border rounded-md\"\n/>\n```",
+    "properties": [
+      {
+        "name": "allowDragAndDrop",
+        "type": "boolean",
+        "description": "Whether to allow drag-and-drop node reordering."
+      },
+      {
+        "name": "allowEditing",
+        "type": "boolean",
+        "description": "Whether to enable inline label editing."
+      },
+      {
+        "name": "allowMultiSelection",
+        "type": "boolean",
+        "description": "Whether to allow selecting multiple nodes (if selectionMode is multiple)."
+      },
+      {
+        "name": "allowTextWrap",
+        "type": "boolean",
+        "description": "Whether to allow node labels to wrap to multiple lines."
+      },
+      {
+        "name": "animation",
+        "type": "boolean | ",
+        "description": "Animation configuration for expansion/collapse."
+      },
+      {
+        "name": "apiRef",
+        "type": "RefObject",
+        "description": "Reference to access the imperative API of the tree."
+      },
+      {
+        "name": "autoCheck",
+        "type": "boolean",
+        "description": "Whether to automatically check child nodes when parent is checked."
+      },
+      {
+        "name": "checkDisabledChildren",
+        "type": "boolean",
+        "description": "Whether to allow checking nodes that are disabled."
+      },
+      {
+        "name": "checkedNodes",
+        "type": "complex",
+        "description": "List of IDs for nodes that should be checked (controlled mode)."
+      },
+      {
+        "name": "checkOnClick",
+        "type": "boolean",
+        "description": "Whether to toggle check state when a node is clicked."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "components",
+        "type": "EzTreeViewComponents",
+        "description": "Custom subcomponents (Slots) to override default rendering.\nAllows fully custom rendering of nodes, icons, and checkboxes."
+      },
+      {
+        "name": "config",
+        "type": "complex",
+        "description": "Advanced internal configuration options."
+      },
+      {
+        "name": "data",
+        "type": "complex",
+        "description": "The hierarchical tree data."
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Direction of the text (ltr, rtl, auto)"
+      },
+      {
+        "name": "expandedNodes",
+        "type": "complex",
+        "description": "List of IDs for nodes that should be expanded (controlled mode)."
+      },
+      {
+        "name": "fields",
+        "type": "complex",
+        "description": "Field mapping for custom data structures."
+      },
+      {
+        "name": "fullRowNavigable",
+        "type": "boolean",
+        "description": "Whether the full row should be navigable via keyboard."
+      },
+      {
+        "name": "fullRowSelect",
+        "type": "boolean",
+        "description": "Whether the full row should be triggers selection on click."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "searchTerm",
+        "type": "string",
+        "description": "Search term for real-time filtering and highlighting."
+      },
+      {
+        "name": "selectedNodes",
+        "type": "complex",
+        "description": "List of IDs for nodes that should be selected (controlled mode)."
+      },
+      {
+        "name": "selectionMode",
+        "type": "multiple | single",
+        "description": "Selection mode for the tree."
+      },
+      {
+        "name": "service",
+        "type": "ITreeService",
+        "description": "Custom data service instance for the tree."
+      },
+      {
+        "name": "serviceName",
+        "type": "string",
+        "description": "Name of the global service to use for data operations."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "showCheckboxes",
+        "type": "boolean",
+        "description": "Whether to show checkboxes for tri-state selection."
+      },
+      {
+        "name": "sortOrder",
+        "type": "None | Ascending | Descending",
+        "description": "Sorting order for tree nodes."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      }
+    ],
+    "events": [
+      {
+        "name": "onActionFailure",
+        "type": "complex",
+        "description": "Callback triggered when an operation fails."
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "complex",
+        "description": "Callback triggered when check states change."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback triggered when the component is created."
+      },
+      {
+        "name": "onDataBound",
+        "type": "complex",
+        "description": "Callback triggered after data is bound to the tree."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": "Callback when data changes."
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when data change is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when data change completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when data change is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when data change starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data loads."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback when data is requested."
+      },
+      {
+        "name": "onDataSourceChanged",
+        "type": "complex",
+        "description": "Callback triggered when the data source is changed."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback triggered when the component is destroyed."
+      },
+      {
+        "name": "onDrawNode",
+        "type": "complex",
+        "description": "Callback before rendering each node, allowing for custom logic."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback on error."
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid/component render completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid/component render starts."
+      },
+      {
+        "name": "onKeyPress",
+        "type": "complex",
+        "description": "Callback on key press within the tree."
+      },
+      {
+        "name": "onLoadChildren",
+        "type": "complex",
+        "description": "Callback for lazy loading children."
+      },
+      {
+        "name": "onNodeChecked",
+        "type": "complex",
+        "description": "Callback triggered when a node is checked."
+      },
+      {
+        "name": "onNodeChecking",
+        "type": "complex",
+        "description": "Callback triggered before checking a node (cancellable)."
+      },
+      {
+        "name": "onNodeClicked",
+        "type": "complex",
+        "description": "Callback triggered when a node is clicked."
+      },
+      {
+        "name": "onNodeCollapsed",
+        "type": "complex",
+        "description": "Callback triggered when a node is collapsed."
+      },
+      {
+        "name": "onNodeCollapsing",
+        "type": "complex",
+        "description": "Callback triggered before collapsing a node (cancellable)."
+      },
+      {
+        "name": "onNodeDragging",
+        "type": "complex",
+        "description": "Callback triggered during node dragging."
+      },
+      {
+        "name": "onNodeDragStart",
+        "type": "complex",
+        "description": "Callback triggered when node dragging starts (cancellable)."
+      },
+      {
+        "name": "onNodeDragStop",
+        "type": "complex",
+        "description": "Callback triggered when node dragging stops."
+      },
+      {
+        "name": "onNodeDrop",
+        "type": "complex",
+        "description": "Callback triggered when a node is dropped during D&D."
+      },
+      {
+        "name": "onNodeEditing",
+        "type": "complex",
+        "description": "Callback triggered before entering node editing mode (cancellable)."
+      },
+      {
+        "name": "onNodeExpand",
+        "type": "complex",
+        "description": "Callback triggered when a node is expanded or collapsed."
+      },
+      {
+        "name": "onNodeExpanded",
+        "type": "complex",
+        "description": "Callback triggered when a node label has been expanded."
+      },
+      {
+        "name": "onNodeExpanding",
+        "type": "complex",
+        "description": "Callback triggered before expanding a node (cancellable)."
+      },
+      {
+        "name": "onNodeRename",
+        "type": "complex",
+        "description": "Callback triggered when a node is renamed via inline editing."
+      },
+      {
+        "name": "onNodeSelected",
+        "type": "complex",
+        "description": "Callback triggered when a node is selected."
+      },
+      {
+        "name": "onNodeSelecting",
+        "type": "complex",
+        "description": "Callback triggered before selecting a node (cancellable)."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback on refresh."
+      },
+      {
+        "name": "onSelectionChange",
+        "type": "complex",
+        "description": "Callback triggered when selection changes."
+      }
+    ],
+    "methods": [],
+    "subcomponents": [
+      {
+        "name": "checkbox",
+        "description": "Custom checkbox component."
+      },
+      {
+        "name": "expandIcon",
+        "description": "Custom expand/collapse icon."
+      },
+      {
+        "name": "node",
+        "description": "Custom renderer for the tree node."
+      }
+    ]
+  },
+  "EzLayout": {
+    "name": "EzLayout",
+    "description": "EzLayout is the foundational multi lingigual layout engine for Web/SaaS applications.\nIt provides a highly configurable and responsive shell that handles authentication,\nheaders, sidebars, and enterprise-grade multi-panel layouts.",
+    "properties": [
+      {
+        "name": "authConfig",
+        "type": "complex",
+        "description": "Configuration for the built-in authentication slider.\nProvides slots for sign-in and sign-up forms."
+      },
+      {
+        "name": "breakpoint",
+        "type": "number",
+        "defaultValue": "```ts\n768\n```",
+        "description": "Breakpoint in pixels for mobile view."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "description": "Main content to be rendered within the layout."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "components",
+        "type": "complex",
+        "description": "Injected components to override or extend the default layout sections."
+      },
+      {
+        "name": "contentClassName",
+        "type": "string",
+        "description": "Custom class name for the main content area."
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Direction of the text (ltr, rtl, auto)"
+      },
+      {
+        "name": "enablePersistence",
+        "type": "boolean",
+        "description": "Enable state persistence to localStorage for layout preferences."
+      },
+      {
+        "name": "footerClassName",
+        "type": "string",
+        "description": "Custom class name for the footer container."
+      },
+      {
+        "name": "headerClassName",
+        "type": "string",
+        "description": "Custom class name for the header container."
+      },
+      {
+        "name": "headerConfig",
+        "type": "EzHeaderProps",
+        "description": "Configuration props passed to the default EzHeader component."
+      },
+      {
+        "name": "headerHeight",
+        "type": "number",
+        "defaultValue": "```ts\n64\n```",
+        "description": "Height of the header in pixels."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "mediaQuery",
+        "type": "string",
+        "description": "Custom media query for fine-grained mobile breakpoint control."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "sidebarClassName",
+        "type": "string",
+        "description": "Custom class name for the sidebar container."
+      },
+      {
+        "name": "sidebarWidth",
+        "type": "number",
+        "defaultValue": "```ts\n256\n```",
+        "description": "Width of the sidebar in pixels."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      }
+    ],
+    "events": [
+      {
+        "name": "onAuthPageChange",
+        "type": "complex",
+        "description": "Callback fired when the auth page changes (signin <-> signup)."
+      },
+      {
+        "name": "onCreate",
+        "type": "complex",
+        "description": "Callback when layout is created."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": "Callback when data changes."
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when data change is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when data change completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when data change is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when data change starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data loads."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback when data is requested."
+      },
+      {
+        "name": "onDestroy",
+        "type": "complex",
+        "description": "Callback when layout is destroyed."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback on error."
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid/component render completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid/component render starts."
+      },
+      {
+        "name": "onModeChange",
+        "type": "complex",
+        "description": "Callback fired when the layout mode changes (e.g. dashboard <-> auth)."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback on refresh."
+      },
+      {
+        "name": "onResizeStart",
+        "type": "complex",
+        "description": "Callback when resizing starts."
+      },
+      {
+        "name": "onResizeStop",
+        "type": "complex",
+        "description": "Callback when resizing stops."
+      },
+      {
+        "name": "onSidebarToggle",
+        "type": "complex",
+        "description": "Callback fired when the sidebar is toggled."
+      },
+      {
+        "name": "onViewportResize",
+        "type": "complex",
+        "description": "Callback fired when the viewport resizes."
+      }
+    ],
+    "methods": [
+      {
+        "name": "addPanel",
+        "description": "Programmatically adds a side panel.",
+        "parameters": [
+          {
+            "name": "panel",
+            "type": "any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(panel: any) => void"
+      },
+      {
+        "name": "closeSidebar",
+        "description": "Programmatically closes the sidebar.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "getAuthPage",
+        "description": "Gets the current auth view.",
+        "parameters": [],
+        "returnType": "any | any",
+        "type": "() => any | any"
+      },
+      {
+        "name": "getHeaderHeight",
+        "description": "Gets the configured header height.",
+        "parameters": [],
+        "returnType": "number",
+        "type": "() => number"
+      },
+      {
+        "name": "getLayoutService",
+        "description": "Returns the underlying LayoutService instance.",
+        "parameters": [],
+        "returnType": "any",
+        "type": "() => any"
+      },
+      {
+        "name": "getMainContentStyle",
+        "description": "Returns calculated CSS styles for the main content area.",
+        "parameters": [],
+        "returnType": "CSSProperties",
+        "type": "() => CSSProperties"
+      },
+      {
+        "name": "getMode",
+        "description": "Gets the current layout mode.",
+        "parameters": [],
+        "returnType": "any | any | any",
+        "type": "() => any | any | any"
+      },
+      {
+        "name": "getServiceRegistry",
+        "description": "Returns the service registry used by the layout.",
+        "parameters": [],
+        "returnType": "ServiceRegistry",
+        "type": "() => ServiceRegistry"
+      },
+      {
+        "name": "getSidebarWidth",
+        "description": "Gets the configured sidebar width.",
+        "parameters": [],
+        "returnType": "number",
+        "type": "() => number"
+      },
+      {
+        "name": "getState",
+        "description": "Returns a snapshot of the internal layout state.",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      },
+      {
+        "name": "getViewport",
+        "description": "Returns current viewport dimensions and mobile status.",
+        "parameters": [],
+        "returnType": "function",
+        "type": "() => function"
+      },
+      {
+        "name": "isMobile",
+        "description": "Direct check if the layout is in mobile mode.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "isSidebarOpen",
+        "description": "Returns current visibility of the sidebar.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "openSidebar",
+        "description": "Programmatically opens the sidebar.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "refresh",
+        "description": "Forces a re-calculation of layout dimensions.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "removePanel",
+        "description": "Removes a side panel by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(id: string) => void"
+      },
+      {
+        "name": "setAuthPage",
+        "description": "Switches the active auth view (signin/signup).",
+        "parameters": [
+          {
+            "name": "page",
+            "type": "any | any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(page: any | any) => void"
+      },
+      {
+        "name": "setMode",
+        "description": "Sets the top-level layout mode.",
+        "parameters": [
+          {
+            "name": "mode",
+            "type": "any | any | any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(mode: any | any | any) => void"
+      },
+      {
+        "name": "showAuth",
+        "description": "Switches layout to authentication mode.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "showDashboard",
+        "description": "Switches layout to dashboard mode.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "showMinimal",
+        "description": "Switches layout to minimal mode.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "showSignIn",
+        "description": "Programmatically shows the sign-in form.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "showSignUp",
+        "description": "Programmatically shows the sign-up form.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "toggleSidebar",
+        "description": "Toggles sidebar visibility or sets it explicitly.",
+        "parameters": [
+          {
+            "name": "open",
+            "type": "boolean",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "void",
+        "type": "(open?: boolean) => void"
+      }
+    ],
+    "subcomponents": []
+  },
+  "EzSignature": {
+    "name": "EzSignature",
+    "description": "EzSignature is a high-fidelity digital ink and signature capture engine.\nIt provides a smooth, pressure-sensitive drawing experience using SVG \nand perfect-freehand algorithms, suitable for legal and formal validations.\n\n\n### Key Features\n- **Natural Ink Flow**: Advanced smoothing and streamlining for professional-looking signatures.\n- **Pressure Sensitivity**: Dynamically adjusts stroke width based on pointer pressure.\n- **Multi-Format Export**: Save signatures as high-resolution `PNG`, `JPEG`, or vector `SVG`.\n- **Vector Persistence**: Stores signatures as geometric point data for lossless scaling and reproduction.\n- **Undo/Redo Stack**: Full transactional history for correcting mistakes during capture.\n- **Theme Aware**: Automatically adjusts stroke colors based on active theme or custom palettes.\n\n### Minimal Example\n```tsx\n<EzSignature\n  width={400}\n  height={200}\n  onSave={(dataUrl) => submitSignature(dataUrl)}\n/>\n```\n\n### Imperative Control\n```tsx\nconst sigRef = useRef<EzSignatureRef>(null);\n\nreturn (\n  <>\n    <EzSignature ref={sigRef} />\n    <button onClick={() => sigRef.current?.clear()}>Clear</button>\n    <button onClick={() => sigRef.current?.save('png')}>Download</button>\n  </>\n);\n```",
+    "properties": [
+      {
+        "name": "backgroundColor",
+        "type": "string",
+        "defaultValue": "```ts\n'transparent'\n```",
+        "description": "Background color of the signature pad."
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "description": "Custom class names for styling"
+      },
+      {
+        "name": "dataTestId",
+        "type": "string",
+        "description": "Data attribute for testing"
+      },
+      {
+        "name": "dir",
+        "type": "auto | ltr | rtl",
+        "description": "Direction of the text (ltr, rtl, auto)"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "description": "Disabled mode."
+      },
+      {
+        "name": "height",
+        "type": "string | number",
+        "defaultValue": "```ts\n300\n```",
+        "description": "Height of the signature canvas."
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": "Unique identifier for the component instance"
+      },
+      {
+        "name": "maxStrokeWidth",
+        "type": "number",
+        "defaultValue": "```ts\n4\n```",
+        "description": "Maximum stroke width."
+      },
+      {
+        "name": "minStrokeWidth",
+        "type": "number",
+        "defaultValue": "```ts\n2\n```",
+        "description": "Minimum stroke width."
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "description": "Read only mode."
+      },
+      {
+        "name": "serviceRegistry",
+        "type": "ServiceRegistry",
+        "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
+      },
+      {
+        "name": "smoothing",
+        "type": "number",
+        "defaultValue": "```ts\n0.5\n```",
+        "description": "Factor to smooth the stroke."
+      },
+      {
+        "name": "strokeColor",
+        "type": "string",
+        "defaultValue": "```ts\n'currentColor' (uses theme foreground)\n```",
+        "description": "Stroke color of the signature."
+      },
+      {
+        "name": "style",
+        "type": "CSSProperties",
+        "description": "Inline styles"
+      },
+      {
+        "name": "thinning",
+        "type": "number",
+        "defaultValue": "```ts\n0.5\n```",
+        "description": "Effect of pressure on the stroke's size."
+      },
+      {
+        "name": "width",
+        "type": "string | number",
+        "defaultValue": "```ts\n'100%'\n```",
+        "description": "Width of the signature canvas."
+      }
+    ],
+    "events": [
+      {
+        "name": "onChange",
+        "type": "complex",
+        "description": "Callback when signature changes (after each stroke)."
+      },
+      {
+        "name": "onCreated",
+        "type": "complex",
+        "description": "Callback when component is created."
+      },
+      {
+        "name": "onDataChange",
+        "type": "complex",
+        "description": "Callback when data changes."
+      },
+      {
+        "name": "onDataChangeCancel",
+        "type": "complex",
+        "description": "Callback when data change is cancelled."
+      },
+      {
+        "name": "onDataChangeComplete",
+        "type": "complex",
+        "description": "Callback when data change completes."
+      },
+      {
+        "name": "onDataChangeRequest",
+        "type": "complex",
+        "description": "Callback when data change is requested."
+      },
+      {
+        "name": "onDataChangeStart",
+        "type": "complex",
+        "description": "Callback when data change starts."
+      },
+      {
+        "name": "onDataLoad",
+        "type": "complex",
+        "description": "Callback when data loads."
+      },
+      {
+        "name": "onDataRequest",
+        "type": "complex",
+        "description": "Callback when data is requested."
+      },
+      {
+        "name": "onDestroyed",
+        "type": "complex",
+        "description": "Callback when component is destroyed."
+      },
+      {
+        "name": "onEnd",
+        "type": "complex",
+        "description": "Callback when signature stroke ends."
+      },
+      {
+        "name": "onError",
+        "type": "complex",
+        "description": "Callback on error."
+      },
+      {
+        "name": "onGridRenderComplete",
+        "type": "complex",
+        "description": "Callback when grid/component render completes."
+      },
+      {
+        "name": "onGridRenderStart",
+        "type": "complex",
+        "description": "Callback when grid/component render starts."
+      },
+      {
+        "name": "onRefresh",
+        "type": "complex",
+        "description": "Callback on refresh."
+      },
+      {
+        "name": "onSave",
+        "type": "complex",
+        "description": "Callback when signature is saved."
+      }
+    ],
+    "methods": [
+      {
+        "name": "canRedo",
+        "description": "Checks if redo is possible.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "canUndo",
+        "description": "Checks if undo is possible.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "clear",
+        "description": "Clears the signature pad.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "getSignature",
+        "description": "Returns the geometric data of the signature.",
+        "parameters": [],
+        "returnType": "number[][][]",
+        "type": "() => number[][][]"
+      },
+      {
+        "name": "isEmpty",
+        "description": "Checks if signature is empty.",
+        "parameters": [],
+        "returnType": "boolean",
+        "type": "() => boolean"
+      },
+      {
+        "name": "load",
+        "description": "Loads a signature from a JSON string of points or Base64 (if supported).\nCurrently supports loading array of Point arrays.",
+        "parameters": [
+          {
+            "name": "data",
+            "type": "any",
+            "description": ""
+          }
+        ],
+        "returnType": "void",
+        "type": "(data: any) => void"
+      },
+      {
+        "name": "redo",
+        "description": "Redoes the last undone stroke.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      },
+      {
+        "name": "save",
+        "description": "Saves the signature to a Base64 string.",
+        "parameters": [
+          {
+            "name": "format",
+            "type": "any | any | any",
+            "description": "",
+            "isOptional": true
+          }
+        ],
+        "returnType": "Promise<string>",
+        "type": "(format?: any | any | any) => Promise<string>"
+      },
+      {
+        "name": "undo",
+        "description": "Undoes the last stroke.",
+        "parameters": [],
+        "returnType": "void",
+        "type": "() => void"
+      }
+    ],
+    "subcomponents": []
+  }
+}
