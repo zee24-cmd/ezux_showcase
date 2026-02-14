@@ -21,7 +21,7 @@ function ViewsPage() {
   }, []);
 
   return (
-    <>
+    <div>
       <MetaTags
         title="Scheduler Views"
         description="Advanced React Scheduler and Calendar component with multi-view support."
@@ -36,6 +36,6 @@ function ViewsPage() {
           <EzSchedulerDemoWrapper initialScenario="views" />
         </Suspense>
       </DemoWrapper>
-    </>
+    </div>
   );
 }

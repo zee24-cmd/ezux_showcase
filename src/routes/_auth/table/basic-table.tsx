@@ -21,7 +21,7 @@ function TablePage() {
     }, []);
 
     return (
-        <>
+        <div>
             <MetaTags
                 title="Table View"
                 description="High-performance React Data Grid with virtualization, sorting, and filtering."
@@ -37,6 +37,6 @@ function TablePage() {
                     <EzTableDemoWrapper />
                 </Suspense>
             </DemoWrapper>
-        </>
+        </div>
     );
 }
