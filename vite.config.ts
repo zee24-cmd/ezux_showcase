@@ -19,10 +19,31 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './src')
+            '@': path.resolve(__dirname, './src'),
+            'use-sync-external-store/shim/with-selector.js': 'use-sync-external-store/shim/with-selector'
+        }
+    },
+    define: {
+        'process.env.NODE_ENV': JSON.stringify('development')
+    },
+    optimizeDeps: {
+        include: [
+            '@tanstack/react-store',
+            'use-sync-external-store/shim/with-selector',
+            'rrule'
+        ],
+        exclude: ['ezux']
+    },
+    server: {
+        hmr: {
+            overlay: true
         }
     },
     build: {
+        commonjsOptions: {
+            include: [/node_modules/],
+            transformMixedEsModules: true
+        },
         chunkSizeWarningLimit: 1000,
         rollupOptions: {
             output: {

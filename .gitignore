@@ -38,3 +38,6 @@ pnpm-debug.log*
 
 # Workspace artifacts (system generated)
 .system_generated/
+
+# Documentation and tutorials
+/tutorials/

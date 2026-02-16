@@ -21,7 +21,7 @@ function TablePage() {
     }, []);
 
     return (
-        <div>
+        <div className="h-full">
             <MetaTags
                 title="Table View"
                 description="High-performance React Data Grid with virtualization, sorting, and filtering."

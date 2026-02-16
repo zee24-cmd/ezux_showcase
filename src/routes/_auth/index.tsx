@@ -17,5 +17,9 @@ export const Route = createFileRoute('/_auth/')({
 });
 
 function HomePage() {
-    return <ShowcaseHome />;
+    return (
+        <div className="h-full overflow-y-auto">
+            <ShowcaseHome />
+        </div>
+    );
 }
