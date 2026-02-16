@@ -198,7 +198,7 @@ export const EzSignatureDemo = () => {
                             minStrokeWidth={width * 0.5}
                             height={400}
                             className="w-full cursor-crosshair"
-                            backgroundColor="transparent"
+                            backgroundColor="white"
                         />
                     </Card>
 
