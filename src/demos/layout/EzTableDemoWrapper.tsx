@@ -209,39 +209,6 @@ export const EzTableDemoWrapper: React.FC = () => {
 
     return (
         <div className="flex flex-col h-full gap-4">
-            <div className="flex justify-between items-center p-2 bg-muted/20 rounded-lg border border-border/40">
-                <div className="flex items-center gap-2">
-                    <Label htmlFor="dataset-size" className="text-xs font-medium text-muted-foreground whitespace-nowrap px-2">
-                        Generate Rows:
-                    </Label>
-                    <div className="relative flex items-center">
-                        <select
-                            id="dataset-size"
-                            className="h-8 pl-3 pr-8 bg-background border border-border hover:border-primary/50 rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary/20 cursor-pointer appearance-none transition-all"
-                            value={datasetSize}
-                            onChange={handleDatasetSizeChange}
-                        >
-                            <option value="50">50 Rows</option>
-                            <option value="100">100 Rows</option>
-                            <option value="1000">1,000 Rows</option>
-                            <option value="5000">5,000 Rows</option>
-                            <option value="10000">10,000 Rows</option>
-                        </select>
-                        <ChevronDown className="absolute right-2.5 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
-                    </div>
-                </div>
-
-                <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 gap-2 bg-background border-border hover:border-primary transition-all active:scale-95 text-xs"
-                    onClick={handleReload}
-                    disabled={isRefetching || isRefreshing}
-                >
-                    <RefreshCw className={cn("w-3.5 h-3.5", (isRefetching || isRefreshing) && "animate-spin")} />
-                    {i18nService.t('reload_dataset')}
-                </Button>
-            </div>
 
             <div className="flex-1 overflow-hidden rounded-xl border border-border shadow-sm bg-card">
                 <EzTable
@@ -262,6 +229,43 @@ export const EzTableDemoWrapper: React.FC = () => {
                     onExportCSV={handleExportCSV}
                     className="h-full border-none"
                     isLoading={isLoading || isRefetching}
+                    slots={{
+                        toolbar: () => (
+                            <div className="flex justify-between items-center p-2 bg-muted/20 border-b border-border/40">
+                                <div className="flex items-center gap-2">
+                                    <Label htmlFor="dataset-size" className="text-xs font-medium text-muted-foreground whitespace-nowrap px-2">
+                                        Generate Rows:
+                                    </Label>
+                                    <div className="relative flex items-center">
+                                        <select
+                                            id="dataset-size"
+                                            className="h-8 pl-3 pr-8 bg-background border border-border hover:border-primary/50 rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary/20 cursor-pointer appearance-none transition-all"
+                                            value={datasetSize}
+                                            onChange={handleDatasetSizeChange}
+                                        >
+                                            <option value="50">50 Rows</option>
+                                            <option value="100">100 Rows</option>
+                                            <option value="1000">1,000 Rows</option>
+                                            <option value="5000">5,000 Rows</option>
+                                            <option value="10000">10,000 Rows</option>
+                                        </select>
+                                        <ChevronDown className="absolute right-2.5 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
+                                    </div>
+                                </div>
+
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="h-8 gap-2 bg-background border-border hover:border-primary transition-all active:scale-95 text-xs"
+                                    onClick={handleReload}
+                                    disabled={isRefetching || isRefreshing}
+                                >
+                                    <RefreshCw className={cn("w-3.5 h-3.5", (isRefetching || isRefreshing) && "animate-spin")} />
+                                    {i18nService.t('reload_dataset')}
+                                </Button>
+                            </div>
+                        )
+                    }}
                 />
             </div>
         </div>

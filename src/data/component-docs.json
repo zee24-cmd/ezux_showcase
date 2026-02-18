@@ -441,7 +441,7 @@
       {
         "name": "slots",
         "type": "EzTableSlots",
-        "description": "Custom slots to override default internal components."
+        "description": "Custom slots to override default internal components. Available slots: `toolbar`, `footer`, `noRowsOverlay`, `loadingOverlay`, `header`, `row`, `emptyRecord`."
       },
       {
         "name": "sortSettings",
@@ -1413,6 +1413,16 @@
         "name": "editorTemplate",
         "type": "string | ",
         "description": "Template for editor content."
+      },
+      {
+        "name": "slots",
+        "type": "EzSchedulerSlots",
+        "description": "Custom component slots for override. Available slots: `toolbar`, `eventModal`, `quickAdd`, `resourceSidebar`."
+      },
+      {
+        "name": "slotProps",
+        "type": "Record<string, any>",
+        "description": "Props to pass to the custom slots."
       },
       {
         "name": "enableAdaptiveUI",
@@ -2473,6 +2483,16 @@
         "name": "wipStrict",
         "type": "boolean",
         "description": "Enforce strict WIP limits."
+      },
+      {
+        "name": "slots",
+        "type": "EzKanbanSlots",
+        "description": "Slots for modular composition. Available slots: `toolbar`, `board`, `column`, `card`, `cardContent`, `swimlane`, `cardEditor`."
+      },
+      {
+        "name": "slotProps",
+        "type": "Record<string, any>",
+        "description": "Props for slots."
       }
     ],
     "events": [
@@ -3577,6 +3597,16 @@
         "name": "onNodeExpand",
         "type": "complex",
         "description": "Callback triggered when a node is expanded or collapsed."
+      },
+      {
+        "name": "slots",
+        "type": "EzTreeViewSlots",
+        "description": "Slots for modular composition. Available slots: `node`, `expandIcon`, `checkbox`, `dragHandle`."
+      },
+      {
+        "name": "slotProps",
+        "type": "Record<string, any>",
+        "description": "Props for slots."
       },
       {
         "name": "onNodeExpanded",

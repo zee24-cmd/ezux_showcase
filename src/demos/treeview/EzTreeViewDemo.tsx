@@ -224,6 +224,43 @@ export const EzTreeViewDemo = () => {
                                 onLoadChildren={handleLoadChildren}
                                 onNodeDrop={handleNodeDrop}
                                 className="h-full"
+                                slots={{
+                                    node: ({ node, style, onToggle, onClick }) => (
+                                        <div
+                                            className={cn(
+                                                "flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-colors select-none",
+                                                "hover:bg-muted/50",
+                                                node.isSelected ? "bg-primary/10 text-primary font-medium" : "text-foreground"
+                                            )}
+                                            style={style}
+                                            onClick={(e) => onClick(e)}
+                                        >
+                                            <div
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onToggle();
+                                                }}
+                                                className={cn(
+                                                    "p-0.5 rounded-md hover:bg-muted/80 transition-colors",
+                                                    node.isLeaf ? "opacity-0 pointer-events-none" : "opacity-100"
+                                                )}
+                                            >
+                                                {node.isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+                                            </div>
+
+                                            <span className="text-lg leading-none">{node.icon}</span>
+
+                                            <span className="flex-1 truncate text-sm">
+                                                {node.label}
+                                                {node.children && <span className="ml-2 text-xs text-muted-foreground">({node.children.length})</span>}
+                                            </span>
+
+                                            {node.isLoaded && !node.isLeaf && (
+                                                <span className="w-2 h-2 rounded-full bg-green-500/50" />
+                                            )}
+                                        </div>
+                                    )
+                                }}
                             />
                         </div>
                     </div>
@@ -262,5 +299,3 @@ export const EzTreeViewDemo = () => {
         </div>
     );
 };
-
-
