@@ -92,7 +92,16 @@ export const EzTableGroupingDemoWrapper: React.FC = () => {
 
     return (
         <div className="flex flex-col h-full gap-4">
-            <div className="flex justify-end items-center p-2 bg-muted/20 rounded-lg border border-border/40">
+            <div className="flex justify-between items-center p-4 bg-blue-50/50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <div className="flex items-center gap-3 text-sm text-blue-700 dark:text-blue-300">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                        <Briefcase className="w-4 h-4" />
+                    </div>
+                    <div>
+                        <p className="font-semibold">Interactive Grouping</p>
+                        <p className="opacity-90">Right-click on any column header to <strong>Group by that column</strong> or <strong>Pin</strong> it to the side.</p>
+                    </div>
+                </div>
                 <Button
                     variant="outline"
                     size="sm"
