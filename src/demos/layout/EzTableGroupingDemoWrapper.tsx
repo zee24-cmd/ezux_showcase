@@ -12,8 +12,8 @@ import { dataWorkerService } from '@/services/DataWorkerService';
 export const EzTableGroupingDemoWrapper: React.FC = () => {
     const i18nService = useI18n();
     const { data = [], isLoading, refetch, isRefetching } = useQuery({
-        queryKey: ['groupingTableData', 5000],
-        queryFn: () => dataWorkerService.generateTableData(5000),
+        queryKey: ['groupingTableData', 300],
+        queryFn: () => dataWorkerService.generateTableData(300),
         staleTime: 5 * 60 * 1000,
     });
 

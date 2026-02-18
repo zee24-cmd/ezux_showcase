@@ -78,7 +78,7 @@ export const EzTablePivotDemoWrapper: React.FC = () => {
         { id: 'tenure', label: 'Tenure (Years)', type: 'number', meta: { align: 'right' } },
         { id: 'performance', label: 'Performance Rating', type: 'string', meta: { align: 'center' } },
         { id: 'skillSet', label: 'Skill Set', type: 'string' },
-        ...Array.from({ length: 15 }).map((_, i) => ({
+        ...Array.from({ length: 2 }).map((_, i) => ({
             id: `customField_${i}`,
             label: `Metric ${i + 1}`,
             type: (i % 3 === 0 ? 'number' : i % 3 === 1 ? 'date' : 'string') as 'number' | 'date' | 'string',
@@ -290,6 +290,7 @@ export const EzTablePivotDemoWrapper: React.FC = () => {
                         persistenceKey="pivot-demo"
                         className="h-full border-none"
                         isLoading={isLoading || isRefetching}
+                        enableColumnVirtualization
                     />
                     {isPending && (
                         <div className="absolute inset-0 z-50 bg-background/40 backdrop-blur-[1px] transition-all flex items-center justify-center">
