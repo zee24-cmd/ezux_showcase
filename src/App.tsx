@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { globalServiceRegistry, LayoutService, I18nService, ThemeService, NotificationService, NotificationPanel } from 'ezux';
+import 'ezux/dist/ezux.css';
 import './index.css';
 
 // Import the generated route tree

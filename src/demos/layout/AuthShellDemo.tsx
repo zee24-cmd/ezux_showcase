@@ -394,7 +394,11 @@ export const EzAuthDemo = () => {
     return (
         <EzLayout
             serviceRegistry={globalServiceRegistry}
-            components={{ header: CustomHeader, sidebar: SidebarContent, footer: FooterContent }}
+            slots={{
+                header: () => CustomHeader,
+                sidebar: () => SidebarContent,
+                footer: () => FooterContent
+            }}
             className="mesh-bg"
             headerClassName="!bg-transparent !shadow-none !border-none z-50 h-18 p-1 px-4"
             sidebarClassName="glass-card !border-y-0 !border-l-0 !rounded-none z-40"

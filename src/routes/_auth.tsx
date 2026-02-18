@@ -410,10 +410,10 @@ function AuthenticatedLayout() {
     return (
         <EzLayout
             serviceRegistry={globalServiceRegistry}
-            components={{
+            slots={{
                 header: HeaderComponent,
-                sidebar: SidebarContent,
-                footer: FooterContent
+                sidebar: () => SidebarContent,
+                footer: () => FooterContent,
             }}
             className="mesh-bg min-h-screen"
             headerClassName="!bg-transparent !shadow-none !border-none z-50 h-18"

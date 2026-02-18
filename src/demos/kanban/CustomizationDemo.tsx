@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { EzKanban, Badge, Button, Progress, Modal } from 'ezux';
-import type { KanbanBoard } from 'ezux';
+import type { KanbanBoard, KanbanCard, KanbanColumn } from 'ezux';
 import { dataWorkerService } from '../../services/DataWorkerService';
 import { Loader2, User, Clock, AlertCircle } from 'lucide-react';
 
@@ -38,9 +38,9 @@ export const CustomizationDemo = () => {
                 board={board}
                 onBoardChange={setBoard}
                 className="h-full"
-                customRenderers={{
+                slots={{
                     // 1. Custom Card Content (Adding progress and status indicators)
-                    cardContent: (card) => {
+                    cardContent: ({ card }) => {
                         const progress = (card.metadata?.progress as number) || 0;
                         const isOverdue = card.dueDate && new Date(card.dueDate) < new Date();
 
@@ -73,7 +73,7 @@ export const CustomizationDemo = () => {
 
                                 <div className="flex items-center justify-between pt-1">
                                     <div className="flex -space-x-1.5">
-                                        {card.assignees?.map((a) => (
+                                        {card.assignees?.map((a: any) => (
                                             <div
                                                 key={a.id}
                                                 className="w-5 h-5 rounded-full border border-background bg-primary/10 flex items-center justify-center overflow-hidden"
@@ -138,7 +138,7 @@ export const CustomizationDemo = () => {
                                                 id="custom-column-select"
                                                 name="custom-column-select"
                                             >
-                                                {columns.map(col => (
+                                                {columns.map((col: KanbanColumn) => (
                                                     <option key={col.id} value={col.id}>{col.name}</option>
                                                 ))}
                                             </select>

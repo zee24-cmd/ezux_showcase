@@ -1,7 +1,8 @@
 @import "tailwindcss";
-@source "../../node_modules/ezux/dist/**/*.{js,mjs,ts,tsx}";
+@source "../../node_modules/ezux/dist/**/*.{js,cjs,mjs,ts,tsx}";
 
 @plugin "tailwindcss-animate";
+@variant dark (.dark &);
 
 /* 
   Initial theme variables (Blue light mode as default).

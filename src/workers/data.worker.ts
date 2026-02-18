@@ -404,7 +404,7 @@ self.onmessage = (e: MessageEvent) => {
             const { payload, requestId } = e.data;
             const { id, updates } = payload;
 
-            let updatedRecord = null;
+            let updatedRecord: MockTableData | null = null;
             if (tableStore) {
                 const index = tableStore.findIndex(r => r.id === id);
                 if (index !== -1) {

@@ -15,7 +15,7 @@ export const exportToCsv = <T extends Record<string, any>>(data: T[], fileName: 
     const headers = Object.keys(data[0]);
 
     // Create CSV content
-    const csvRows = [];
+    const csvRows: string[] = [];
 
     // Add header row
     csvRows.push(headers.join(','));

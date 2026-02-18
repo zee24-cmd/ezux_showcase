@@ -231,7 +231,7 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
         return [unassignedEvent, ...filtered];
     }, [dataEvents, activeResourceIds, scenario]);
 
-    const components = useMemo(() => {
+    const slots = useMemo(() => {
         const CustomEventRenderer: React.FC<{ event: SchedulerEvent }> = ({ event }) => {
             const resource = resources.find(r => r.id === event.resourceId);
             return (
@@ -582,8 +582,7 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
                             group={scenario === 'grouping' ? { resources: ['floor'], byDate: false } : undefined}
                             showResourcesInDayView={scenario !== 'timeline' && scenario !== 'grouping' && (scenario as string) !== 'views'}
                             showHeaderBar={false}
-                            // @ts-ignore
-                            components={components}
+                            slots={slots}
                             showResourceHeaders={true}
                             showWeekNumber={scenario === 'test-enhancements'}
                             showUnassignedLane={scenario !== 'resource' && scenario !== 'grouping' && (scenario as string) !== 'views'} // Hide unassigned lane for resource/grouping/views

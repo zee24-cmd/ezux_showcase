@@ -147,8 +147,8 @@ export function EzLayoutImperativeDemoWrapper() {
                         serviceRegistry={isolatedRegistry}
                         className="!h-full !static"
                         contentClassName="!p-4 overflow-auto custom-scrollbar"
-                        components={{
-                            sidebar: (
+                        slots={{
+                            sidebar: () => (
                                 <div className="p-4">
                                     <h2 className="text-sm font-semibold mb-2">Sidebar Content</h2>
                                     <p className="text-xs text-muted-foreground">
