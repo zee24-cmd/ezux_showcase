@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { AnimatedText, useI18nService, cn } from 'ezux';
 import React, { useState, useEffect } from 'react';
+import pkg from '../../package.json';
 
 // CSS Animations
 export const AnimationStyles = () => (
@@ -211,9 +212,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-                <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
-                    <Sparkles className="w-4 h-4" />
-                    <span>{i18nService.t('hero_badge')}</span>
+                <div className="animate-fade-in-up flex items-center justify-center gap-3 mb-8">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                        <Sparkles className="w-4 h-4" />
+                        <span>{i18nService.t('hero_badge')}</span>
+                    </div>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-sm font-medium border border-emerald-500/20">
+                        <span>ezux {pkg.dependencies.ezux.replace('^', '')}</span>
+                    </div>
                 </div>
 
                 <AnimatedText
