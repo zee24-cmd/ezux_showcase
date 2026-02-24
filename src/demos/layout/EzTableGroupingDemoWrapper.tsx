@@ -120,8 +120,9 @@ export const EzTableGroupingDemoWrapper: React.FC = () => {
                     columns={columns as any}
                     pagination
                     pageSize={50}
-                    enableColumnFiltering
+
                     enableGrouping
+                    enableColumnReorder
                     enableRowSelection
                     enableContextMenu
                     enableStickyHeader

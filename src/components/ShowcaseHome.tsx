@@ -24,7 +24,7 @@ import {
     Languages,
     Trello,
 } from 'lucide-react';
-import { AnimatedText, globalServiceRegistry, I18nService, cn } from 'ezux';
+import { AnimatedText, useI18nService, cn } from 'ezux';
 import React, { useState, useEffect } from 'react';
 
 // CSS Animations
@@ -150,7 +150,7 @@ interface ComponentSectionProps {
 }
 
 const ComponentSection: React.FC<ComponentSectionProps> = ({ icon: Icon, title, description, strengths, colorScheme, delay, to }) => {
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const i18nService = useI18nService();
     return (
         <section id={title.toLowerCase().replace('ez', '')} className="py-12 border-b border-border/50 last:border-none">
             <div className="flex flex-col lg:flex-row gap-8 animate-fade-in-up" style={{ animationDelay: `${delay * 0.1}s` }}>
@@ -193,7 +193,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
     const navigate = useNavigate();
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const i18nService = useI18nService();
     const [_, setTick] = useState(0);
 
     useEffect(() => {
@@ -289,7 +289,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick }) => {
 // Main Home Page Component
 export const ShowcaseHome = ({ showOnlyContent = false }: { showOnlyContent?: boolean }) => {
     const navigate = useNavigate();
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const i18nService = useI18nService();
     const [_, setTick] = useState(0);
 
     useEffect(() => {

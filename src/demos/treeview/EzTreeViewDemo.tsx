@@ -225,7 +225,7 @@ export const EzTreeViewDemo = () => {
                                 onNodeDrop={handleNodeDrop}
                                 className="h-full"
                                 slots={{
-                                    node: ({ node, style, onToggle, onClick }) => (
+                                    node: (({ node, style, onToggle, onClick }: { node: TreeNode; style: React.CSSProperties; onToggle: () => void; onClick: (e: React.MouseEvent) => void }) => (
                                         <div
                                             className={cn(
                                                 "flex items-center gap-2 p-1.5 rounded-lg cursor-pointer transition-colors select-none",
@@ -259,7 +259,7 @@ export const EzTreeViewDemo = () => {
                                                 <span className="w-2 h-2 rounded-full bg-green-500/50" />
                                             )}
                                         </div>
-                                    )
+                                    )) as React.ComponentType<unknown>
                                 }}
                             />
                         </div>

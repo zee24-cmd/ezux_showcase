@@ -273,7 +273,7 @@ export const EzTablePivotDemoWrapper: React.FC = () => {
                         columns={columns as any}
                         pagination
                         pageSize={100}
-                        enableColumnFiltering
+
                         enableGrouping
                         enableRowSelection
                         enableContextMenu
@@ -284,8 +284,6 @@ export const EzTablePivotDemoWrapper: React.FC = () => {
                         enableChangeTracking
                         enableAdvancedFiltering
                         state={{ grouping, columnVisibility }}
-                        onGroupingChange={setGrouping as any}
-                        enablePivoting
                         enablePersistence
                         persistenceKey="pivot-demo"
                         className="h-full border-none"

@@ -2,9 +2,10 @@ import React from 'react';
 import { createFileRoute, Outlet, redirect, Link, useNavigate } from '@tanstack/react-router';
 import {
     EzLayout,
-    globalServiceRegistry,
+    useEzServiceRegistry,
+    useI18nService,
+    useNotificationService,
     LayoutService,
-    I18nService,
     Button,
     Input,
     Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
@@ -13,9 +14,9 @@ import {
     EzLanguageSwitcher,
     EzUserProfile,
     cn,
-    NotificationService,
     EzNotificationDropdown
 } from 'ezux';
+import { layoutService } from '../App';
 import { MetaTags } from '@/components/MetaTags';
 import {
     Calendar,
@@ -38,7 +39,6 @@ import {
 
 export const Route = createFileRoute('/_auth')({
     beforeLoad: () => {
-        const layoutService = globalServiceRegistry.getOrThrow<LayoutService>('LayoutService');
         const state = layoutService.getState();
 
         // If in auth mode, redirect to auth/signin
@@ -99,8 +99,10 @@ const NavLinkGroup = ({
 function AuthenticatedLayout() {
     const navigate = useNavigate();
     const { pathname } = window.location;
-    const layoutService = globalServiceRegistry.getOrThrow<LayoutService>('LayoutService');
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const registry = useEzServiceRegistry();
+    const i18nService = useI18nService();
+    const layoutService = registry.getOrThrow<LayoutService>('LayoutService');
+    const notificationService = useNotificationService();
     const [_, setTick] = React.useState(0);
 
     // Accordion state
@@ -124,8 +126,7 @@ function AuthenticatedLayout() {
         const unsub = i18nService.subscribe(() => setTick(t => t + 1));
 
         // Add welcome notification
-        const notificationService = globalServiceRegistry.get<NotificationService>('NotificationService');
-        if (notificationService && !notifiedRef.current) {
+        if (!notifiedRef.current) {
             notificationService.add({
                 type: 'info',
                 message: i18nService.t('welcome_to_ezux') || 'Welcome to ezUX!',
@@ -135,7 +136,7 @@ function AuthenticatedLayout() {
         }
 
         return () => { unsub(); };
-    }, [i18nService]);
+    }, [i18nService, notificationService]);
 
     const handleLogout = () => {
         layoutService.setMode('auth');
@@ -409,7 +410,6 @@ function AuthenticatedLayout() {
 
     return (
         <EzLayout
-            serviceRegistry={globalServiceRegistry}
             slots={{
                 header: HeaderComponent,
                 sidebar: () => SidebarContent,

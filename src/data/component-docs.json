@@ -109,11 +109,6 @@
         "description": "Enable change tracking for batch editing."
       },
       {
-        "name": "enableColumnFiltering",
-        "type": "boolean",
-        "description": "Enable column filtering."
-      },
-      {
         "name": "enableColumnPinning",
         "type": "boolean",
         "description": "Enable column pinning (sticky columns)."
@@ -167,11 +162,6 @@
         "name": "enablePersistence",
         "type": "boolean",
         "description": "Enable state persistence (save settings to local storage)."
-      },
-      {
-        "name": "enablePivoting",
-        "type": "boolean",
-        "description": "Enable pivoting mode."
       },
       {
         "name": "enableRangeSelection",
@@ -237,11 +227,6 @@
         "name": "gridLines",
         "type": "Both | Horizontal | Vertical | None",
         "description": "Grid line configuration."
-      },
-      {
-        "name": "groupSettings",
-        "type": "complex",
-        "description": "Configuration for grouping UI."
       },
       {
         "name": "height",
@@ -629,11 +614,6 @@
         "name": "onGridRenderStart",
         "type": "complex",
         "description": "Callback when grid renders starts."
-      },
-      {
-        "name": "onGroupingChange",
-        "type": "complex",
-        "description": ""
       },
       {
         "name": "onPageChange",

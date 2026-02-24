@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Loader2, ArrowRight, BookOpen, Layout, Terminal, Table, Trello, Calendar, GitBranch, PenTool } from 'lucide-react';
 import { DemoWrapper } from '@/components/DemoWrapper';
-import { globalServiceRegistry, I18nService } from 'ezux';
+import { useI18nService } from 'ezux';
 
 const ShowcaseHome = lazy(() => import('@/components/ShowcaseHome').then(m => ({ default: m.ShowcaseHome })));
 
@@ -11,7 +11,7 @@ export const Route = createFileRoute('/_auth/docs/ez-layout')({
 });
 
 function EzLayoutDocs() {
-  const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+  const i18nService = useI18nService();
   const [homeCode, setHomeCode] = useState('');
 
   useEffect(() => {

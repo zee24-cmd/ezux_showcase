@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { cn, Tabs, TabsList, TabsTrigger, TabsContent, ScrollArea, globalServiceRegistry, I18nService } from 'ezux';
+import { cn, Tabs, TabsList, TabsTrigger, TabsContent, ScrollArea, useI18nService } from 'ezux';
 import { Check, Copy, Eye, CodeXml, BookOpen } from 'lucide-react';
 import { DocTab } from './DocTab';
 import docData from '../data/component-docs.json';
@@ -16,7 +16,7 @@ interface DemoWrapperProps {
 
 export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title, description, className, componentName }) => {
     const [copied, setCopied] = useState(false);
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const i18nService = useI18nService();
     const [_, setTick] = useState(0);
 
     React.useEffect(() => {
@@ -61,7 +61,7 @@ export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title,
                     </div>
 
                     <TabsContent value="preview" className="flex-1 min-h-0 border rounded-xl bg-card shadow-sm overflow-hidden mt-0 relative data-[state=inactive]:hidden">
-                        <div className="h-full w-full overflow-hidden">
+                        <div className="h-full w-full">
                             {children}
                         </div>
                     </TabsContent>

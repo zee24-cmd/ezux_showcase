@@ -1,17 +1,17 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { SignInForm, EzLayout, globalServiceRegistry, LayoutService } from 'ezux';
+import { SignInForm, EzLayout, useEzServiceRegistry, LayoutService } from 'ezux';
 
 export const Route = createFileRoute('/auth/signin')({
     component: SignInPage,
 });
 
 function SignInPage() {
-    const layoutService = globalServiceRegistry.getOrThrow<LayoutService>('LayoutService');
+    const registry = useEzServiceRegistry();
+    const layoutService = registry.getOrThrow<LayoutService>('LayoutService');
     const navigate = useNavigate();
 
     return (
         <EzLayout
-            serviceRegistry={globalServiceRegistry}
             authConfig={{
                 signInSlot: (
                     <div className="space-y-6">

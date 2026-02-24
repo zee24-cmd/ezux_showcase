@@ -1,9 +1,9 @@
 import { useState, useEffect, Suspense, lazy } from 'react';
 import {
     EzLayout,
-    globalServiceRegistry,
+    useEzServiceRegistry,
+    useI18nService,
     LayoutService,
-    I18nService,
     cn,
     Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
     Button,
@@ -58,8 +58,9 @@ const DemoSkeleton = () => (
 type ViewMode = 'auth' | 'dashboard' | 'table' | 'table_all_types' | 'table_crud' | 'table_grouping' | 'table_pivot' | 'scheduler' | 'tree' | 'kanban';
 
 export const EzAuthDemo = () => {
-    const layoutService = globalServiceRegistry.getOrThrow<LayoutService>('LayoutService');
-    const i18nService = globalServiceRegistry.getOrThrow<I18nService>('I18nService');
+    const registry = useEzServiceRegistry();
+    const layoutService = registry.getOrThrow<LayoutService>('LayoutService');
+    const i18nService = useI18nService();
 
     // Local state for view switching, sync with layout service for auth mode
     const [view, setView] = useState<ViewMode>('dashboard');
@@ -393,7 +394,6 @@ export const EzAuthDemo = () => {
 
     return (
         <EzLayout
-            serviceRegistry={globalServiceRegistry}
             slots={{
                 header: () => CustomHeader,
                 sidebar: () => SidebarContent,

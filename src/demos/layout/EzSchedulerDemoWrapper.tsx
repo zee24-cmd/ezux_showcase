@@ -309,8 +309,8 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
         };
 
         return {
-            event: CustomEventRenderer,
-            resourceHeader: CustomResourceHeader
+            event: CustomEventRenderer as React.ComponentType<unknown>,
+            resourceHeader: CustomResourceHeader as React.ComponentType<unknown>
         };
     }, [resources, activeResourceIds, handleResourceChange, scenario]);
 
@@ -339,7 +339,7 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
     }, [finalEvents]);
 
     return (
-        <div className="flex flex-col h-full bg-background overflow-hidden relative">
+        <div className="flex flex-col h-full min-h-0 bg-background relative">
             <header className="px-6 py-4 border-b border-border bg-background flex items-center justify-between shrink-0 z-20 text-foreground">
                 <div className="flex items-center gap-4">
                     <Button
@@ -563,7 +563,7 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
 
                 <main id="scheduler-main-container" className="flex-1 p-4 md:p-6 relative flex flex-col min-h-0 overflow-hidden">
                     <div className={cn(
-                        "flex-1 bg-background rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border border-border flex flex-col transition-opacity duration-300 min-h-0 overflow-hidden",
+                        "flex-1 bg-background rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border border-border flex flex-col transition-opacity duration-300 min-h-0 h-full overflow-auto",
                         (isPending || isLoadingData) && "opacity-60"
                     )}>
                         <EzScheduler
@@ -572,7 +572,7 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
                             resources={displayedResources}
                             selectedDate={currentDate}
                             onDateChange={(date) => setCurrentDate(date)}
-                            className="flex-1 w-full border-none min-h-0"
+                            className="flex-1 w-full h-full border-none min-h-0"
                             view={currentView}
                             slotDuration={slotDuration}
                             views={['Day', 'Week', 'WorkWeek', 'Month', 'Agenda']}
@@ -589,9 +589,9 @@ export const EzSchedulerDemoWrapper: React.FC<EzSchedulerDemoWrapperProps> = ({ 
                             weekRule="FirstFourDayWeek"
                             monthsCount={scenario === 'test-enhancements' ? 2 : 1}
                             enableHtmlSanitizer={true}
-                            cell={scenario === 'test-enhancements' ? (data) => (
+                            cell={scenario === 'test-enhancements' ? (date: Date) => (
                                 <div data-testid="custom-cell-template" className="w-full h-full p-0.5 opacity-50">
-                                    <span className="text-[8px]">{data.date.getDate()}</span>
+                                    <span className="text-[8px]">{date.getDate()}</span>
                                 </div>
                             ) : undefined}
                             eventDragArea={scenario === 'test-enhancements' ? "#scheduler-main-container" : undefined}

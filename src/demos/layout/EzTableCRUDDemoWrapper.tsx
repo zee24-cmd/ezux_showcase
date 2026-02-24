@@ -126,7 +126,7 @@ export const EzTableCRUDDemoWrapper: React.FC = () => {
 
 
     // Handle individual row deletion from table
-    const handleDeleteRecord = useCallback((rowId: number, name: string) => {
+    const handleDeleteRecord = useCallback((rowIndex: number, rowId: number, name: string) => {
         setConfirmDialog({
             show: true,
             type: 'default',
@@ -135,7 +135,7 @@ export const EzTableCRUDDemoWrapper: React.FC = () => {
             onConfirm: () => {
                 // Use table internal delete for batch tracking
                 if (tableRef.current?.deleteRecord) {
-                    tableRef.current.deleteRecord(rowId);
+                    tableRef.current.deleteRecord(rowIndex);
                 } else {
                     // Fallback if ref not ready (shouldn't happen)
                     deleteMutation.mutate([rowId]);
@@ -418,7 +418,7 @@ export const EzTableCRUDDemoWrapper: React.FC = () => {
                             // Prevent multiple clicks while mutation is loading
                             if (deleteMutation.isPending) return;
 
-                            handleDeleteRecord(Number(row.id), row.original.name);
+                            handleDeleteRecord(row.index, Number(row.original.id), row.original.name);
                         }}
                         disabled={false}
                     >
@@ -486,7 +486,7 @@ export const EzTableCRUDDemoWrapper: React.FC = () => {
                     columns={columns}
                     pagination
                     pageSize={20}
-                    enableColumnFiltering
+
                     enableRowSelection
                     enableContextMenu
                     enableStickyHeader

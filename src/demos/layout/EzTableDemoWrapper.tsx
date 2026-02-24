@@ -218,7 +218,7 @@ export const EzTableDemoWrapper: React.FC = () => {
                     // pageSize={20}
                     enableInfiniteScroll
                     onEndReached={handleLoadMore}
-                    enableColumnFiltering
+                    
                     enableRowSelection
                     enableContextMenu
                     enableStickyHeader

@@ -361,7 +361,7 @@ export const EzTableComprehensiveDemoWrapper: React.FC = () => {
                     columns={columns}
                     pagination
                     pageSize={20}
-                    enableColumnFiltering
+                    
                     enableRowSelection
                     enableContextMenu
                     enableStickyHeader

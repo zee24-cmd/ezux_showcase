@@ -2,19 +2,22 @@ import { useState } from 'react';
 import { BasicDemo } from '../kanban/BasicDemo';
 import { SwimlaneDemo } from '../kanban/SwimlaneDemo';
 import { TimelineDemo } from '../kanban/TimelineDemo';
-import { Tabs, TabsList, TabsTrigger, globalServiceRegistry, KanbanService } from 'ezux';
+import { Tabs, TabsList, TabsTrigger, useEzServiceRegistry, KanbanService } from 'ezux';
+import { useEffect } from 'react';
 
 export const EzKanbanDemoWrapper = () => {
     const [activeDemo, setActiveDemo] = useState('basic');
+    const registry = useEzServiceRegistry();
 
     // Register the Kanban Service for Enterprise Data Management logic
-    // We do this synchronously in render (lazy check) so it's available for children immediately
-    if (!globalServiceRegistry.get('KanbanService')) {
-        const service = new KanbanService();
-        service.init();
-        globalServiceRegistry.register('KanbanService', service);
-        console.log('KanbanService Registered for Demos');
-    }
+    useEffect(() => {
+        if (!registry.get('KanbanService')) {
+            const service = new KanbanService();
+            service.init();
+            registry.register('KanbanService', service);
+            console.log('KanbanService Registered for Demos');
+        }
+    }, [registry]);
 
     return (
         <div className="flex flex-col h-full w-full bg-background overflow-hidden p-4 space-y-4">
