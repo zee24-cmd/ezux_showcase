@@ -1,7 +1,7 @@
 {
     "name": "ezux-showcase",
     "private": true,
-    "version": "1.1.6",
+    "version": "1.1.7",
     "author": "Zeeshan Sayed",
     "repository": {
         "type": "git",
@@ -41,7 +41,7 @@
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
         "dompurify": "^3.3.1",
-        "ezux": "^1.1.8",
+        "ezux": "^1.1.9",
         "file-saver": "^2.0.5",
         "lucide-react": "^0.575.0",
         "pdf-lib": "^1.17.1",

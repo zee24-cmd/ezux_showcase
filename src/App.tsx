@@ -9,7 +9,6 @@ import {
     NotificationPanel
 } from 'ezux';
 import 'ezux/dist/ezux.css';
-import 'ezux/dist/theme-vars.css';
 import './index.css';
 
 // Import the generated route tree
