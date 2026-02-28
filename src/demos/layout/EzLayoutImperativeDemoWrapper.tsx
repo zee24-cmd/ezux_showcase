@@ -8,7 +8,10 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-    EzServiceRegistry
+    EzServiceRegistry,
+    EzSidebarNav,
+    EzSidebarNavItem,
+    EzSidebarFooter
 } from 'ezux';
 import {
     LayoutDashboard,
@@ -19,9 +22,6 @@ import {
     Projector,
     FileText
 } from 'lucide-react';
-import { EzSidebarNav } from '../../../../ezux/src/components/EzLayout/components/EzSidebarNav';
-import { EzSidebarNavItem } from '../../../../ezux/src/components/EzLayout/components/EzSidebarNavItem';
-import { EzSidebarFooter } from '../../../../ezux/src/components/EzLayout/components/EzSidebarFooter';
 
 /**
  * Demo showcasing the improved EzLayout with nested navigation and organization switcher
