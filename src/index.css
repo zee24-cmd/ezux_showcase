@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@source "../../node_modules/ezux/dist/**/*.{js,cjs,mjs,ts,tsx}";
+@source "../node_modules/ezux/dist/**/*.{js,cjs,mjs,ts,tsx}";
 /* Local dev: scan ezux source directly (EZUX_LOCAL=true) */
-@source "../../ezux/src/**/*.{ts,tsx}";
+@source "../ezux/src/**/*.{ts,tsx}";
 
 @plugin "tailwindcss-animate";
 @variant dark (.dark &);

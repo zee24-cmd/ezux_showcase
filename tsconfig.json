@@ -25,27 +25,6 @@
         "paths": {
             "@/*": [
                 "./src/*"
-            ],
-            "ezux": [
-                "../ezux/src/index.ts"
-            ],
-            "ezux/scheduler": [
-                "../ezux/src/components/EzScheduler/index.tsx"
-            ],
-            "ezux/kanban": [
-                "../ezux/src/components/EzKanban/index.tsx"
-            ],
-            "ezux/layout": [
-                "../ezux/src/components/EzLayout/index.tsx"
-            ],
-            "ezux/table": [
-                "../ezux/src/components/EzTable/index.tsx"
-            ],
-            "ezux/treeview": [
-                "../ezux/src/components/EzTreeView/index.tsx"
-            ],
-            "ezux/signature": [
-                "../ezux/src/components/EzSignature/index.tsx"
             ]
         }
     },
