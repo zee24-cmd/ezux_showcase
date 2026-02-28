@@ -14,7 +14,11 @@ import {
     EzLanguageSwitcher,
     EzUserProfile,
     cn,
-    EzNotificationDropdown
+    EzNotificationDropdown,
+    EzSidebarNav,
+    EzSidebarNavItem,
+    EzSidebarFooter,
+    EzOrganizationSwitcher
 } from 'ezux';
 import { layoutService } from '../App';
 import { MetaTags } from '@/components/MetaTags';
@@ -161,165 +165,196 @@ function AuthenticatedLayout() {
         </Breadcrumb>
     );
 
-    const SidebarContent = (
-        <div className="flex flex-col h-full bg-transparent">
-            {/* Sidebar Logo for Mobile */}
-            <div className="p-8 md:hidden">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-black shadow-lg shadow-primary/20">E</div>
-                    <span className="font-black text-xl tracking-tighter">ezUX</span>
+    const SidebarContent = ({ open, onToggle }: { open: boolean, onToggle: () => void }) => {
+        const organizations = [
+            { id: '1', name: 'AppShell', logo: 'E' },
+            { id: '2', name: 'EzUX Dev', logo: 'D' },
+        ];
+        const currentOrg = organizations[1];
+
+        return (
+            <div className="flex flex-col h-full bg-transparent overflow-hidden">
+                <div className="p-4">
+                    <EzOrganizationSwitcher
+                        organizations={organizations}
+                        currentOrg={currentOrg}
+                        onSelect={() => { }}
+                        collapsed={!open}
+                    />
                 </div>
-            </div>
 
-            <div className="flex-1 flex flex-col whitespace-normal px-4 space-y-1.5 mt-6 md:mt-4 overflow-y-auto custom-scrollbar">
-                <p className="px-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em] mb-4">{i18nService.t('nav_main_navigation')}</p>
+                <EzSidebarNav className="flex-1 overflow-y-auto custom-scrollbar">
+                    <EzSidebarNavItem
+                        icon={Home}
+                        label={i18nService.t('nav_home')}
+                        active={pathname === '/'}
+                        collapsed={!open}
+                        onClick={() => navigate({ to: '/' })}
+                    />
 
-                <Link
-                    to="/"
-                    className={cn(
-                        "inline-flex items-center justify-start w-full gap-3.5 h-12 px-4 font-bold text-left relative overflow-hidden group transition-all duration-500 rounded-2xl",
-                        "hover:bg-primary/[0.06] hover:text-primary hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)]",
-                        "text-foreground/80 border border-transparent hover:border-primary/10"
-                    )}
-                    activeProps={{ className: "bg-primary/10 text-primary shadow-sm border-primary/20" }}
-                >
-                    <Home className="w-4.5 h-4.5 flex-shrink-0 transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110" />
-                    <span className="truncate tracking-tight">{i18nService.t('nav_home')}</span>
-                    <div className="absolute right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <ChevronRight className="w-3.5 h-3.5" />
+                    <EzSidebarNavItem
+                        icon={TableProperties}
+                        label={i18nService.t('nav_data_tables')}
+                        active={pathname.startsWith('/table')}
+                        collapsed={!open}
+                    >
+                        <EzSidebarNavItem
+                            icon={TableProperties}
+                            label={i18nService.t('nav_basic_table')}
+                            active={pathname === '/table/basic-table'}
+                            onClick={() => navigate({ to: '/table/basic-table' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Table2}
+                            label={i18nService.t('nav_all_types')}
+                            active={pathname === '/table/all-types'}
+                            onClick={() => navigate({ to: '/table/all-types' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={FileSpreadsheet}
+                            label={i18nService.t('nav_crud_features')}
+                            active={pathname === '/table/crud'}
+                            onClick={() => navigate({ to: '/table/crud' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Layers}
+                            label={i18nService.t('nav_grouping_hierarchy')}
+                            active={pathname === '/table/grouping'}
+                            onClick={() => navigate({ to: '/table/grouping' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={LayoutDashboard}
+                            label={i18nService.t('nav_pivot_table')}
+                            active={pathname === '/table/pivot'}
+                            onClick={() => navigate({ to: '/table/pivot' })}
+                        />
+                    </EzSidebarNavItem>
+
+                    <EzSidebarNavItem
+                        icon={Calendar}
+                        label={i18nService.t('nav_scheduler')}
+                        active={pathname.startsWith('/scheduler')}
+                        collapsed={!open}
+                    >
+                        <EzSidebarNavItem
+                            icon={Layers}
+                            label={i18nService.t('nav_basic_views')}
+                            active={pathname === '/scheduler/views'}
+                            onClick={() => navigate({ to: '/scheduler/views' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={LayoutDashboard}
+                            label={i18nService.t('nav_timeline_resources')}
+                            active={pathname === '/scheduler/timeline'}
+                            onClick={() => navigate({ to: '/scheduler/timeline' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Calendar}
+                            label={i18nService.t('nav_resource')}
+                            active={pathname === '/scheduler/resource'}
+                            onClick={() => navigate({ to: '/scheduler/resource' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Layers}
+                            label={i18nService.t('nav_resource_grouping')}
+                            active={pathname === '/scheduler/grouping'}
+                            onClick={() => navigate({ to: '/scheduler/grouping' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Calendar}
+                            label={i18nService.t('nav_work_days')}
+                            active={pathname === '/scheduler/workdays'}
+                            onClick={() => navigate({ to: '/scheduler/workdays' })}
+                        />
+                    </EzSidebarNavItem>
+
+                    <EzSidebarNavItem
+                        icon={Trello}
+                        label={i18nService.t('nav_kanban')}
+                        active={pathname.startsWith('/kanban')}
+                        collapsed={!open}
+                    >
+                        <EzSidebarNavItem
+                            icon={Layers}
+                            label={i18nService.t('nav_basic_kanban')}
+                            active={pathname === '/kanban/basic'}
+                            onClick={() => navigate({ to: '/kanban/basic' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={LayoutDashboard}
+                            label={i18nService.t('nav_swimlanes')}
+                            active={pathname === '/kanban/swimlanes'}
+                            onClick={() => navigate({ to: '/kanban/swimlanes' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Calendar}
+                            label={i18nService.t('nav_timeline_view')}
+                            active={pathname === '/kanban/timeline'}
+                            onClick={() => navigate({ to: '/kanban/timeline' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={Settings}
+                            label={i18nService.t('nav_custom_renderers')}
+                            active={pathname === '/kanban/customization'}
+                            onClick={() => navigate({ to: '/kanban/customization' })}
+                        />
+                        <EzSidebarNavItem
+                            icon={MousePointer2}
+                            label={i18nService.t('nav_events_api')}
+                            active={pathname === '/kanban/events'}
+                            onClick={() => navigate({ to: '/kanban/events' })}
+                        />
+                    </EzSidebarNavItem>
+
+                    <EzSidebarNavItem
+                        icon={FolderTree}
+                        label={i18nService.t('nav_tree')}
+                        active={pathname === '/tree'}
+                        collapsed={!open}
+                        onClick={() => navigate({ to: '/tree' })}
+                    />
+
+                    <EzSidebarNavItem
+                        icon={MousePointer2}
+                        label={i18nService.t('nav_signature')}
+                        active={pathname === '/signature'}
+                        collapsed={!open}
+                        onClick={() => navigate({ to: '/signature' })}
+                    />
+
+                    <div className="mt-8 mb-2 border-t border-border/40 mx-2 pt-4 px-2">
+                        {!open ? (
+                            <div className="h-[1px] bg-border/40 w-full" />
+                        ) : (
+                            <p className="text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em]">{i18nService.t('nav_system_settings')}</p>
+                        )}
                     </div>
-                </Link>
 
-                <NavLinkGroup
-                    icon={TableProperties}
-                    label={i18nService.t('nav_data_tables')}
-                    isExpanded={expandedSection === 'table'}
-                    onToggle={() => setExpandedSection(expandedSection === 'table' ? null : 'table')}
-                >
-                    {[
-                        { to: "/table/basic-table", label: i18nService.t('nav_basic_table'), icon: TableProperties },
-                        { to: "/table/all-types", label: i18nService.t('nav_all_types'), icon: Table2 },
-                        { to: "/table/crud", label: i18nService.t('nav_crud_features'), icon: FileSpreadsheet },
-                        { to: "/table/grouping", label: i18nService.t('nav_grouping_hierarchy'), icon: Layers },
-                        { to: "/table/pivot", label: i18nService.t('nav_pivot_table'), icon: LayoutDashboard },
-                    ].map((link) => (
-                        <Link
-                            key={link.to}
-                            to={link.to}
-                            className={cn(
-                                "inline-flex items-center justify-start w-full gap-3 h-9 px-4 font-semibold text-left text-xs relative overflow-hidden transition-all duration-300 rounded-xl group",
-                                "hover:bg-primary/[0.04] hover:text-primary text-foreground/70"
-                            )}
-                            activeProps={{ className: "text-primary font-black bg-primary/[0.08] !text-primary" }}
-                        >
-                            <link.icon className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
-                            <span className="truncate">{link.label}</span>
-                        </Link>
-                    ))}
-                </NavLinkGroup>
+                    <EzSidebarNavItem
+                        icon={FolderTree}
+                        label={i18nService.t('nav_documentation')}
+                        active={pathname.startsWith('/docs')}
+                        collapsed={!open}
+                        onClick={() => navigate({ to: '/docs/ez-layout' })}
+                    />
+                </EzSidebarNav>
 
-                <NavLinkGroup
-                    icon={Calendar}
-                    label={i18nService.t('nav_scheduler')}
-                    isExpanded={expandedSection === 'scheduler'}
-                    onToggle={() => setExpandedSection(expandedSection === 'scheduler' ? null : 'scheduler')}
-                >
-                    {[
-                        { to: "/scheduler/views", label: i18nService.t('nav_basic_views'), icon: Layers },
-                        { to: "/scheduler/timeline", label: i18nService.t('nav_timeline_resources'), icon: LayoutDashboard },
-                        { to: "/scheduler/resource", label: i18nService.t('nav_resource'), icon: Calendar },
-                        { to: "/scheduler/grouping", label: i18nService.t('nav_resource_grouping'), icon: Layers },
-                        { to: "/scheduler/workdays", label: i18nService.t('nav_work_days'), icon: Calendar },
-                    ].map((link) => (
-                        <Link
-                            key={link.to}
-                            to={link.to}
-                            className={cn(
-                                "inline-flex items-center justify-start w-full gap-3 h-9 px-4 font-semibold text-left text-xs relative overflow-hidden transition-all duration-300 rounded-xl group",
-                                "hover:bg-primary/[0.04] hover:text-primary text-foreground/70"
-                            )}
-                            activeProps={{ className: "text-primary font-black bg-primary/[0.08] !text-primary" }}
-                        >
-                            <link.icon className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
-                            <span className="truncate">{link.label}</span>
-                        </Link>
-                    ))}
-                </NavLinkGroup>
-
-                <NavLinkGroup
-                    icon={Trello}
-                    label={i18nService.t('nav_kanban')}
-                    isExpanded={expandedSection === 'kanban'}
-                    onToggle={() => setExpandedSection(expandedSection === 'kanban' ? null : 'kanban')}
-                >
-                    {[
-                        { to: "/kanban/basic", label: i18nService.t('nav_basic_kanban'), icon: Layers },
-                        { to: "/kanban/swimlanes", label: i18nService.t('nav_swimlanes'), icon: LayoutDashboard },
-                        { to: "/kanban/timeline", label: i18nService.t('nav_timeline_view'), icon: Calendar },
-                        { to: "/kanban/customization", label: i18nService.t('nav_custom_renderers'), icon: Settings },
-                        { to: "/kanban/events", label: i18nService.t('nav_events_api'), icon: MousePointer2 },
-                    ].map((link) => (
-                        <Link
-                            key={link.to}
-                            to={link.to}
-                            className={cn(
-                                "inline-flex items-center justify-start w-full gap-3 h-9 px-4 font-semibold text-left text-xs relative overflow-hidden transition-all duration-300 rounded-xl group",
-                                "hover:bg-primary/[0.04] hover:text-primary text-foreground/70"
-                            )}
-                            activeProps={{ className: "text-primary font-black bg-primary/[0.08] !text-primary" }}
-                        >
-                            <link.icon className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" />
-                            <span className="truncate">{link.label}</span>
-                        </Link>
-                    ))}
-                </NavLinkGroup>
-
-                <Link
-                    to="/tree"
-                    className={cn(
-                        "inline-flex items-center justify-start w-full gap-3.5 h-12 px-4 font-bold text-left relative overflow-hidden group transition-all duration-500 rounded-2xl",
-                        "hover:bg-primary/[0.06] hover:text-primary",
-                        "text-foreground/80 border border-transparent hover:border-primary/10"
-                    )}
-                    activeProps={{ className: "bg-primary/10 text-primary shadow-sm border-primary/20" }}
-                >
-                    <FolderTree className="w-4.5 h-4.5 flex-shrink-0 transition-transform duration-700 group-hover:scale-110" />
-                    <span className="truncate tracking-tight">{i18nService.t('nav_tree')}</span>
-                </Link>
-
-                <Link
-                    to="/signature"
-                    className={cn(
-                        "inline-flex items-center justify-start w-full gap-3.5 h-12 px-4 font-bold text-left relative overflow-hidden group transition-all duration-500 rounded-2xl",
-                        "hover:bg-primary/[0.06] hover:text-primary",
-                        "text-foreground/80 border border-transparent hover:border-primary/10"
-                    )}
-                    activeProps={{ className: "bg-primary/10 text-primary shadow-sm border-primary/20" }}
-                >
-                    <MousePointer2 className="w-4.5 h-4.5 flex-shrink-0 transition-transform duration-700 group-hover:scale-110" />
-                    <span className="truncate tracking-tight">{i18nService.t('nav_signature')}</span>
-                </Link>
-
-                <p className="px-4 text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em] mt-8 mb-4">{i18nService.t('nav_system_settings')}</p>
-                <Link
-                    to="/docs/ez-layout"
-                    className={cn(
-                        "inline-flex items-center justify-start w-full gap-3.5 h-12 px-4 font-bold text-left relative overflow-hidden group transition-all duration-500 rounded-2xl",
-                        "hover:bg-primary/[0.06] hover:text-primary",
-                        "text-foreground/80 border border-transparent hover:border-primary/10"
-                    )}
-                    activeProps={{ className: "bg-primary/10 text-primary shadow-sm border-primary/20" }}
-                >
-                    <FolderTree className="w-4.5 h-4.5 flex-shrink-0 transition-transform duration-700 group-hover:scale-110" />
-                    <span className="truncate tracking-tight">{i18nService.t('nav_documentation')}</span>
-                </Link>
+                <EzSidebarFooter
+                    collapsed={!open}
+                    onLogout={handleLogout}
+                    onToggle={onToggle}
+                />
             </div>
-        </div>
-    );
+        );
+    };
 
-    const FooterContent = (
+    const FooterContent = () => (
         <div className="h-14 flex items-center justify-between px-8 text-xs font-medium text-muted-foreground/60 bg-transparent backdrop-blur-md border-t border-border/40">
-            <span>© 2024 <span className="text-primary/70 font-bold tracking-tight">ezUX</span>. {i18nService.t('nav_copyright')}</span>
+            <div className="flex items-center gap-4">
+                <span>© 2024 <span className="text-primary/70 font-bold tracking-tight">ezUX</span>. {i18nService.t('nav_copyright')}</span>
+                <span className="w-[1px] h-3 bg-border/40" />
+                <span className="text-[10px] opacity-70">Developer: <span className="text-primary/80 font-semibold italic">Zeeshan Sayed</span></span>
+            </div>
             <div className="flex gap-6 items-center">
                 <a href="https://github.com/zee24-cmd/ezux" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1.5">
                     <Github className="w-3.5 h-3.5" />
@@ -412,8 +447,8 @@ function AuthenticatedLayout() {
         <EzLayout
             slots={{
                 header: HeaderComponent,
-                sidebar: () => SidebarContent,
-                footer: () => FooterContent,
+                sidebar: (props: any) => <SidebarContent open={props.open} onToggle={() => layoutService.toggleSidebar()} />,
+                footer: FooterContent,
             }}
             className="mesh-bg min-h-screen"
             headerClassName="!bg-transparent !shadow-none !border-none z-50 h-18"

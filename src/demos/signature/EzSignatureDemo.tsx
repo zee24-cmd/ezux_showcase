@@ -10,7 +10,8 @@ import {
     CardDescription,
     Label,
     Input,
-    useI18n
+    useI18n,
+    useMediaQuery
 } from 'ezux';
 import {
     Undo,
@@ -30,7 +31,7 @@ export const EzSignatureDemo = () => {
     }, [i18n]);
 
     const signatureRef = useRef<EzSignatureRef>(null);
-    const [color, setColor] = useState('#000f55'); // Ink Blue
+    const [color, setColor] = useState('#0321ab'); // Ink Blue
     const [width, setWidth] = useState(5); // Default 5px as requested
     const [savedSignature, setSavedSignature] = useState<string | null>(null);
 
@@ -121,16 +122,20 @@ export const EzSignatureDemo = () => {
         }
     };
 
+    const isMobile = useMediaQuery('(max-width: 768px)');
+    const sigHeight = isMobile ? 200 : 400;
+
     return (
         <div className="space-y-6 max-w-4xl mx-auto h-full overflow-y-auto">
 
             <div className="grid gap-6 md:grid-cols-[300px_1fr]">
                 {/* Controls */}
-                <Card>
+                <Card className="order-2 md:order-1">
                     <CardHeader>
                         <CardTitle>{i18n.t('controls')}</CardTitle>
                         <CardDescription>{i18n.t('customize_stroke')}</CardDescription>
                     </CardHeader>
+                    {/* ... (rest of controls content) */}
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label>{i18n.t('stroke_color')}</Label>
@@ -189,14 +194,14 @@ export const EzSignatureDemo = () => {
                 </Card>
 
                 {/* Canvas */}
-                <div className="space-y-6">
+                <div className="space-y-6 order-1 md:order-2">
                     <Card className="overflow-hidden bg-white dark:bg-zinc-950 border-2 border-dashed shadow-sm">
                         <EzSignature
                             ref={signatureRef}
                             strokeColor={color}
                             maxStrokeWidth={width} // Variable width based on pressure
                             minStrokeWidth={width * 0.5}
-                            height={400}
+                            height={sigHeight}
                             className="w-full cursor-crosshair"
                         />
                     </Card>

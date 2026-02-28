@@ -20,35 +20,6 @@ import { showcaseTranslations } from './translations';
 // Exported for non-React context usage (route guards)
 export const layoutService = new LayoutService();
 
-/**
- * Supplemental service initialization that requires the EzProvider context.
- */
-const AppServiceInit = () => {
-    const registry = useEzServiceRegistry();
-
-    useEffect(() => {
-        // Register LayoutService which isn't auto-managed by EzProvider
-        registry.register('LayoutService', layoutService);
-    }, [registry]);
-
-    return null;
-};
-
-// Create a new router instance
-const router = createRouter({
-    routeTree,
-    defaultPreload: 'intent',
-    defaultPreloadStaleTime: 0,
-});
-
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-    interface Register {
-        router: typeof router;
-    }
-}
-
-// Create Query Client
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -58,10 +29,21 @@ const queryClient = new QueryClient({
     },
 });
 
+const router = createRouter({
+    routeTree,
+    defaultPreload: 'intent',
+});
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+    interface Register {
+        router: typeof router;
+    }
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <EzProvider translations={showcaseTranslations}>
-            <AppServiceInit />
             <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router} />
                 <NotificationPanel />

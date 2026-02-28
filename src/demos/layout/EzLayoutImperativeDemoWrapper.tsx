@@ -1,16 +1,44 @@
 import { useRef, useState, useMemo } from 'react';
-import { EzLayout, EzLayoutRef, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, EzServiceRegistry } from 'ezux';
+import {
+    EzLayout,
+    EzLayoutRef,
+    Button,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    EzServiceRegistry
+} from 'ezux';
+import {
+    LayoutDashboard,
+    Briefcase,
+    CheckSquare,
+    BarChart3,
+    Settings,
+    Projector,
+    FileText
+} from 'lucide-react';
+import { EzSidebarNav } from '../../../../ezux/src/components/EzLayout/components/EzSidebarNav';
+import { EzSidebarNavItem } from '../../../../ezux/src/components/EzLayout/components/EzSidebarNavItem';
+import { EzSidebarFooter } from '../../../../ezux/src/components/EzLayout/components/EzSidebarFooter';
 
 /**
- * Demo showcasing the imperative API of EzLayout
- * This demonstrates how to programmatically control the layout using refs
+ * Demo showcasing the improved EzLayout with nested navigation and organization switcher
  */
 export function EzLayoutImperativeDemoWrapper() {
     const layoutRef = useRef<EzLayoutRef>(null);
     const [stateInfo, setStateInfo] = useState<string>('');
+    const [currentOrg, setCurrentOrg] = useState({ id: '1', name: 'AppShell' });
 
     // Isolate this layout instance from the global registry
     const isolatedRegistry = useMemo(() => new EzServiceRegistry(), []);
+
+    const organizations = [
+        { id: '1', name: 'AppShell' },
+        { id: '2', name: 'MyCompany' },
+        { id: '3', name: 'GlobalCorp' },
+    ];
 
     // Update state info display
     const updateStateInfo = () => {
@@ -141,46 +169,108 @@ export function EzLayoutImperativeDemoWrapper() {
 
             {/* Main Layout Container */}
             <div className="flex-1 p-4 bg-muted/10">
-                <div className="max-w-7xl mx-auto border rounded-xl shadow-inner bg-background overflow-hidden h-[500px] relative">
+                <div className="max-w-7xl mx-auto border rounded-xl shadow-2xl bg-background overflow-hidden h-[600px] relative">
                     <EzLayout
                         ref={layoutRef}
                         serviceRegistry={isolatedRegistry}
                         className="!h-full !static"
                         contentClassName="!p-4 overflow-auto custom-scrollbar"
+                        headerConfig={{
+                            orgConfig: {
+                                currentOrg,
+                                organizations,
+                                onSelect: setCurrentOrg
+                            },
+                            user: {
+                                name: 'John Doe',
+                                avatarUrl: 'https://github.com/shadcn.png',
+                                initials: 'JD'
+                            }
+                        }}
                         slots={{
-                            sidebar: () => (
-                                <div className="p-4">
-                                    <h2 className="text-sm font-semibold mb-2">Sidebar Content</h2>
-                                    <p className="text-xs text-muted-foreground">
-                                        This sidebar is isolated.
-                                    </p>
+                            sidebar: (props: any) => (
+                                <div className="flex flex-col h-full bg-card/20 backdrop-blur-sm">
+                                    <EzSidebarNav>
+                                        <EzSidebarNavItem
+                                            icon={LayoutDashboard}
+                                            label="Dashboard"
+                                            active
+                                            collapsed={!props.open}
+                                        />
+                                        <EzSidebarNavItem
+                                            icon={Briefcase}
+                                            label="Projects"
+                                            collapsed={!props.open}
+                                        >
+                                            <EzSidebarNavItem icon={Projector} label="Project A" />
+                                            <EzSidebarNavItem icon={Projector} label="Project B" />
+                                        </EzSidebarNavItem>
+                                        <EzSidebarNavItem
+                                            icon={CheckSquare}
+                                            label="Tasks"
+                                            collapsed={!props.open}
+                                        />
+                                        <EzSidebarNavItem
+                                            icon={BarChart3}
+                                            label="Reports"
+                                            collapsed={!props.open}
+                                        />
+                                        <EzSidebarNavItem
+                                            icon={Settings}
+                                            label="Settings"
+                                            collapsed={!props.open}
+                                        />
+                                    </EzSidebarNav>
+
+                                    <EzSidebarFooter
+                                        collapsed={!props.open}
+                                        onToggle={() => layoutRef.current?.toggleSidebar()}
+                                        onLogout={() => console.log('Logout')}
+                                    />
                                 </div>
                             )
                         }}
-                        onSidebarToggle={(isOpen: boolean) => {
-                            console.log('Sidebar toggled:', isOpen);
-                            updateStateInfo();
-                        }}
-                        onModeChange={(mode: 'dashboard' | 'auth' | 'minimal') => {
-                            console.log('Mode changed:', mode);
-                            updateStateInfo();
-                        }}
+                        onSidebarToggle={() => updateStateInfo()}
+                        onModeChange={() => updateStateInfo()}
                     >
                         <div className="space-y-4">
                             <Card className="border-none shadow-none bg-muted/20">
                                 <CardHeader className="p-6">
-                                    <CardTitle className="text-lg">Embedded Layout Instance</CardTitle>
+                                    <CardTitle className="text-xl">Premium Layout Preview</CardTitle>
                                     <CardDescription>
-                                        This layout component is running in a fully isolated service registry.
+                                        Testing the new EzSidebar components with nested items and collapsed popovers.
                                     </CardDescription>
                                 </CardHeader>
-                                <CardContent className="p-6 pt-0 space-y-4">
-                                    <p className="text-sm text-muted-foreground">
-                                        Using the imperative API, you can control this specific instance without affecting the global application layout.
+                                <CardContent className="p-6 pt-0 space-y-4 text-sm">
+                                    <p className="leading-relaxed">
+                                        The new layout system provides a highly responsive and customisable shell.
+                                        Try collapsing the sidebar to see the popover navigation in action.
                                     </p>
                                     <div className="flex flex-wrap gap-2">
-                                        <span className="px-2 py-1 bg-primary/10 text-primary text-[10px] rounded font-mono">ISOLATED_REGISTRY</span>
-                                        <span className="px-2 py-1 bg-green-500/10 text-green-600 text-[10px] rounded font-mono">IMPERATIVE_API</span>
+                                        <span className="px-2 py-1 bg-primary/10 text-primary text-[10px] rounded font-mono uppercase font-bold">Nested_Nav</span>
+                                        <span className="px-2 py-1 bg-blue-500/10 text-blue-600 text-[10px] rounded font-mono uppercase font-bold">Org_Switcher</span>
+                                        <span className="px-2 py-1 bg-green-500/10 text-green-600 text-[10px] rounded font-mono uppercase font-bold">Premium_Aesthetics</span>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                                        <Card className="bg-background/50 border-dashed">
+                                            <CardHeader className="p-4 pb-2">
+                                                <CardTitle className="text-xs text-muted-foreground uppercase">Stats Overview</CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="p-4 pt-0">
+                                                <div className="text-2xl font-bold">128</div>
+                                                <p className="text-[10px] text-muted-foreground">+12% from last month</p>
+                                            </CardContent>
+                                        </Card>
+                                        <Card className="bg-background/50 border-dashed">
+                                            <CardHeader className="p-4 pb-2">
+                                                <CardTitle className="text-xs text-muted-foreground uppercase">Revenue</CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="p-4 pt-0">
+                                                <div className="text-2xl font-bold">$12,450</div>
+                                                <p className="text-[10px] text-muted-foreground">+5.4% from last week</p>
+                                            </CardContent>
+                                        </Card>
                                     </div>
                                 </CardContent>
                             </Card>
