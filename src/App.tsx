@@ -8,6 +8,7 @@ import {
     LayoutService,
     NotificationPanel
 } from 'ezux';
+import { dataWorkerService } from './services/DataWorkerService';
 import 'ezux/dist/ezux.css';
 import './index.css';
 
@@ -41,11 +42,28 @@ declare module '@tanstack/react-router' {
     }
 }
 
+
+const AppServiceInit = () => {
+    const registry = useEzServiceRegistry();
+    useEffect(() => {
+        registry.register('DataWorkerService', dataWorkerService);
+        registry.register('LayoutService', layoutService);
+    }, [registry]);
+    return null;
+};
+
+const ShowcaseApp = () => {
+    return (
+        <RouterProvider router={router} />
+    );
+};
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <EzProvider translations={showcaseTranslations}>
+            <AppServiceInit />
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
+                <ShowcaseApp />
                 <NotificationPanel />
             </QueryClientProvider>
         </EzProvider>

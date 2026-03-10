@@ -11,6 +11,7 @@ export const EzTreeViewDemo = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [showCheckboxes, setShowCheckboxes] = useState(true);
     const [allowEditing, setAllowEditing] = useState(true);
+    const [useCustomNode, setUseCustomNode] = useState(false);
     const treeApiRef = useRef<EzTreeViewApi>(null);
     const [, forceUpdate] = useState({});
 
@@ -168,6 +169,17 @@ export const EzTreeViewDemo = () => {
                                         className="h-4 w-4 rounded border-border"
                                     />
                                 </div>
+                                <div className="flex items-center justify-between">
+                                    <label className="text-sm font-medium flex items-center gap-2">
+                                        <Settings2 className="w-4 h-4" /> Custom Render
+                                    </label>
+                                    <input
+                                        type="checkbox"
+                                        checked={useCustomNode}
+                                        onChange={(e) => setUseCustomNode(e.target.checked)}
+                                        className="h-4 w-4 rounded border-border"
+                                    />
+                                </div>
                             </div>
 
                             <hr className="border-border" />
@@ -224,7 +236,7 @@ export const EzTreeViewDemo = () => {
                                 onLoadChildren={handleLoadChildren}
                                 onNodeDrop={handleNodeDrop}
                                 className="h-full"
-                                slots={{
+                                slots={useCustomNode ? {
                                     node: (({ node, style, onToggle, onClick }: { node: TreeNode; style: React.CSSProperties; onToggle: () => void; onClick: (e: React.MouseEvent) => void }) => (
                                         <div
                                             className={cn(
@@ -260,7 +272,7 @@ export const EzTreeViewDemo = () => {
                                             )}
                                         </div>
                                     )) as React.ComponentType<unknown>
-                                }}
+                                } : undefined}
                             />
                         </div>
                     </div>

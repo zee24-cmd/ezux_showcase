@@ -3727,15 +3727,37 @@
         "description": "The shared service registry instance.\nThis is required to access shared services like HierarchyService, FocusManagerService, etc."
       },
       {
+        "name": "onSidebarResize",
+        "type": "complex",
+        "description": "Callback fired when the user resizes the sidebar."
+      },
+      {
         "name": "sidebarClassName",
         "type": "string",
         "description": "Custom class name for the sidebar container."
       },
       {
+        "name": "sidebarResizable",
+        "type": "boolean",
+        "description": "Enables the resizable sidebar feature for desktop mode. Requires react-resizable-panels."
+      },
+      {
+        "name": "sidebarMinWidth",
+        "type": "number",
+        "defaultValue": "```ts\n200\n```",
+        "description": "Minimum width of the resizable sidebar in pixels."
+      },
+      {
+        "name": "sidebarMaxWidth",
+        "type": "number",
+        "defaultValue": "```ts\n480\n```",
+        "description": "Maximum width of the resizable sidebar in pixels."
+      },
+      {
         "name": "sidebarWidth",
         "type": "number",
         "defaultValue": "```ts\n256\n```",
-        "description": "Width of the sidebar in pixels."
+        "description": "Width of the sidebar in pixels (or default width when resizable)."
       },
       {
         "name": "style",

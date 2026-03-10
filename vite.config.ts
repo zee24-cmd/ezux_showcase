@@ -63,6 +63,7 @@ export default defineConfig({
         exclude: ['ezux']
     },
     server: {
+        port: 3001,
         hmr: {
             overlay: true
         }

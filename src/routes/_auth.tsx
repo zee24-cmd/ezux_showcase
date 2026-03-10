@@ -444,33 +444,21 @@ function AuthenticatedLayout() {
     );
 
     return (
-        <EzLayout
-            slots={{
-                header: HeaderComponent,
-                sidebar: (props: any) => <SidebarContent open={props.open} onToggle={() => layoutService.toggleSidebar()} />,
-                footer: FooterContent,
-            }}
-            className="mesh-bg min-h-screen"
-            headerClassName="!bg-transparent !shadow-none !border-none z-50 h-18"
-            sidebarClassName="glass-card !border-y-0 !border-l-0 !rounded-none z-40"
-            footerClassName="bg-transparent"
-        >
-            <div className="h-full">
-                <MetaTags
-                    description="Professional React UI components for enterprise applications. High-performance grids, schedulers, boards and more."
-                    keywords="React, UI Suite, Enterprise, Grid, Table, Scheduler, Kanban, Treeview, Signature, TanStack"
-                />
-                <div className="relative h-full">
-                    <React.Suspense fallback={
-                        <div className="h-full w-full flex items-center justify-center p-12">
-                            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-                        </div>
-                    }>
-                        <Outlet />
-                    </React.Suspense>
-                </div>
+        <div className="mesh-bg min-h-screen relative">
+            <MetaTags
+                description="Professional React UI components for enterprise applications. High-performance grids, schedulers, boards and more."
+                keywords="React, UI Suite, Enterprise, Grid, Table, Scheduler, Kanban, Treeview, Signature, TanStack"
+            />
+            <div className="relative h-full p-8">
+                <React.Suspense fallback={
+                    <div className="h-full w-full flex items-center justify-center p-12">
+                        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                    </div>
+                }>
+                    <Outlet />
+                </React.Suspense>
             </div>
-        </EzLayout>
+        </div>
     );
 }
 

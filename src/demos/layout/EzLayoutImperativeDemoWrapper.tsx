@@ -30,6 +30,8 @@ export function EzLayoutImperativeDemoWrapper() {
     const layoutRef = useRef<EzLayoutRef>(null);
     const [stateInfo, setStateInfo] = useState<string>('');
     const [currentOrg, setCurrentOrg] = useState({ id: '1', name: 'AppShell' });
+    const [sidebarResizable, setSidebarResizable] = useState(true);
+    const [sidebarWidth, setSidebarWidth] = useState(256);
 
     // Isolate this layout instance from the global registry
     const isolatedRegistry = useMemo(() => new EzServiceRegistry(), []);
@@ -82,6 +84,20 @@ export function EzLayoutImperativeDemoWrapper() {
                                 >
                                     Close Sidebar
                                 </Button>
+                                <div className="flex items-center justify-between pt-2 border-t">
+                                    <span className="text-xs font-medium">Resizable Sidebar</span>
+                                    <input
+                                        type="checkbox"
+                                        checked={sidebarResizable}
+                                        onChange={(e) => setSidebarResizable(e.target.checked)}
+                                        className="h-4 w-4 rounded border-border"
+                                    />
+                                </div>
+                                {sidebarResizable && (
+                                    <div className="text-[10px] text-muted-foreground pt-1">
+                                        Current Width: {sidebarWidth}px
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
 
@@ -173,6 +189,10 @@ export function EzLayoutImperativeDemoWrapper() {
                     <EzLayout
                         ref={layoutRef}
                         serviceRegistry={isolatedRegistry}
+                        sidebarResizable={sidebarResizable}
+                        sidebarMinWidth={200}
+                        sidebarMaxWidth={480}
+                        onSidebarResize={(w) => setSidebarWidth(w)}
                         className="!h-full !static"
                         contentClassName="!p-4 overflow-auto custom-scrollbar"
                         headerConfig={{

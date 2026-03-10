@@ -17,6 +17,7 @@ type PendingRequest = {
 };
 
 export class DataWorkerService {
+    public readonly name = 'DataWorkerService';
     private worker: Worker | null = null;
     private requestId = 0;
     private pendingRequests = new Map<number, PendingRequest>();
