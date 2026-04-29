@@ -8,10 +8,13 @@ EzUX Showcase is a comprehensive demonstration platform for the **EzUX** library
 
 - 🚀 **Built with React 19 & Vite**: Ultra-fast development and build times.
 - 🧩 **Advanced Enterprise Components**: 
-  - **DataTable**: Grouping, Pivot, CRUD, and Virtualization via TanStack Table.
-  - **Scheduler**: Resource management, timeline views, and workday configurations.
-  - **Kanban**: Drag-and-drop workflow management with swimlanes and timeline integration.
-  - **Signature Pad**: Digital signature capture with PDF export support.
+  - **EzLayout**: AppShell supporting theming, multiple languages (including RTL), Light/Dark Mode, Sign In/Signout, Sidebar, Header, Footer, and Main content areas.
+  - **EzTable**: High-performance DataTable with Excel-like Filter, Sort, Grouping, Pivot, CRUD operations, and Virtualization via TanStack Table.
+  - **EzScheduler**: Advanced resource management with Day, Week, Month, and Timeline views, plus Group-by-Resources and workday configurations.
+  - **EzKanban**: Drag-and-drop workflow management with swimlanes and timeline integration.
+  - **EzFlow**: Customizable Drag-and-Drop Visual Workflow Designer.
+  - **EzTreeView**: Tri-state TreeView capable of loading thousands of hierarchical nodes with customizable icons.
+  - **EzSignature**: Digital signature capture with PDF export support.
 - 🧭 **Type-Safe Routing**: Fully integrated with TanStack Router.
 - 🎨 **Modern Aesthetics**: Sleek, responsive designs using Tailwind CSS 4.0.
 - 🧪 **E2E Testing**: Robust test coverage with Playwright.
