@@ -9,7 +9,7 @@ import {
     useI18n,
     cn,
     StatusBadge
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import { RefreshCw } from 'lucide-react';
 
 // Memoized avatar stack to match Basic Table

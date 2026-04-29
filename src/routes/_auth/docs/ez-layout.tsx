@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { Loader2, ArrowRight, BookOpen, Layout, Terminal, Table, Trello, Calendar, GitBranch, PenTool } from 'lucide-react';
+import { Suspense, lazy } from 'react';
+import { Loader2, ArrowRight, BookOpen, Layout, Terminal, Table, Kanban, Calendar, GitBranch, PenTool } from 'lucide-react';
 import { DemoWrapper } from '@/components/DemoWrapper';
-import { useI18nService } from 'ezux';
+import { useI18nService } from '@/lib/ezux-compat';
 
 const ShowcaseHome = lazy(() => import('@/components/ShowcaseHome').then(m => ({ default: m.ShowcaseHome })));
 
@@ -12,14 +12,6 @@ export const Route = createFileRoute('/_auth/docs/ez-layout')({
 
 function EzLayoutDocs() {
   const i18nService = useI18nService();
-  const [homeCode, setHomeCode] = useState('');
-
-  useEffect(() => {
-    // @ts-ignore
-    import('@/components/ShowcaseHome?raw').then((m) => {
-      setHomeCode(m.default);
-    });
-  }, []);
 
   return (
     <div className="h-full overflow-y-auto">
@@ -40,7 +32,7 @@ function EzLayoutDocs() {
               {[
                 { title: 'EzLayout', desc: i18nService.t('comp_layout_desc'), icon: Layout, color: 'text-blue-500' },
                 { title: 'EzTable', desc: i18nService.t('comp_table_desc'), icon: Table, color: 'text-emerald-500' },
-                { title: 'EzKanban', desc: i18nService.t('comp_kanban_desc'), icon: Trello, color: 'text-cyan-500' },
+                { title: 'EzKanban', desc: i18nService.t('comp_kanban_desc'), icon: Kanban, color: 'text-cyan-500' },
                 { title: 'EzScheduler', desc: i18nService.t('comp_scheduler_desc'), icon: Calendar, color: 'text-violet-500' },
                 { title: 'EzTreeView', desc: i18nService.t('comp_tree_desc'), icon: GitBranch, color: 'text-amber-500' },
                 { title: 'EzSignature', desc: i18nService.t('comp_signature_desc'), icon: PenTool, color: 'text-rose-500' },
@@ -102,7 +94,7 @@ function EzLayoutDocs() {
           <DemoWrapper
             title={i18nService.t('docs_layout_demo_wrapper_title')}
             description={i18nService.t('docs_layout_demo_wrapper_desc')}
-            code={homeCode}
+            codeLoader={() => import('@/components/ShowcaseHome?raw').then(m => m.default)}
             componentName="EzLayout"
           >
             <Suspense fallback={<div className="flex items-center justify-center h-full"><Loader2 className="animate-spin" /></div>}>

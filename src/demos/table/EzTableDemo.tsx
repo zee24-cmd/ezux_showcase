@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { EzTable, Checkbox } from 'ezux';
-import type { ColumnDef } from 'ezux';
+import { EzTable, Checkbox } from '@/lib/ezux-compat';
+import type { ColumnDef } from '@/lib/ezux-compat';
 import { Row, Table, PaginationState, SortingState, ColumnFiltersState } from '@tanstack/react-table';
 import { exportToCsv } from '../../utils/exportUtils';
 import { dataWorkerService } from '../../services/DataWorkerService';

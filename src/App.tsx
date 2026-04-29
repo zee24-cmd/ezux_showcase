@@ -6,10 +6,12 @@ import {
     EzProvider,
     useEzServiceRegistry,
     LayoutService,
-    NotificationPanel
-} from 'ezux';
+    NotificationPanel,
+    useThemeService
+} from '@/lib/ezux-compat';
 import { dataWorkerService } from './services/DataWorkerService';
 import 'ezux/dist/ezux.css';
+import '@xyflow/react/dist/style.css';
 import './index.css';
 
 // Import the generated route tree
@@ -45,10 +47,20 @@ declare module '@tanstack/react-router' {
 
 const AppServiceInit = () => {
     const registry = useEzServiceRegistry();
+    const themeService = useThemeService();
+
     useEffect(() => {
-        registry.register('DataWorkerService', dataWorkerService);
-        registry.register('LayoutService', layoutService);
-    }, [registry]);
+        if (registry.get('DataWorkerService') !== dataWorkerService) {
+            registry.unregister('DataWorkerService');
+            registry.register('DataWorkerService', dataWorkerService);
+        }
+        if (registry.get('LayoutService') !== layoutService) {
+            registry.unregister('LayoutService');
+            registry.register('LayoutService', layoutService);
+        }
+        themeService.setMode('light');
+    }, [registry, themeService]);
+
     return null;
 };
 

@@ -12,7 +12,7 @@ import {
     Input,
     useI18n,
     useMediaQuery
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import {
     Undo,
     Redo,

@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { ShowcaseHome } from '@/components/ShowcaseHome';
+import { lazy, Suspense } from 'react';
+
+const ShowcaseHome = lazy(() => import('@/components/ShowcaseHome').then(m => ({ default: m.ShowcaseHome })));
 
 export const Route = createFileRoute('/_auth/')({
     component: HomePage,
@@ -19,7 +21,9 @@ export const Route = createFileRoute('/_auth/')({
 function HomePage() {
     return (
         <div className="h-full overflow-y-auto">
-            <ShowcaseHome />
+            <Suspense fallback={null}>
+                <ShowcaseHome />
+            </Suspense>
         </div>
     );
 }

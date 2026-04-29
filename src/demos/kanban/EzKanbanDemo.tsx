@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { EzKanban } from 'ezux';
-import type { KanbanBoard, KanbanCard } from 'ezux';
+import { EzKanban } from '@/lib/ezux-compat';
+import type { KanbanBoard, KanbanCard } from '@/lib/ezux-compat';
 import { dataWorkerService } from '../../services/DataWorkerService';
 import { Loader2 } from 'lucide-react';
 

@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { Loader2 } from 'lucide-react';
 import { DemoWrapper } from '@/components/DemoWrapper';
 
@@ -10,20 +10,12 @@ export const Route = createFileRoute('/_auth/table/column-types')({
 });
 
 function ColumnTypesPage() {
-    const [code, setCode] = useState('');
-
-    useEffect(() => {
-        // @ts-ignore
-        import('@/demos/layout/EzTableColumnTypesDemoWrapper?raw').then((m) => {
-            setCode(m.default);
-        });
-    }, []);
 
     return (
         <DemoWrapper
             title="Column Types"
             description="Demonstrates boolean column types with tri-state support (true, false, null) and custom cell rendering."
-            code={code} componentName="EzTable"
+            codeLoader={() => import('@/demos/layout/EzTableColumnTypesDemoWrapper?raw').then(m => m.default)} componentName="EzTable"
         >
             <Suspense fallback={<div className="flex items-center justify-center h-full"><Loader2 className="animate-spin" /></div>}>
                 <EzTableColumnTypesDemoWrapper />

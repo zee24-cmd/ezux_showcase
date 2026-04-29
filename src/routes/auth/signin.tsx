@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { SignInForm, EzLayout, useEzServiceRegistry, LayoutService } from 'ezux';
+import { SignInForm, EzLayout, useEzServiceRegistry, LayoutService } from '@/lib/ezux-compat';
 
 export const Route = createFileRoute('/auth/signin')({
     component: SignInPage,

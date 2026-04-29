@@ -33,12 +33,13 @@ const ezuxLocalAliases = EZUX_LOCAL
 export default defineConfig({
     plugins: [
         tailwindcss(),
-        react(),
         TanStackRouterVite({
             routesDirectory: './src/routes',
             generatedRouteTree: './src/routeTree.gen.ts',
-            enableRouteGeneration: true
-        })
+            enableRouteGeneration: true,
+            autoCodeSplitting: true
+        }),
+        react()
     ],
     resolve: {
         alias: [
@@ -76,10 +77,17 @@ export default defineConfig({
         chunkSizeWarningLimit: 1000,
         rollupOptions: {
             output: {
-                manualChunks: {
-                    'vendor-react': ['react', 'react-dom'],
-                    'vendor-tanstack': ['@tanstack/react-router', '@tanstack/react-table', '@tanstack/react-virtual'],
-                    'vendor-ui': ['lucide-react', 'clsx', 'tailwind-merge'],
+                manualChunks(id) {
+                    if (!id.includes('node_modules')) return;
+                    if (id.includes('/react/') || id.includes('/react-dom/')) return 'vendor-react';
+                    if (id.includes('/@tanstack/')) return 'vendor-tanstack';
+                    if (
+                        id.includes('/lucide-react/') ||
+                        id.includes('/clsx/') ||
+                        id.includes('/tailwind-merge/')
+                    ) {
+                        return 'vendor-ui';
+                    }
                 }
             }
         }

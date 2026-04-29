@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import { EzTable, useI18n, cn, StatusBadge, formatCurrency, Button } from 'ezux';
+import { EzTable, useI18n, cn, StatusBadge, formatCurrency, Button } from '@/lib/ezux-compat';
 import { MockTableData } from '@/utils/DataGenerator';
 import { Briefcase, Mail, Building, Activity, DollarSign, RefreshCw } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';

@@ -15,12 +15,13 @@ import {
     EzSidebarNav,
     EzSidebarNavItem,
     EzSidebarFooter,
-    EzOrganizationSwitcher
-} from 'ezux';
+    EzOrganizationSwitcher,
+    useEzServiceRegistry
+} from '@/lib/ezux-compat';
 import {
     Calendar,
     FolderTree,
-    Trello,
+    Kanban,
     LayoutDashboard,
     TableProperties,
     FileSpreadsheet,
@@ -33,15 +34,18 @@ import {
     Power,
     MousePointer2,
     ChevronRight,
-    Github
+    GitPullRequest
 } from 'lucide-react';
 
 export const HeaderComponent: React.FC<any> = ({ toggleSidebar, sidebarOpen }) => {
     const i18nService = useI18nService();
     const navigate = useNavigate();
+    const registry = useEzServiceRegistry();
+    const layoutService = registry.getOrThrow<LayoutService>('LayoutService');
 
     const handleLogout = () => {
-        // Implement logout logic here or via service
+        layoutService.setMode('auth');
+        navigate({ to: '/auth/signin' });
     };
 
     return (
@@ -100,7 +104,7 @@ export const HeaderComponent: React.FC<any> = ({ toggleSidebar, sidebarOpen }) =
                         className="h-9 w-9 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300"
                     >
                         <a href="https://github.com/zee24-cmd/ezux" target="_blank" rel="noopener noreferrer" title="View on GitHub">
-                            <Github className="w-5 h-5" />
+                            <GitPullRequest className="w-5 h-5" />
                         </a>
                     </Button>
                     <EzLanguageSwitcher />
@@ -114,10 +118,12 @@ export const HeaderComponent: React.FC<any> = ({ toggleSidebar, sidebarOpen }) =
                             avatarUrl: 'https://github.com/shadcn.png',
                             email: 'zed@ezux.example'
                         }}
+                        onLogout={handleLogout}
                     />
                     <Button
                         variant="ghost"
                         size="icon"
+                        onClick={handleLogout}
                         className="h-10 w-10 rounded-2xl text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all duration-300"
                         title={i18nService.t('sign_out')}
                     >
@@ -129,10 +135,17 @@ export const HeaderComponent: React.FC<any> = ({ toggleSidebar, sidebarOpen }) =
     );
 };
 
-export const SidebarContent = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
+export const SidebarContent = ({ open }: { open: boolean, onClose: () => void }) => {
     const i18nService = useI18nService();
     const navigate = useNavigate();
+    const registry = useEzServiceRegistry();
+    const layoutService = registry.getOrThrow<LayoutService>('LayoutService');
     const { pathname } = window.location;
+
+    const handleLogout = () => {
+        layoutService.setMode('auth');
+        navigate({ to: '/auth/signin' });
+    };
 
     const organizations = [
         { id: '1', name: 'AppShell', logo: 'E' },
@@ -237,7 +250,7 @@ export const SidebarContent = ({ open, onClose }: { open: boolean, onClose: () =
                 </EzSidebarNavItem>
 
                 <EzSidebarNavItem
-                    icon={Trello}
+                    icon={Kanban}
                     label={i18nService.t('nav_kanban')}
                     active={pathname.startsWith('/kanban')}
                     collapsed={!open}
@@ -283,6 +296,14 @@ export const SidebarContent = ({ open, onClose }: { open: boolean, onClose: () =
                 />
 
                 <EzSidebarNavItem
+                    icon={GitPullRequest}
+                    label="EzFlow"
+                    active={pathname.startsWith('/flow')}
+                    collapsed={!open}
+                    onClick={() => navigate({ to: '/flow' })}
+                />
+
+                <EzSidebarNavItem
                     icon={MousePointer2}
                     label={i18nService.t('nav_signature')}
                     active={pathname === '/signature'}
@@ -309,8 +330,8 @@ export const SidebarContent = ({ open, onClose }: { open: boolean, onClose: () =
 
             <EzSidebarFooter
                 collapsed={!open}
-                onLogout={() => { }}
-                onToggle={onClose}
+                onLogout={handleLogout}
+                onToggle={() => layoutService.toggleSidebar()}
             />
         </div>
     );
@@ -327,11 +348,11 @@ export const FooterContent = () => {
             </div>
             <div className="flex gap-6 items-center">
                 <a href="https://github.com/zee24-cmd/ezux" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1.5">
-                    <Github className="w-3.5 h-3.5" />
+                    <GitPullRequest className="w-3.5 h-3.5" />
                     Library
                 </a>
                 <a href="https://github.com/zee24-cmd/ezux_showcase" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1.5">
-                    <Github className="w-3.5 h-3.5" />
+                    <GitPullRequest className="w-3.5 h-3.5" />
                     Showcase
                 </a>
                 <span className="w-[1px] h-3 bg-border/40" />

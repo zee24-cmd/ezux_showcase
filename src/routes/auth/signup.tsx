@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { SignUpForm, EzLayout, useEzServiceRegistry, LayoutService } from 'ezux';
+import { SignUpForm, EzLayout, useEzServiceRegistry, LayoutService } from '@/lib/ezux-compat';
 
 export const Route = createFileRoute('/auth/signup')({
     component: SignUpPage,

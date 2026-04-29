@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { cn, Tabs, TabsList, TabsTrigger, TabsContent, ScrollArea, useI18nService } from 'ezux';
+import { cn, Tabs, TabsList, TabsTrigger, TabsContent, ScrollArea, useI18nService } from '@/lib/ezux-compat';
 import { Check, Copy, Eye, CodeXml, BookOpen } from 'lucide-react';
 import { DocTab } from './DocTab';
 import docData from '../data/component-docs.json';
@@ -8,14 +8,18 @@ import docData from '../data/component-docs.json';
 interface DemoWrapperProps {
     children: React.ReactNode;
     code?: string;
+    codeLoader?: () => Promise<string>;
     title: string;
     description?: string;
     className?: string;
     componentName?: string;
 }
 
-export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title, description, className, componentName }) => {
+export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, codeLoader, title, description, className, componentName }) => {
     const [copied, setCopied] = useState(false);
+    const [activeTab, setActiveTab] = useState('preview');
+    const [loadedCode, setLoadedCode] = useState(code ?? '');
+    const [isCodeLoading, setIsCodeLoading] = useState(false);
     const i18nService = useI18nService();
     const [_, setTick] = useState(0);
 
@@ -24,14 +28,28 @@ export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title,
         return unsub;
     }, [i18nService]);
 
+    React.useEffect(() => {
+        if (code !== undefined) setLoadedCode(code);
+    }, [code]);
+
+    React.useEffect(() => {
+        if (activeTab !== 'code' || loadedCode || !codeLoader || isCodeLoading) return;
+
+        setIsCodeLoading(true);
+        codeLoader()
+            .then(setLoadedCode)
+            .finally(() => setIsCodeLoading(false));
+    }, [activeTab, codeLoader, isCodeLoading, loadedCode]);
+
     const handleCopy = () => {
-        if (!code) return;
-        navigator.clipboard.writeText(code);
+        if (!loadedCode) return;
+        navigator.clipboard.writeText(loadedCode);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
 
     const hasDocs = componentName && docData[componentName as keyof typeof docData];
+    const hasCode = Boolean(code || codeLoader);
 
     return (
         <div className={cn("flex flex-col gap-6 h-full p-6", className)}>
@@ -45,13 +63,13 @@ export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title,
             </div>
 
             <div className="flex-1 min-h-0 flex flex-col">
-                <Tabs defaultValue="preview" className="flex-1 flex flex-col min-h-0">
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0">
                     <div className="flex items-center justify-between mb-4">
                         <TabsList className="grid w-auto inline-grid grid-cols-3">
                             <TabsTrigger value="preview" className="flex items-center gap-2">
                                 <Eye className="w-4 h-4" /> {i18nService.t('tab_preview') || 'Preview'}
                             </TabsTrigger>
-                            <TabsTrigger value="code" disabled={!code} className="flex items-center gap-2">
+                            <TabsTrigger value="code" disabled={!hasCode} className="flex items-center gap-2">
                                 <CodeXml className="w-4 h-4" /> {i18nService.t('tab_code') || 'Code'}
                             </TabsTrigger>
                             <TabsTrigger value="doc" disabled={!hasDocs} className="flex items-center gap-2">
@@ -80,7 +98,7 @@ export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title,
                         <ScrollArea className="h-full">
                             <div className="p-6">
                                 <pre className="text-sm font-mono leading-relaxed tab-size-4 text-slate-50">
-                                    <code>{code}</code>
+                                    <code>{isCodeLoading ? 'Loading source...' : loadedCode}</code>
                                 </pre>
                             </div>
                         </ScrollArea>
@@ -100,4 +118,3 @@ export const DemoWrapper: React.FC<DemoWrapperProps> = ({ children, code, title,
         </div>
     );
 };
-

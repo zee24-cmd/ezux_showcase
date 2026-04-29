@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { ColumnDef, EzTable, useI18n, cn, Button } from 'ezux';
+import { ColumnDef, EzTable, useI18n, cn, Button } from '@/lib/ezux-compat';
 import { RefreshCw } from 'lucide-react';
 
 // Memoized avatar stack to match Basic Table

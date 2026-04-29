@@ -8,7 +8,7 @@ import {
     StatusBadge,
     formatDate,
     Checkbox
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import { MockTableData } from '../../utils/DataGenerator';
 import { RefreshCw, Trash2, AlertTriangle } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -500,7 +500,8 @@ export const EzTableCRUDDemoWrapper: React.FC = () => {
                     className="h-full border-none"
                     rowHeight={48}
                     isLoading={isLoading || isRefetching}
-                    validateField={({ fieldName, value }) => {
+                    validateField={({ field, value }) => {
+                        const fieldName = String(field);
                         // Skip validation for fresh new rows (undefined value) if not being saved
                         // But if we are validating for save, we need to check everything.
 

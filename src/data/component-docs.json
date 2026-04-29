@@ -2317,7 +2317,7 @@
   },
   "EzKanban": {
     "name": "EzKanban",
-    "description": "EzKanban is a powerful, flexible board management system designed for \nagile workflows and task visualization. It features a robust drag-and-drop \nengine and supports multiple viewing modes.\n\n\n### Key Features\n- **Modular Architecture**: Built on `@dnd-kit` for performant and accessible drag-and-drop.\n- **Multi-View Engine**: Switch between `standard` (basic columns), `swimlane` (grouped by team/priority), and `timeline` views.\n- **Dynamic Columns**: Support for collapsible columns, WIP limits, and custom header rendering.\n- **Enterprise Editing**: Integrated card editor modal with support for custom field extensions.\n- **Change Tracking**: Built-in undo/redo stack for all board operations.\n- **Extensibility**: Inversion of Control (IoC) via custom renderers for cards, headers, and editors.\n\n### Minimal Example\n```tsx\nimport { EzKanban } from 'ezux';\n\nfunction TaskBoard() {\n  return (\n    <EzKanban\n      board={initialBoardData}\n      onBoardChange={(newBoard) => saveBoard(newBoard)}\n    />\n  );\n}\n```\n\n### Advanced Config: Swimlanes & Timeline\n```tsx\n<EzKanban\n  board={engineeringBoard}\n  view=\"swimlane\"\n  swimlaneSettings={{ collapsible: true }}\n  onCardDoubleClick={(card) => openDetails(card)}\n/>\n```",
+    "description": "EzKanban is a powerful, flexible board management system designed for \nagile workflows and task visualization. It features a robust drag-and-drop \nengine and supports multiple viewing modes.\n\n\n### Key Features\n- **Modular Architecture**: Built on `@dnd-kit` for performant and accessible drag-and-drop.\n- **Multi-View Engine**: Switch between `standard` (basic columns), `swimlane` (grouped by team/priority), and `timeline` views.\n- **Dynamic Columns**: Support for collapsible columns, WIP limits, and custom header rendering.\n- **Enterprise Editing**: Integrated card editor modal with support for custom field extensions.\n- **Change Tracking**: Built-in undo/redo stack for all board operations.\n- **Extensibility**: Inversion of Control (IoC) via custom renderers for cards, headers, and editors.\n\n### Minimal Example\n```tsx\nimport { EzKanban } from 'ezux/kanban';\n\nfunction TaskBoard() {\n  return (\n    <EzKanban\n      board={initialBoardData}\n      onBoardChange={(newBoard) => saveBoard(newBoard)}\n    />\n  );\n}\n```\n\n### Advanced Config: Swimlanes & Timeline\n```tsx\n<EzKanban\n  board={engineeringBoard}\n  view=\"swimlane\"\n  swimlaneSettings={{ collapsible: true }}\n  onCardDoubleClick={(card) => openDetails(card)}\n/>\n```",
     "properties": [
       {
         "name": "allowDragAndDrop",
@@ -4326,6 +4326,106 @@
         "parameters": [],
         "returnType": "void",
         "type": "() => void"
+      }
+    ],
+    "subcomponents": []
+  },
+  "EzFlow": {
+    "name": "EzFlow",
+    "description": "EzFlow is a visual workflow builder for typed automation graphs.\nIt provides a node toolbox, editable canvas, validation panel, inspector, JSON import/export, and service-backed save and publish hooks.\n\n### Core Capabilities\n- **Typed Nodes**: Start, end, decision, loop, action, request, delay, approval, and group nodes.\n- **Validation**: Detect missing starts, orphan nodes, incomplete branches, invalid cycles, and missing required config.\n- **Persistence Hooks**: Use local, optimistic, or REST workflow services for load, save, publish, and validation flows.\n\n### Minimal Example\n```tsx\nimport { EzWorkflow, approvalWorkflowExample, createLocalEzWorkflowService } from 'ezux/flow';\n\nconst service = createLocalEzWorkflowService({ approval: approvalWorkflowExample });\n\n<EzWorkflow\n  workflowId=\"approval\"\n  service={service}\n  defaultWorkflow={approvalWorkflowExample}\n  onValidationChange={(result) => console.log(result.valid)}\n/>\n```",
+    "properties": [
+      {
+        "name": "workflow",
+        "type": "EzFlowSerializedState",
+        "description": "Controlled workflow state."
+      },
+      {
+        "name": "defaultWorkflow",
+        "type": "EzFlowSerializedState",
+        "description": "Initial workflow state for uncontrolled usage."
+      },
+      {
+        "name": "workflowId",
+        "type": "string",
+        "description": "Identifier used when loading, saving, or publishing through a workflow service."
+      },
+      {
+        "name": "service",
+        "type": "IWorkflowService",
+        "description": "Service implementation for load, save, publish, and validation operations."
+      },
+      {
+        "name": "showToolbox",
+        "type": "boolean",
+        "description": "Show the draggable node library."
+      },
+      {
+        "name": "showInspector",
+        "type": "boolean",
+        "description": "Show node details and editing controls."
+      },
+      {
+        "name": "showValidationPanel",
+        "type": "boolean",
+        "description": "Show validation status and issues."
+      },
+      {
+        "name": "autoValidate",
+        "type": "boolean",
+        "description": "Validate the workflow automatically as it changes."
+      }
+    ],
+    "events": [
+      {
+        "name": "onConnectionCreate",
+        "type": "(args: EzWorkflowConnectionEvent) => void",
+        "description": "Fires when a new connection is created between two nodes."
+      },
+      {
+        "name": "onWorkflowChange",
+        "type": "(workflow: EzFlowSerializedState) => void",
+        "description": "Fires when nodes, edges, or workflow metadata change."
+      },
+      {
+        "name": "onValidationChange",
+        "type": "(result: EzWorkflowValidationResult) => void",
+        "description": "Fires after workflow validation runs."
+      }
+    ],
+    "methods": [
+      {
+        "name": "getWorkflow",
+        "description": "Returns the current serialized workflow.",
+        "parameters": [],
+        "returnType": "EzFlowSerializedState",
+        "type": "() => EzFlowSerializedState"
+      },
+      {
+        "name": "validate",
+        "description": "Runs workflow validation.",
+        "parameters": [],
+        "returnType": "EzWorkflowValidationResult",
+        "type": "() => EzWorkflowValidationResult"
+      },
+      {
+        "name": "exportJson",
+        "description": "Exports the current workflow as JSON.",
+        "parameters": [],
+        "returnType": "string",
+        "type": "() => string"
+      },
+      {
+        "name": "importJson",
+        "description": "Imports a workflow from JSON.",
+        "parameters": [
+          {
+            "name": "json",
+            "type": "string",
+            "description": "Serialized workflow JSON."
+          }
+        ],
+        "returnType": "void",
+        "type": "(json: string) => void"
       }
     ],
     "subcomponents": []

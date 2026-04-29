@@ -16,7 +16,7 @@ import {
     EzUserProfile,
     SignInForm,
     SignUpForm
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import {
     Menu,
     Home,
@@ -30,7 +30,7 @@ import {
     Table,
     Calendar,
     FolderTree,
-    Trello
+    Kanban
 } from 'lucide-react';
 
 // Lazy load demo components (siblings now)
@@ -271,7 +271,7 @@ export const EzAuthDemo = () => {
                     {view === 'kanban' && (
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-full" />
                     )}
-                    <Trello className={cn(
+                    <Kanban className={cn(
                         "w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:scale-110",
                         view === 'kanban' ? "text-primary" : "text-foreground/80"
                     )} />

@@ -12,7 +12,7 @@ import {
     EzSidebarNav,
     EzSidebarNavItem,
     EzSidebarFooter
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import {
     LayoutDashboard,
     Briefcase,

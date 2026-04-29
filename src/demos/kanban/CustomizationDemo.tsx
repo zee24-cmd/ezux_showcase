@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { EzKanban, Badge, Button, Progress, Modal } from 'ezux';
-import type { KanbanBoard, KanbanCard, KanbanColumn } from 'ezux';
+import { EzKanban, Badge, Button, Progress, Modal } from '@/lib/ezux-compat';
+import type { KanbanBoard, KanbanCard, KanbanColumn } from '@/lib/ezux-compat';
 import { dataWorkerService } from '../../services/DataWorkerService';
 import { Loader2, User, Clock, AlertCircle } from 'lucide-react';
 

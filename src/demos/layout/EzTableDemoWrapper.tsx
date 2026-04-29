@@ -8,7 +8,7 @@ import {
     StatusBadge,
     Label,
     convertToCSV
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import { MockTableData } from '../../utils/DataGenerator';
 import { RefreshCw, ChevronDown } from 'lucide-react';
 

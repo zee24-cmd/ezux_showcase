@@ -1,4 +1,4 @@
-import type { KanbanBoard, KanbanColumn, KanbanCard, CardAssignee } from 'ezux';
+import type { KanbanBoard, KanbanColumn, KanbanCard, CardAssignee } from '@/lib/ezux-compat';
 
 /**
  * Mock data factory for EzKanban demo

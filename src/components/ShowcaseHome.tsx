@@ -22,9 +22,9 @@ import {
     FileSignature,
     Layers2,
     Languages,
-    Trello,
+    Kanban,
 } from 'lucide-react';
-import { AnimatedText, useI18nService, cn } from 'ezux';
+import { AnimatedText, useI18nService, cn } from '@/lib/ezux-compat';
 import React, { useState, useEffect } from 'react';
 import pkg from '../../package.json';
 
@@ -351,7 +351,7 @@ export const ShowcaseHome = ({ showOnlyContent = false }: { showOnlyContent?: bo
         },
         {
             id: 'kanban',
-            icon: Trello,
+            icon: Kanban,
             title: i18nService.t('kanban_title'),
             description: i18nService.t('kanban_desc'),
             to: '/kanban/basic',

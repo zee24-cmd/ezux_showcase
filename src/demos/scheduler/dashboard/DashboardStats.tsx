@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from 'ezux';
+import { Card, CardContent, CardHeader, CardTitle } from '@/lib/ezux-compat';
 import { Users, Calendar, Clock, Activity } from 'lucide-react';
-import { cn } from 'ezux';
+import { cn } from '@/lib/ezux-compat';
 
 interface StatCardProps {
     title: string;

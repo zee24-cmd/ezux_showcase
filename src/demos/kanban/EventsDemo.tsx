@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { EzKanban, Button, Badge, Modal, Input, Textarea, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Checkbox } from 'ezux';
-import type { KanbanBoard, EzKanbanRef } from 'ezux';
+import { EzKanban, Button, Badge, Modal, Input, Textarea, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Checkbox } from '@/lib/ezux-compat';
+import type { KanbanBoard, EzKanbanRef } from '@/lib/ezux-compat';
 import { dataWorkerService } from '../../services/DataWorkerService';
 import { Loader2, Terminal, Trash2, Plus, Settings, CheckSquare, Paperclip, AlignLeft, File, Trash2 as Trash2Icon } from 'lucide-react';
 

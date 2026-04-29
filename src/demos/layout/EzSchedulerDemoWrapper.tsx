@@ -17,7 +17,7 @@ import {
     Calendar,
     Switch,
     Label
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import {
     Clock,
     Sparkles,

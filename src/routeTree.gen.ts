@@ -20,6 +20,7 @@ import { Route as AuthSignatureIndexRouteImport } from './routes/_auth/signature
 import { Route as AuthSchedulerIndexRouteImport } from './routes/_auth/scheduler/index'
 import { Route as AuthLayoutImperativeIndexRouteImport } from './routes/_auth/layout-imperative/index'
 import { Route as AuthKanbanIndexRouteImport } from './routes/_auth/kanban/index'
+import { Route as AuthFlowIndexRouteImport } from './routes/_auth/flow/index'
 import { Route as AuthTableVariantsRouteImport } from './routes/_auth/table/variants'
 import { Route as AuthTablePivotRouteImport } from './routes/_auth/table/pivot'
 import { Route as AuthTableGroupingRouteImport } from './routes/_auth/table/grouping'
@@ -94,6 +95,11 @@ const AuthKanbanIndexRoute = AuthKanbanIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthKanbanRoute,
+} as any)
+const AuthFlowIndexRoute = AuthFlowIndexRouteImport.update({
+  id: '/flow/',
+  path: '/flow/',
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthTableVariantsRoute = AuthTableVariantsRouteImport.update({
   id: '/table/variants',
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/table/grouping': typeof AuthTableGroupingRoute
   '/table/pivot': typeof AuthTablePivotRoute
   '/table/variants': typeof AuthTableVariantsRoute
+  '/flow/': typeof AuthFlowIndexRoute
   '/kanban/': typeof AuthKanbanIndexRoute
   '/layout-imperative/': typeof AuthLayoutImperativeIndexRoute
   '/scheduler/': typeof AuthSchedulerIndexRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/table/grouping': typeof AuthTableGroupingRoute
   '/table/pivot': typeof AuthTablePivotRoute
   '/table/variants': typeof AuthTableVariantsRoute
+  '/flow': typeof AuthFlowIndexRoute
   '/kanban': typeof AuthKanbanIndexRoute
   '/layout-imperative': typeof AuthLayoutImperativeIndexRoute
   '/scheduler': typeof AuthSchedulerIndexRoute
@@ -281,6 +289,7 @@ export interface FileRoutesById {
   '/_auth/table/grouping': typeof AuthTableGroupingRoute
   '/_auth/table/pivot': typeof AuthTablePivotRoute
   '/_auth/table/variants': typeof AuthTableVariantsRoute
+  '/_auth/flow/': typeof AuthFlowIndexRoute
   '/_auth/kanban/': typeof AuthKanbanIndexRoute
   '/_auth/layout-imperative/': typeof AuthLayoutImperativeIndexRoute
   '/_auth/scheduler/': typeof AuthSchedulerIndexRoute
@@ -314,6 +323,7 @@ export interface FileRouteTypes {
     | '/table/grouping'
     | '/table/pivot'
     | '/table/variants'
+    | '/flow/'
     | '/kanban/'
     | '/layout-imperative/'
     | '/scheduler/'
@@ -344,6 +354,7 @@ export interface FileRouteTypes {
     | '/table/grouping'
     | '/table/pivot'
     | '/table/variants'
+    | '/flow'
     | '/kanban'
     | '/layout-imperative'
     | '/scheduler'
@@ -376,6 +387,7 @@ export interface FileRouteTypes {
     | '/_auth/table/grouping'
     | '/_auth/table/pivot'
     | '/_auth/table/variants'
+    | '/_auth/flow/'
     | '/_auth/kanban/'
     | '/_auth/layout-imperative/'
     | '/_auth/scheduler/'
@@ -467,6 +479,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/kanban/'
       preLoaderRoute: typeof AuthKanbanIndexRouteImport
       parentRoute: typeof AuthKanbanRoute
+    }
+    '/_auth/flow/': {
+      id: '/_auth/flow/'
+      path: '/flow'
+      fullPath: '/flow/'
+      preLoaderRoute: typeof AuthFlowIndexRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/table/variants': {
       id: '/_auth/table/variants'
@@ -644,6 +663,7 @@ interface AuthRouteChildren {
   AuthTableGroupingRoute: typeof AuthTableGroupingRoute
   AuthTablePivotRoute: typeof AuthTablePivotRoute
   AuthTableVariantsRoute: typeof AuthTableVariantsRoute
+  AuthFlowIndexRoute: typeof AuthFlowIndexRoute
   AuthLayoutImperativeIndexRoute: typeof AuthLayoutImperativeIndexRoute
   AuthSchedulerIndexRoute: typeof AuthSchedulerIndexRoute
   AuthSignatureIndexRoute: typeof AuthSignatureIndexRoute
@@ -667,6 +687,7 @@ const AuthRouteChildren: AuthRouteChildren = {
   AuthTableGroupingRoute: AuthTableGroupingRoute,
   AuthTablePivotRoute: AuthTablePivotRoute,
   AuthTableVariantsRoute: AuthTableVariantsRoute,
+  AuthFlowIndexRoute: AuthFlowIndexRoute,
   AuthLayoutImperativeIndexRoute: AuthLayoutImperativeIndexRoute,
   AuthSchedulerIndexRoute: AuthSchedulerIndexRoute,
   AuthSignatureIndexRoute: AuthSignatureIndexRoute,

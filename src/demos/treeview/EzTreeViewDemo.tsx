@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
-import { EzTreeView, TreeNode, EzTreeViewApi, cn } from 'ezux';
+import { EzTreeView, TreeNode, EzTreeViewApi, cn } from '@/lib/ezux-compat';
 import { Search, Maximize2, Minimize2, CheckSquare, Edit3, RefreshCw, Settings2 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { dataWorkerService } from '@/services/DataWorkerService';

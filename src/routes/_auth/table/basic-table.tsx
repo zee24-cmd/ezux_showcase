@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { Loader2 } from 'lucide-react';
 import { DemoWrapper } from '@/components/DemoWrapper';
 import { MetaTags } from '@/components/MetaTags';
@@ -11,14 +11,6 @@ export const Route = createFileRoute('/_auth/table/basic-table')({
 });
 
 function TablePage() {
-    const [code, setCode] = useState('');
-
-    useEffect(() => {
-        // @ts-ignore
-        import('@/demos/layout/EzTableDemoWrapper?raw').then((m) => {
-            setCode(m.default);
-        });
-    }, []);
 
     return (
         <div className="h-full">
@@ -30,7 +22,7 @@ function TablePage() {
             <DemoWrapper
                 title="Table View"
                 description="High-performance data grid with virtualization, sorting, filtering, and infinite scroll."
-                code={code} componentName="EzTable"
+                codeLoader={() => import('@/demos/layout/EzTableDemoWrapper?raw').then(m => m.default)} componentName="EzTable"
 
             >
                 <Suspense fallback={<div className="flex items-center justify-center h-full"><Loader2 className="animate-spin" /></div>}>

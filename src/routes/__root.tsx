@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router';
-import { EzLayout } from 'ezux';
+import { EzLayout } from '@/lib/ezux-compat';
 import { HeaderComponent, SidebarContent, FooterContent } from '../components/ShowcaseShell';
 
 export const Route = createRootRoute({

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { EzKanban, useEzServiceRegistry, Modal, Button, Input, Textarea, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Badge, Checkbox } from 'ezux';
-import type { KanbanBoard } from 'ezux';
+import { EzKanban, useEzServiceRegistry, Modal, Button, Input, Textarea, Select, SelectContent, SelectItem, SelectTrigger, SelectValue, Badge, Checkbox } from '@/lib/ezux-compat';
+import type { KanbanBoard } from '@/lib/ezux-compat';
 import { dataWorkerService } from '../../services/DataWorkerService';
 import { Loader2, CheckSquare, Paperclip, AlignLeft, File, Trash2 } from 'lucide-react';
 

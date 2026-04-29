@@ -1,4 +1,4 @@
-import type { KanbanBoard, KanbanColumn, KanbanCard } from 'ezux';
+import type { KanbanBoard, KanbanColumn, KanbanCard } from '@/lib/ezux-compat';
 
 export const createSampleBoard = (): KanbanBoard => {
     const columns: KanbanColumn[] = [

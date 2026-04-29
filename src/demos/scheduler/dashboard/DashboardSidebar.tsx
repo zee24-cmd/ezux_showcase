@@ -1,4 +1,4 @@
-import { cn, Button } from 'ezux';
+import { cn, Button } from '@/lib/ezux-compat';
 import { LayoutDashboard, Calendar, Users, Settings, Bell, HelpCircle } from 'lucide-react';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> { }

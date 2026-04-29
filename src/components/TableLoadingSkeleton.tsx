@@ -1,4 +1,4 @@
-import { Skeleton } from 'ezux';
+import { Skeleton } from '@/lib/ezux-compat';
 
 export const TableLoadingSkeleton = () => (
     <div className="flex flex-col h-full bg-background p-6 animate-pulse">

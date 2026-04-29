@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BasicDemo } from '../kanban/BasicDemo';
 import { SwimlaneDemo } from '../kanban/SwimlaneDemo';
 import { TimelineDemo } from '../kanban/TimelineDemo';
-import { Tabs, TabsList, TabsTrigger, useEzServiceRegistry, KanbanService } from 'ezux';
+import { Tabs, TabsList, TabsTrigger, useEzServiceRegistry, KanbanService } from '@/lib/ezux-compat';
 import { useEffect } from 'react';
 
 export const EzKanbanDemoWrapper = () => {

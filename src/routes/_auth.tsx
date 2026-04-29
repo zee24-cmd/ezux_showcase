@@ -19,13 +19,13 @@ import {
     EzSidebarNavItem,
     EzSidebarFooter,
     EzOrganizationSwitcher
-} from 'ezux';
+} from '@/lib/ezux-compat';
 import { layoutService } from '../App';
 import { MetaTags } from '@/components/MetaTags';
 import {
     Calendar,
     FolderTree,
-    Trello,
+    Kanban,
     LayoutDashboard,
     TableProperties,
     FileSpreadsheet,
@@ -38,7 +38,7 @@ import {
     Power,
     MousePointer2,
     ChevronRight,
-    Github
+    GitPullRequest
 } from 'lucide-react';
 
 export const Route = createFileRoute('/_auth')({
@@ -269,7 +269,7 @@ function AuthenticatedLayout() {
                     </EzSidebarNavItem>
 
                     <EzSidebarNavItem
-                        icon={Trello}
+                        icon={Kanban}
                         label={i18nService.t('nav_kanban')}
                         active={pathname.startsWith('/kanban')}
                         collapsed={!open}
@@ -357,11 +357,11 @@ function AuthenticatedLayout() {
             </div>
             <div className="flex gap-6 items-center">
                 <a href="https://github.com/zee24-cmd/ezux" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1.5">
-                    <Github className="w-3.5 h-3.5" />
+                    <GitPullRequest className="w-3.5 h-3.5" />
                     Library
                 </a>
                 <a href="https://github.com/zee24-cmd/ezux_showcase" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors flex items-center gap-1.5">
-                    <Github className="w-3.5 h-3.5" />
+                    <GitPullRequest className="w-3.5 h-3.5" />
                     Showcase
                 </a>
                 <span className="w-[1px] h-3 bg-border/40" />
@@ -413,7 +413,7 @@ function AuthenticatedLayout() {
                         className="h-9 w-9 rounded-xl text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-300"
                     >
                         <a href="https://github.com/zee24-cmd/ezux" target="_blank" rel="noopener noreferrer" title="View on GitHub">
-                            <Github className="w-5 h-5" />
+                            <GitPullRequest className="w-5 h-5" />
                         </a>
                     </Button>
                     <EzLanguageSwitcher />

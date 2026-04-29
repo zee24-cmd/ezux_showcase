@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { cn, ScrollArea } from 'ezux';
+import { cn, ScrollArea } from '@/lib/ezux-compat';
 import { ChevronRight, Component, Search } from 'lucide-react';
-import { Input } from 'ezux';
+import { Input } from '@/lib/ezux-compat';
 
 interface MethodDoc {
     name: string;
@@ -194,18 +194,23 @@ export const DocTab: React.FC<DocTabProps> = ({ componentName, docData, classNam
         );
     };
 
-    const filteredProperties = useMemo(() => filterList(mainDoc.properties), [mainDoc.properties, searchQuery]);
-    const filteredEvents = useMemo(() => filterList(mainDoc.events), [mainDoc.events, searchQuery]);
+    const properties = mainDoc.properties ?? [];
+    const events = mainDoc.events ?? [];
+    const methods = mainDoc.methods ?? [];
+    const subcomponents = mainDoc.subcomponents ?? [];
+
+    const filteredProperties = useMemo(() => filterList(properties), [properties, searchQuery]);
+    const filteredEvents = useMemo(() => filterList(events), [events, searchQuery]);
     const filteredMethods = useMemo(() => {
-        if (!searchQuery) return mainDoc.methods;
+        if (!searchQuery) return methods;
         const q = searchQuery.toLowerCase();
-        return mainDoc.methods.filter(m =>
+        return methods.filter(m =>
             m.name.toLowerCase().includes(q) ||
             m.description.toLowerCase().includes(q) ||
             m.returnType?.toLowerCase().includes(q) ||
             m.parameters?.some(p => p.name.toLowerCase().includes(q) || p.type.toLowerCase().includes(q))
         );
-    }, [mainDoc.methods, searchQuery]);
+    }, [methods, searchQuery]);
 
     const renderProperties = (props: typeof mainDoc.properties) => {
         if (!props || props.length === 0) {
@@ -390,7 +395,7 @@ export const DocTab: React.FC<DocTabProps> = ({ componentName, docData, classNam
         );
     } else {
         // Subcomponent
-        const subInfo = mainDoc.subcomponents.find(s => s.name === currentItem.name);
+        const subInfo = subcomponents.find(s => s.name === currentItem.name);
         content = (
             <div className="flex flex-col gap-8 pb-10">
                 <div>
